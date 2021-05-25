@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.mappers.productsMapper">
+	<!-- 관리자 상품 추가하기 -->
+    <insert  id="insertProduct">
+        INSERT INTO products (img_view, product_type, product_type_name, 
+        product_name, product_price, product_content, product_count) 
+        VALUES (#{img_view}, #{product_type}, #{product_type_name}, #{product_name},
+         #{product_price}, #{product_content}, #{product_count})
+    </insert >
+    
+    <!-- 관리자 상품 수정하기 -->
+    <update id="updateProduct">
+        update products set img_view = #{img_view}, product_name = #{product_name},
+         product_type_name= #{product_type_name}, product_type = #{product_type}, 
+         product_price = #{product_price}, product_content = #{product_content}, 
+         product_count = #{product_count}
+        where product_code = #{product_code}
+    </update>    
+    
+    <!-- 관리자 상품삭제 -->
+    <delete id="deleteProduct">
+    	delete from products where product_code = #{product_code}
+    </delete>
+
+	<!-- 상품리스트보기 -->
+	<select id="productList" resultType="productVO" parameterType="String">
+		select	product_code, product_type, img_view, product_name, 
+				product_price, product_read, product_count, product_like 
+				from products
+				where product_type = #{product_type}					
+	</select>	
+	
+	<!-- 상품 상세보기 -->
+    <select id="productView" resultType="productVO">
+            select * from products where product_code = #{product_code}
+    </select>
+    
+    <!-- 상품 조회수 -->
+    <update id="updateViewCnt">
+		update products set product_read = product_read + 1 where product_code = #{product_code}
+	</update>
+	
+	<!-- 상품 좋아요 -->
+    <update id="productLike">
+		update products set product_like = product_like + 1 where product_code = #{product_code}
+	</update>
+	
+	
+	
+	
+	
+	
+    
+</mapper>
