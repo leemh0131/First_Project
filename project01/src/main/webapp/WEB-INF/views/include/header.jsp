@@ -111,7 +111,7 @@ font-size: 17px;
      <div class="col-md-3 my-0 text-dark">
         <ul class="nav">
          장바구니
-	        <li class="nav-item text-dark"><a class="nav-link" href="#"><i class="fa fa-shopping-cart fa-lg text-dark pt-1"></i><br></a></li>
+	        <li class="nav-item text-dark"><a class="nav-link" href="/mypage/likey"><i class="fa fa-shopping-cart fa-lg text-dark pt-1"></i><br></a></li>
 	         로그인 메뉴
 	        <li class="nav-item dropdown text-dark mr-auto">
             <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
@@ -119,7 +119,7 @@ font-size: 17px;
              	<span class="text-dark">이민호&nbsp;님</span> 
             </a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
-	            <a class="dropdown-item" href="#">마이페이지</a>
+	            <a class="dropdown-item" href="mypage/mypage">마이페이지</a>
 	            <a class="dropdown-item" href="#">공지사항</a>
 	            <a class="dropdown-item" href="#">문의하기</a>
 	            <a class="dropdown-item" href="#">리뷰작성</a>
