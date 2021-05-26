@@ -31,6 +31,13 @@
 				product_price, product_read, product_count, product_like 
 				from products
 				where product_type = #{product_type}					
+	</select>
+	
+	<!-- 베스트리스트보기 -->
+	<select id="productListBest" resultType="productVO" parameterType="String">
+		select	product_code, product_type, img_view, product_name, 
+				product_price, product_read, product_count, product_like 
+				from products ORDER BY product_like desc limit 10
 	</select>	
 	
 	<!-- 상품 상세보기 -->

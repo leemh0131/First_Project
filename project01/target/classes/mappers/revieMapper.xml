@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.mappers.revieMapper">
+	
+	<!-- 리뷰보기 -->
+    <select id="reviewView" resultType="reviewVO">
+    	select r.review_num, r.product_code, p.product_name, c.member_code, c.member_name, r.review_star, r.review_title, r.review_content, r.review_date 
+    	from review as r, products as p, customers as c
+    	where r.product_code = #{product_code} and r.product_code = p.product_code;           
+    </select>   
+    
+    
+	
+	
+    
+</mapper>

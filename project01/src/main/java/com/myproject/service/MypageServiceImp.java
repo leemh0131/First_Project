@@ -14,9 +14,9 @@ import com.myproject.domain.LikeyVO;
 
 
 @Service
-public class MypageServiceImpl implements MypageService {
+public class MypageServiceImp implements MypageService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MypageServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(MypageServiceImp.class);
 	
 	@Inject
 	private MypageDAO mypageDAO;

@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.myproject.domain.productVO;
+import com.myproject.domain.reviewVO;
 import com.myproject.service.productService;
+import com.myproject.service.reviewService;
 
 @Controller
 @RequestMapping(value="/products/", produces="text/plain;charset=UTF-8")
@@ -27,19 +28,22 @@ public class productsController {
 	private static final Logger logger = LoggerFactory.getLogger(productsController.class);
 
 	@Inject
-	private productService productService;
+	private productService productService;	
+	
+	@Inject
+	private reviewService reviewService;
 	
 	
-//	//리스트화면
-//	 
-//	@RequestMapping(value="/productList",method=RequestMethod.GET)
-//	public void	productList(Model model) throws Exception { logger.info("productList GET");
-//	
-//	List<productVO> list = null; list =
-//	productService.productList("productList");
-//	model.addAttribute("productList",list);
-//	 
-//	}
+	//베스트10화면	 
+	@RequestMapping(value="/productListBest",method=RequestMethod.GET)
+	public void	productListBest(Model model) throws Exception { 
+		logger.info("productListBest GET");
+		
+		List<productVO> ListBest = null;
+		ListBest = productService.productListBest("productListBest");
+		model.addAttribute("productListBest", ListBest);
+	 
+	}
 
 	// 리스트화면
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
@@ -50,7 +54,8 @@ public class productsController {
 		list = productService.productList(product_type);
 		model.addAttribute("productList", list);
 		//System.out.println("model => " + model);
-	}
+	}	
+
 
 	// 상품등록 get
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.GET)
@@ -85,6 +90,11 @@ public class productsController {
 		//조회수
 		productService.updateViewCnt(product_code);
 		
+		//리뷰보기
+		reviewVO reviewView = null;
+		reviewView = reviewService.reviewView(product_code);
+		model.addAttribute("reviewView", reviewView);
+		
 	}	
 	
 	//상품 수정 get
@@ -109,7 +119,7 @@ public class productsController {
 	@RequestMapping(value = "deleteProduct", method = RequestMethod.GET)
 	public String deleteProduct(@RequestParam("product_code")int product_code) throws Exception {
 		productService.deleteProduct(product_code);
-		return "redirect:/";
+		return "redirect:/products/productListBest";
 	}
 	
 	// 좋아요	ajax사용으로 수정필요..

@@ -18,6 +18,9 @@ public interface productService {
 	//상품리스트보기
 	public List<productVO> productList(String tbl) throws Exception;
 	
+	//상품베스트10보기
+	public List<productVO> productListBest(String tbl) throws Exception;
+	
 	//상품상세보기
 	public productVO productView(int product_code) throws Exception;
 	

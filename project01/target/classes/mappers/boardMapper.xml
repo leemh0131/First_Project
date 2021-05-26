@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.mappers.boardMapper">
+	<!-- 등록 -->
+    <insert  id="boardInsert">
+        INSERT INTO board (board_title, board_content, board_readcount) 
+        VALUES (#{board_title}, #{board_content}, 0)
+    </insert >
+    
+    <!-- 수정 -->
+    <update id="boardUpdate">
+        UPDATE board 
+        SET board_title = #{board_title}, board_content = #{board_content} 
+        WHERE board_num = #{board_num}
+    </update>    
+    
+    <!-- 삭제 -->
+    <delete id="boardDelete">
+    	delete from select where board_num = #{board_num}
+    </delete>
+
+	<!-- 리스트 -->
+	<select id="boardList" resultType="boardVO" parameterType="String">
+		 select * from board order by board_date desc						
+	</select>	
+	
+	<!-- 상세보기 -->
+    <select id="boardView" resultType="boardVO">
+        select * from board where board_num = #{board_num}
+    </select>
+    
+    <!-- 조회수 -->
+    <update id="boardCnt">
+		update board set board_readcount = board_readcount + 1 where board_num = #{board_num}
+	</update>
+	
+	
+    
+</mapper>

@@ -40,7 +40,7 @@
           		<h2 class="text-info"><b>Main</b></h2>
           		<ul class="list-unstyled">
             		<li class="Main"> <a href="/" class="text-info">Home</a></li>
-            		<li class="Main"> <a href="#" class="text-info">FAQ</a></li>
+            		<li class="Main"> <a href="/board/boardList" class="text-info">FAQ</a></li>
 		            <li class="Main"> <a href="#" class="text-info">Best</a></li>
 		            <li class="Main"> <a href="#" class="text-info">Review</a></li>
           		</ul>

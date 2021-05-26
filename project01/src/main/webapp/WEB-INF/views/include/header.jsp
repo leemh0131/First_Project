@@ -43,7 +43,7 @@ font-size: 17px;
     <div class="col-md-5 py-0 text-dark">
 	    <ul id="id_nav-item" class="nav text-dark">
 	        <li class="nav-item ml-auto">
-	          <a href="../products/productList?product_type=all" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Best10</span></a>
+	          <a href="../products/productListBest" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Best10</span></a>
 	        </li>
 	        <li class="nav-item">
 	          <a href="../products/productList?product_type=1" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Outer </span></a>
@@ -96,7 +96,7 @@ font-size: 17px;
 	            	<span class="text-dark">Menu</span>
 	            </a>
 	            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
-		            <a class="dropdown-item" href="#">공지사항</a>
+		            <a class="dropdown-item" href="/board/boardList">공지사항</a>
 		            <a class="dropdown-item" onclick="not_loginQnA()" href="#">문의하기</a>
 		            <a class="dropdown-item" href="#">리뷰보기</a>
 		            <a class="dropdown-item" href="#">비회원조회</a>
@@ -120,7 +120,7 @@ font-size: 17px;
             </a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
 	            <a class="dropdown-item" href="mypage/mypage">마이페이지</a>
-	            <a class="dropdown-item" href="#">공지사항</a>
+	            <a class="dropdown-item" href="/board/boardList">공지사항</a>
 	            <a class="dropdown-item" href="#">문의하기</a>
 	            <a class="dropdown-item" href="#">리뷰작성</a>
 	            <a class="dropdown-item" href="#">주문조회</a>
@@ -146,7 +146,7 @@ font-size: 17px;
 	             	<span class="text-dark">관리자모드</span> 
 	            </a>
 	            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">	            
-		            <a class="dropdown-item" href="#">게시판관리</a>
+		            <a class="dropdown-item" href="/board/boardList">게시판관리</a>
 		            <a class="dropdown-item" href="#">주문관리</a>
 		            <a class="dropdown-item" href="../products/insertProduct">상품등록</a>	            
 		            <a class="dropdown-item" href="#">로그아웃</a>
