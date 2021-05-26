@@ -52,7 +52,7 @@ public class boardController {
 	}
 	
 	
-	// 공지수정	
+	// 공지수정 get
 	@RequestMapping(value = "/boardUpdate", method = RequestMethod.GET)
 	public void boardUpdate(@RequestParam("board_num") int board_num, Model model) throws Exception {
 		logger.info("boardController boardUpdate() GET => " + board_num);
@@ -64,7 +64,7 @@ public class boardController {
 	}	
 	
 	
-	// 공지 수정	
+	// 공지수정 get	
 	@RequestMapping(value = "/boardUpdate", method = RequestMethod.POST)
 	public String postUpdate(boardVO vo) throws Exception {
 	
@@ -92,7 +92,7 @@ public class boardController {
 	
 	// 게시글 삭제 GET	
 	@RequestMapping(value = "boardDelete", method = RequestMethod.GET)
-	public String boardDelete(@RequestParam("product_code")int board_num) throws Exception {
+	public String boardDelete(@RequestParam("board_num")int board_num) throws Exception {
 		boardService.boardDelete(board_num);
 		return "redirect:/board/boardList";
 	}

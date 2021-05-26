@@ -50,6 +50,14 @@
             </c:forEach>             
             </tbody>
         </table>
+        
+        <!-- 관리자 버튼 작성 -->
+		<div style="float: right;">
+	        <a href="/board/boardInsert"><button type="button" class="btn btn-outline-dark btn-lg">
+			<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;작성
+			</button>
+			</a>
+		</div>
 
         <br><br><br><br><br><br>
 

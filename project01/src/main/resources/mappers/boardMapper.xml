@@ -18,7 +18,7 @@
     
     <!-- 삭제 -->
     <delete id="boardDelete">
-    	delete from select where board_num = #{board_num}
+    	delete from board where board_num = #{board_num}
     </delete>
 
 	<!-- 리스트 -->

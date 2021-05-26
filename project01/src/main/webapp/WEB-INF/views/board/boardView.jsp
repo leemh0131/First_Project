@@ -54,14 +54,33 @@
 	
 	<!-- 관리자 버튼 수정/삭제 -->
 		<div style="float: right;">
-	        <a href="/board/boardUpdate?board_num=${boardView.board_num}"><button type="button" id="update" class="btn1 btn-outline-dark btn-lg">
-			<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;수정 / 삭제
+	        <a href="/board/boardUpdate?board_num=${boardView.board_num}"><button type="button" class="btn btn-outline-dark btn-lg">
+			<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;수정
 			</button>
 			</a>
+			
+			<button onclick="del(${boardView.board_num})" type="button" class="btn btn-outline-dark btn-lg">
+			<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;삭제
+			</button>	
+			
+			
 		</div>
 
 </div>
+
+<script type="text/javascript">
+
+//삭제
+function del(board_num) {
+	var chk = confirm("정말 삭제하시겠습니까?");
+	if (chk) {
+		location.href='boardDelete?board_num='+board_num;
+	}
+}
+</script>
+
 </body>
+
 <br><br><br><br><br><br><br><br>
 <br><br><br><br>
 <!-- footer -->
