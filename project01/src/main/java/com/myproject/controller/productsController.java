@@ -88,17 +88,19 @@ public class productsController {
 		//조회수
 		productService.updateViewCnt(product_code);
 		
-		//리뷰보기
-		String y;
+		//리뷰		 
 		int x = product_code;
-		y = Integer.toString(x);
+		String y = Integer.toString(x);
 		List<reviewVO> list = null;
 		list = reviewService.reviewAll(y);
 		model.addAttribute("reviewAll", list);
 		
-	
+		//리뷰갯수
+		reviewVO  cnt = null;
+		cnt = reviewService.reviewCnt(product_code);
+		model.addAttribute("reviewCnt", cnt);		
+		
 	}	
-	
 	
 	
 	//상품 수정 get

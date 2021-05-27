@@ -43,6 +43,8 @@ public class reviewController {
 		reviewService.reviewWrite(vo);
 		return "redirect:/";
 	}
+	
+	
 
 	
 

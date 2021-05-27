@@ -52,6 +52,13 @@ public class reviewServiceImp implements reviewService {
 		return dao.reviewAll(tbl);
 	}
 
+	//리뷰갯수
+	@Override
+	public reviewVO reviewCnt(int product_code) throws Exception {
+		logger.info("reviewServiceImp reviewCnt() => " + product_code);		
+		return dao.reviewCnt(product_code);
+	}
+
 	
 	
 	

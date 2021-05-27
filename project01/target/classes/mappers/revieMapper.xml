@@ -11,6 +11,13 @@
     	where r.product_code = p.product_code  
     </select>   
     
+    <!-- 리뷰갯수 -->
+    <select id="reviewCnt" resultType="reviewVO">    
+    	SELECT COUNT(*) 
+    	FROM review, products 
+    	where review.product_code = #{product_code} and review.product_code = products.product_code;
+    </select>  
+    
     <!-- 리뷰전체 -->
 	<select id="reviewAll" resultType="reviewVO">
     	select r.review_num, r.product_code, p.product_name, c.member_code, c.member_name, r.review_star, r.review_title, r.review_content, r.review_date, r.review_img 
@@ -29,7 +36,6 @@
 	<!-- 리뷰삭제 -->
 	<delete id="reviewdelete">
     	delete from review where review_num = #{review_num}
-    </delete>
-	
+    </delete>	
     
 </mapper>

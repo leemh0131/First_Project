@@ -184,7 +184,7 @@
 					<div class="col-md-4">
 						<div  class="btn1">
 						<button onclick="like(${productView.product_code})" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
-						<i class="glyphicon glyphicon-heart-empty"></i>
+						<i class="fa fa-heart"></i>
 						<span style="font-size: 17px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
 						</div>
 					</div>						
@@ -209,60 +209,157 @@
 		</div>				
 	</form>		
 	</div>
+
 	<hr style="border-color: #A5A5A5;"><br><br>
 	
 	<!-- 리뷰 -->
 	<div class="row">
+	
 		<div class="col-md-12">
-			<h4 id="REVIEW">REVIEW&nbsp;<span class="badge badge-pill badge-dark">0</span></h4><br>
+			<h4 id="REVIEW">REVIEW&nbsp;<span class="badge badge-pill badge-dark">${reviewCnt}</span></h4><br>
 		</div>
+		
 		<div class="col-md-12">
 			<p id="REVIEW_p">상품을 구매하신 분들이 작성한 리뷰입니다.</p>
 		</div>
 		
-		<!-- 리뷰작성버튼 --> 
+		<!-- 리뷰작성버튼 
 		<div class="col-md-2">
 			<a href="#"><button id="REVIEW_b" class="btn btn-dark" type="button">구매평 작성				
 			</button></a>
-		</div>	
+		</div>
+		-->
 		
+		<!-- 임시용 리뷰 버튼 -> 구매현황페이지 -> 구매완료면 리뷰작성가능 하게 구현 -->
+		<div class="col-md-2">
+			<a onclick="fnModuleInfo(${productView.product_code})"> <button id="REVIEW_b" class="btn btn-dark" type="button">구매평 작성				
+			</button></a>
+		</div>
+		
+		
+		<!-- Moa Modal-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    		<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">		    
+		    	</div>
+		  	</div>
+		</div>		
 		
 		
 	</div><br><br><hr style="border-color: #A5A5A5;">
 	
-	<div class="row">
 	
-		<!-- 리뷰가없을시 -->
-		<div class="col-md-12">
-			<h2 style="text-align: center; height: 500px; padding-top: 200px; color: #979491;">
-			등록된 구매평이 없습니다.
-			</h2>
-		</div>		
+	
+		<!-- 리뷰가없을시 
+		<div class="row">
+			<div class="col-md-12">
+				<h2 style="text-align: center; height: 500px; padding-top: 200px; color: #979491;">
+				등록된 구매평이 없습니다.
+				</h2>
+			</div>
+		</div>	-->
 		
-		
-		
+	
 		
 		<!-- 리뷰 -->
-		<form method="">
+		<c:forEach items="${reviewAll}" var="reviewVO">	
+		<div class="row" style="margin: 100px, 100px, 100px, 100px;">
+			
+			<input type="hidden" value="${reviewVO.review_num}" />
 		
-		
-		
-		
-		</form>
+			<!-- 이름 -->
+			<div class="col-md-2">				
+				<h6 style="font-weight:bold;">${reviewVO.member_name}&nbsp;님</h6>
+			</div>
+			
+			<!-- 별점 -->
+			<div class="col-md-10">
+			<c:choose>
+				<c:when test="${reviewVO.review_star == 1}">
+	        		<p style="font-size:20px; color: #FF0000;">★</p>
+	   			</c:when>
+	   			<c:when test="${reviewVO.review_star == 2}">
+	        		<p style="font-size:20px; color: #FF0000;">★★</p>
+	   			</c:when>
+	   			<c:when test="${reviewVO.review_star == 3}">
+	        		<p style="font-size:20px; color: #FF0000;">★★★</p>
+	   			</c:when>
+	   			<c:when test="${reviewVO.review_star == 4}">
+	        		<p style="font-size:20px; color: #FF0000;">★★★★</p>
+	   			</c:when>
+	   			<c:when test="${reviewVO.review_star == 5}">
+	        		<p style="font-size:20px; color: #FF0000;">★★★★★</p>
+	   			</c:when>				
+			</c:choose>
+			</div>
+			
+			<!-- 사진 -->
+			<div class="col-md-2" style="width:150px; height: 190px; background-color: gray;">
+				<h5>${reviewVO.review_img}</h5>
+			</div>
+			
+			<%-- 사진 없을 때 .... 오류
+			<c:set var="a" value="사진없음"/> 
+			<c:choose>
+				<c:when test='${reviewVO.review_img == a}'>
+					<div class="col-md-2" style="width:150px; height: 190px; background-color: blue;">
+						<h5>${reviewVO.review_img}</h5>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-md-2" style="width:150px; height: 190px; background-color: red;">		
+						<h5>${reviewVO.review_img}</h5>
+					</div>
+				</c:otherwise>.
+			</c:choose> --%> 
+			
+			
+			<div class="col-md-10">
+			
+				<!-- 제목	 -->
+				<h6 style="font-weight:bolder;" >${reviewVO.review_title}</h6>
 				
-	</div>
+				<!-- 내용 -->
+				<div class="col-md-10">		
+					<h6>${reviewVO.review_content}</h6>
+				</div>
+				
+				<!-- 헤더에서 회원코드를 가져온 후 일치하면 보여주는 삭제 버튼(본인로그인 삭제) -->
+				<!-- 컨트롤러에서 equestParam으로 review_num가 안불러와짐 ㅠㅠ 뭔가 잘못됐는데 뭔지 모르겠음 리스트형태라 그런가.. -->
+				<div style="float: right;" class="col-md-2">		
+					<button name="review_num" onclick="del(${reviewVO.review_num})" style="width: 70px;" type="button" class="btn1 btn-outline-dark btn-sm">삭제</button>
+				</div>			
+				
+			</div>
+			
+		</div> <hr>
+		</c:forEach>		
+	
 </div>
 
-<br><br><br><br><br><br>
+
+<br><br><br>
 
 <script type="text/javascript">
+//모달사용
+function fnModuleInfo(str){
+   $('#myModal .modal-content').load("../../review/reviewWrite?product_code="+str);
+   $('#myModal').modal();
+}
+
+//삭제
+function del(review_num) {
+	var chk = confirm("정말 삭제하시겠습니까?");
+	if (chk) {
+		location.href='reviewdelete?review_num?review_num=' + review_num;
+	}
+}
 
 //실시간 가격
 function productContentBuy()  {
-    var buy = document.getElementById('product_content_input').value;
-  
+    var buy = document.getElementById('product_content_input').value;  
     document.getElementById("priceResult").innerText = buy * ${productView.product_price} + " KRW";
-  }
+}
   
 //좋아요요 ajax사용으로 수정필요.. 중복, 새로고침
 var click = true;

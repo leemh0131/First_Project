@@ -1,38 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../../resources/css/bootstrap.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">	
-	<title>리뷰작성</title>
-	
-	<style type="text/css">
-	
-	#star a{ text-decoration: none; color: gray; }
-	#star a.on{ color: red; }
-	
-	</style>
-	
-</head>
-<body>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" id="myBtn">
-  Launch demo modal
-</button>
 
 
+<style type="text/css">
 
+#star a{ text-decoration: none; color: gray; }
+#star a.on{ color: red; }
 
+</style>
 
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-    	<form onsubmit="return check()" name="f" method="post">
-		<div class="modal-content">
+<form onsubmit="return check()" name="f" method="post">
 		
 		    <div class="modal-header">
 		    
@@ -49,28 +29,39 @@
 		    	<!-- 숨겨서 상품코드, 멤버코드 보낸다 -->
 		    	<input type="hidden" name="product_code" value="${reviewWrite.product_code}"/>
 		    	<!-- 나중에 헤드에서 멤버코드 값 가져오기 -->
-		    	<input type="hidden" name="member_code" value="1"/>		    		    	
-		    	<p>이민호 님</p>
-		    	
-		    	<!-- 리뷰 별 -->
-		    	<div>
-					<!-- 부모 --> 
-					<P id="star"> 
-					<!-- 자식들-->
-						<a href="#" value="1">★</a> 
-						<a href="#" value="2">★</a> 
-						<a href="#" value="3">★</a>
-						<a href="#" value="4">★</a>
-						<a href="#" value="5">★</a>
-						<input style="border:none; width:15px;" name="review_star" id="review_star" value="" readonly="readonly"/>
-					<p>
-				</div>				
-      			<input maxlength='20' placeholder="20자이하 제목" name="review_title"/>
-      			<input maxlength='100' placeholder="100자 이하 한줄평" name="review_content"/>
-      			<input type="file" name="files" multiple="multiple" value="사진없음"/>  
-      			    	
-      					
-		    		    
+		    	<input type="hidden" name="member_code" value="1"/>		 
+		    	<div class="row">
+		    		<div class="col-md-3">	    	
+			    		<p>이민호 님</p>
+			    	</div>			    	
+			    	<!-- 리뷰 별 -->
+			    	<div class="col-md-6">
+						<!-- 부모 --> 
+						<P id="star"> 별점
+						<!-- 자식들-->
+							<a href="#" value="1">★</a> 
+							<a href="#" value="2">★</a> 
+							<a href="#" value="3">★</a>
+							<a href="#" value="4">★</a>
+							<a href="#" value="5">★</a>
+							<input style="border:none; width:15px;" name="review_star" id="review_star" value="" readonly="readonly"/>
+						<p>
+					</div>
+					
+					<div class="col-md-12">
+      					<label>제목</label><input style="width: 100%;" maxlength='20' placeholder="20자이하 제목" name="review_title"/><br>
+                    </div>
+
+      				<div class="col-md-12">
+      					<label>내용</label><input style="width: 100%; height: 100px;" maxlength='100' placeholder="100자이하 한줄평" name="review_content"/><br><br>
+      				</div>
+
+      				<div class="col-md-12">
+      					<input type="file" name="files" multiple="multiple" value="사진없음"/>
+      				</div>
+
+				</div>	
+
 		    </div>
 		    <!-- 닫기 작성 버튼 -->
 		    <div class="modal-footer">
@@ -78,18 +69,8 @@
 			    <button type="submit" class="btn btn-primary">리뷰작성</button>			    
 		    </div>
 		    
-		    
-		    
-		</div>
-		</form>
-    </div>
-</div>
+</form>
 
-
-
-
-
-</body>
 <script type="text/javascript">
 
 
@@ -105,17 +86,7 @@ $('#star a').click(function(){
 	
 });
 
-
-
-
-
-$(document).ready(function() {	
-	$("#myBtn").click(function() {
-		$("#myModal").modal();
-	});
-});
-
-
+//키보드사용
 $(function() {
 	$("#myModal").modal({
 		keyboard:	true
@@ -125,7 +96,7 @@ $(function() {
 </script>
 
 
-</html>
+
 
 
 
