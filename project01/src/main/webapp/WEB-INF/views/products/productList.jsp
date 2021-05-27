@@ -40,11 +40,12 @@
 	margin-bottom: -1px;
 	font-family: sans-serif;
 	font-weight: bold;
-	
+	font-size: 16px;
 	}
 	
 	.product_price{
 	font-family: sans-serif;	
+	font-size: 14px;
 	}
 	
 	</style>	
@@ -56,7 +57,7 @@
 
 <!-- body -->
 <body>
-<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 <div class="container">
 
 <div class="row">
@@ -65,7 +66,7 @@
 		<a href="/products/productView?product_code=${productVO.product_code}">			
 			<div class="product_img">		
 				<img src="${productVO.img_view}" alt="image"/>
-				<h3 class="product_name">${productVO.product_name}</h3>
+				<h4 class="product_name">${productVO.product_name}</h4>
 				<c:if test="${productVO.product_count <= 0}">
 				<h4 style="font-weight: bolder; color: red;" class="product_price">SOLD OUT</h4>
 				</c:if>

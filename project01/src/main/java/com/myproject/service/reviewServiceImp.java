@@ -40,9 +40,16 @@ public class reviewServiceImp implements reviewService {
 
 	//리뷰삭제
 	@Override
-	public void reviewdelete(int product_code) throws Exception {
-		logger.info("reviewServiceImp reviewdelete() => " + product_code);
-		dao.reviewdelete(product_code);		
+	public void reviewdelete(int review_num) throws Exception {
+		logger.info("reviewServiceImp reviewdelete() => " + review_num);
+		dao.reviewdelete(review_num);		
+	}
+
+	//리뷰전체
+	@Override
+	public List<reviewVO> reviewAll(String tbl) throws Exception {
+		logger.info("reviewServiceImp reviewAll() => " + tbl);
+		return dao.reviewAll(tbl);
 	}
 
 	

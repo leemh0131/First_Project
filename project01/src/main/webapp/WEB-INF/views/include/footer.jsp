@@ -5,7 +5,8 @@
 <style>
     #footer{
     	background-color: #242D23;
-    	width: 100%; 	
+    	width: 100%; 
+    	height: 250px;	
     }
     
     .Main {

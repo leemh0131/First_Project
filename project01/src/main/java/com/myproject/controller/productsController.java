@@ -1,19 +1,17 @@
 package com.myproject.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.myproject.domain.productVO;
 import com.myproject.domain.reviewVO;
@@ -91,11 +89,17 @@ public class productsController {
 		productService.updateViewCnt(product_code);
 		
 		//리뷰보기
-		reviewVO reviewView = null;
-		reviewView = reviewService.reviewView(product_code);
-		model.addAttribute("reviewView", reviewView);
+		String y;
+		int x = product_code;
+		y = Integer.toString(x);
+		List<reviewVO> list = null;
+		list = reviewService.reviewAll(y);
+		model.addAttribute("reviewAll", list);
 		
+	
 	}	
+	
+	
 	
 	//상품 수정 get
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.GET)

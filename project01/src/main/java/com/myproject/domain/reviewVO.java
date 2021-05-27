@@ -18,6 +18,9 @@ public class reviewVO {
 	private	int review_num;			// 코드
 	private	int product_code ;		// 상품코드
 	private int member_code;		// 회원코드
+	private String product_name;	// 상품이름
+	private String member_name;		// 회원이름
+	private String review_img;		// 리뷰사진
 	private int review_star;		// 평별 별
 	private String review_title;	// 제목
 	private String review_content;	// 내용

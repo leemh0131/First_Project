@@ -1,5 +1,7 @@
 package com.myproject.service;
 
+import java.util.List;
+
 import com.myproject.domain.reviewVO;
 
 public interface reviewService {
@@ -11,6 +13,9 @@ public interface reviewService {
 	public void reviewWrite(reviewVO vo) throws Exception;
 	
 	//리뷰삭제
-	public void reviewdelete(int product_code) throws Exception;
+	public void reviewdelete(int review_num) throws Exception;
+	
+	//전체리뷰
+	public List<reviewVO> reviewAll(String tbl) throws Exception;
 
 }

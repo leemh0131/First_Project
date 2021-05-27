@@ -4,15 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myproject.mappers.revieMapper">
 	
-	<!-- 리뷰보기 -->
+	<!-- 관리자 관리용 리뷰보기 -->
     <select id="reviewView" resultType="reviewVO">
     	select r.review_num, r.product_code, p.product_name, c.member_code, c.member_name, r.review_star, r.review_title, r.review_content, r.review_date 
     	from review as r, products as p, customers as c
-    	where r.product_code = #{product_code} and r.product_code = p.product_code;           
+    	where r.product_code = p.product_code  
     </select>   
     
+    <!-- 리뷰전체 -->
+	<select id="reviewAll" resultType="reviewVO">
+    	select r.review_num, r.product_code, p.product_name, c.member_code, c.member_name, r.review_star, r.review_title, r.review_content, r.review_date, r.review_img 
+    	from review as r, products as p, customers as c
+    	where r.product_code = #{product_code} and r.product_code = p.product_code;         
+    </select>
     
+    <!-- 리뷰쓰기 -->    
+	<insert id="reviewWrite">
+		INSERT INTO review (product_code, member_code, review_star, review_title, 
+		review_content, review_img) 
+        VALUES (#{product_code}, #{member_code}, #{review_star}, #{review_title},
+         #{review_content}, #{review_img})	
+	</insert>
 	
+	<!-- 리뷰삭제 -->
+	<delete id="reviewdelete">
+    	delete from review where review_num = #{review_num}
+    </delete>
 	
     
 </mapper>

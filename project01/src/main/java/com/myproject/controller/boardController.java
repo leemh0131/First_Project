@@ -77,7 +77,7 @@ public class boardController {
 	
 	// 공지 작성 get
 	@RequestMapping(value = "/boardInsert", method = RequestMethod.GET) 
-	public void getWrite() throws Exception {
+	public void getboardInsert() throws Exception {
 		logger.info("boardController boardInsert() GET");
 	}
 	

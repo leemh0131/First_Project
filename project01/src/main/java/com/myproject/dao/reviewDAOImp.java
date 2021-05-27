@@ -25,7 +25,7 @@ public class reviewDAOImp implements reviewDAO {
 	//리뷰보기
 	@Override
 	public reviewVO reviewView(int product_code) throws Exception {		
-		logger.info("reviewDAOImp review() => " + product_code);
+		logger.info("reviewDAOImp reviewView() => " + product_code);
 		return sqlSession.selectOne(namespace + ".review", product_code);
 	}
 
@@ -38,9 +38,16 @@ public class reviewDAOImp implements reviewDAO {
 
 	//리뷰삭제
 	@Override
-	public void reviewdelete(int product_code) throws Exception {
-		logger.info("reviewDAOImp reviewdelete() => " + product_code);
-		sqlSession.delete(namespace + ".reviewdelete", product_code);	
+	public void reviewdelete(int review_num) throws Exception {
+		logger.info("reviewDAOImp reviewdelete() => " + review_num);
+		sqlSession.delete(namespace + ".reviewdelete", review_num);	
+	}
+
+	//리뷰올
+	@Override
+	public List<reviewVO> reviewAll(String tbl) throws Exception {
+		logger.info("reviewDAOImp reviewAll() => " + tbl);
+		return sqlSession.selectList(namespace + ".reviewAll", tbl);
 	}
 	
 	

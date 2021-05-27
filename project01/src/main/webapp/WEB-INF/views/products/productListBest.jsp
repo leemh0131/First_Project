@@ -40,11 +40,12 @@
 	margin-bottom: -1px;
 	font-family: sans-serif;
 	font-weight: bold;
-	
+	font-size: 16px;
 	}
 	
 	.product_price{
 	font-family: sans-serif;	
+	font-size: 14px;
 	}
 	
 	</style>	

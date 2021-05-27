@@ -1,9 +1,14 @@
 package com.myproject.dao;
 
 
+import java.util.List;
+
 import com.myproject.domain.reviewVO;
 
 public interface reviewDAO {
+	
+	//전체리뷰
+	public List<reviewVO> reviewAll(String tbl) throws Exception;
 	
 	//리뷰보기
 	public reviewVO reviewView(int product_code) throws Exception;
@@ -12,6 +17,6 @@ public interface reviewDAO {
 	public void reviewWrite(reviewVO vo) throws Exception;
 	
 	//리뷰삭제
-	public void reviewdelete(int product_code) throws Exception;
+	public void reviewdelete(int review_num) throws Exception;
 
 }
