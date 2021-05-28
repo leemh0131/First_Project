@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.myproject.domain.productVO;
-import com.myproject.domain.reviewVO;
+import com.myproject.domain.board.reviewVO;
 import com.myproject.service.productService;
-import com.myproject.service.reviewService;
+import com.myproject.service.board.reviewService;
 
 @Controller
 @RequestMapping(value="/products/", produces="text/plain;charset=UTF-8")
@@ -67,7 +67,7 @@ public class productsController {
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
 	public String insertProductPost(productVO vo) throws Exception {
 
-		logger.info("insertProductGET" + vo);
+		logger.info("insertProductPOST" + vo);
 
 		productService.insertProduct(vo);
 		

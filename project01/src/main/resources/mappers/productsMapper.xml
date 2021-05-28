@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.myproject.mappers.productsMapper">
+<mapper namespace="com.myproject.mappers.productsMapper">	
+
 	<!-- 관리자 상품 추가하기 -->
     <insert  id="insertProduct">
         INSERT INTO products (img_view, product_type, product_type_name, 

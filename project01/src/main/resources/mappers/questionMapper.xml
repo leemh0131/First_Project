@@ -42,28 +42,5 @@
 		where q.question_num = #{question_num}
     </select>
     
-    <!-- comment -->
-    
-    <!-- 답변등록 -->
-    <insert  id="commentInsert">
-        INSERT INTO comment (question_num, comment_title, comment_content) 
-        VALUES (#{question_num}, #{comment_title}, #{comment_content})
-    </insert >
-    
-    <!-- 답변수정 -->
-    <update id="commentUpdate">
-        UPDATE comment 
-        SET comment_title = #{comment_title}, comment_content = #{comment_content} 
-        WHERE comment_num = #{comment_num}
-    </update>    
-    
-    <!-- 답변삭제 -->
-    <delete id="commentDelete">
-    	delete from comment where comment_num = #{comment_num}
-    </delete>
-    
-    
-	
-	
     
 </mapper>
