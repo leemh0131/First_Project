@@ -317,7 +317,10 @@
 			<div class="col-md-10">
 			
 				<!-- 제목	 -->
-				<h6 style="font-weight:bolder;" >${reviewVO.review_title}</h6>
+				<h6 style="font-weight:bolder;" >${reviewVO.review_title}				
+					<!-- 날짜 -->
+					<label style="float: right;"><c:set var="date" value="${reviewVO.review_date}"/><fmt:formatDate value="${date}"/></label>
+				</h6>
 				
 				<!-- 내용 -->
 				<div class="col-md-10">		
@@ -373,6 +376,7 @@ function like(product_code)  {
     document.getElementById("likeResult").innerText = " " + ${productView.product_like};
   }
   
+
 
 
 </script>
