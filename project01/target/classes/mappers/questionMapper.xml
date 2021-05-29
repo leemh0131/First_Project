@@ -23,9 +23,13 @@
 
 	<!-- 관리자 리스트 -->
 	<select id="questionAllList" resultType="questionVO" parameterType="String">
-		select *
-		from question as q, customers as c 
-		where q.member_code = c.member_code order by q.question_date desc		
+		select * 
+		from 
+			(select q.question_num, q.member_code, q.question_title, q.question_content, q.question_date, c.member_name, c.member_id 
+		    from question as q, customers as c 
+		    where q.member_code = c.member_code) as qc 
+		left join comments as c 
+		on c.question_num = qc.question_num order by qc.question_date desc		
 	</select>
 	
 	<!-- 리스트 -->
@@ -37,9 +41,14 @@
 	
 	<!-- 상세보기 -->
     <select id="questionView" resultType="questionVO">
-        select q.question_num, c.member_code, q.question_title, c.member_id, c.member_name, q.question_content, q.question_date, a.comment_num, a.comment_title, a.comment_content, a.comment_date
-		from question as q, customers as c, comment as a 
-		where q.question_num = #{question_num};
+        select * 
+		from 
+			(select q.question_num, q.member_code, q.question_title, q.question_content, q.question_date, c.member_name, c.member_id 
+		    from question as q, customers as c 
+		    where q.member_code = c.member_code) as qc 
+				left join comments as c 
+				on c.question_num = qc.question_num
+				where qc.question_num = #{question_num}
     </select>
     
     

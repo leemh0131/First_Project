@@ -35,7 +35,8 @@
                     <th>Title</th>
                     <th>Member_ID</th>
                     <th>Writer</th>                    
-                    <th>Date</th>                         
+                    <th>Date</th>
+                    <th>답변</th>                      
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +46,15 @@
                     <td>${vo.question_title}</td>
                     <td>${vo.member_id}</td>
                     <td>${vo.member_name}</td>
-                    <td><c:set var="date" value="${vo.question_date}"/><fmt:formatDate value="${date}"/></td>                                                                          
+                    <td><c:set var="date" value="${vo.question_date}"/><fmt:formatDate value="${date}"/></td>
+	                <c:choose>
+						<c:when test = "${!empty vo.comment_content}">
+							<td style="color: blue;">답변완료</td>
+						</c:when>
+						<c:otherwise>
+							<td style="color: red;">답변필요</td>
+						</c:otherwise>	
+					</c:choose>                                                                         
                 </tr> 
             </c:forEach>             
             </tbody>

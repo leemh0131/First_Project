@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myproject.domain.board.commentVO;
 import com.myproject.domain.board.questionVO;
-import com.myproject.domain.board.reviewVO;
 import com.myproject.service.board.commentService;
 import com.myproject.service.board.questionService;
 
@@ -73,17 +72,17 @@ public class questionController {
 	@RequestMapping(value = "/commentInsert", method = RequestMethod.POST)
 	public String commentInsert(commentVO vo, questionVO Qvo) throws Exception {
 		logger.info("reviewController commentInsert() => " + vo);
+		logger.info("reviewController 답변작성 번호() => " + Qvo.getQuestion_num());
 		commentService.commentInsert(vo);				
 		return "redirect:/question/questionView?question_num=" + Qvo.getQuestion_num();
-	}
-	
+	}	
 	
 	// 답변삭제	
 	@RequestMapping(value = "/commentDelete", method = RequestMethod.GET)
-	public String commentDelete(questionVO Qvo, @RequestParam("comment_num")int comment_num) throws Exception {
-		logger.info("reviewController commentDelete() => " + vo);
+	public String commentDelete(@RequestParam("comment_num")int comment_num) throws Exception {
+		logger.info("reviewController commentDelete() =>" + comment_num);		
 		commentService.commentDelete(comment_num);
-		return "redirect:/question/questionView?question_num=" + Qvo.getQuestion_num();
+		return "redirect:/question/questionAllList";		
 	}
 
 

@@ -17,4 +17,5 @@ public interface commentDAO {
 	
 	// 답글 삭제
 	public int commentDelete(int comment_num) throws Exception;
+		
 }

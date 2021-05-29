@@ -7,25 +7,25 @@
 
 	<!-- 답글의 개수를 구한다. -->
 	<select id="commentCount" resultType="int">
-	SELECT	COUNT(*) FROM COMMENT
+	SELECT	COUNT(*) FROM COMMENTS
 	</select>
 	
 	<!-- 답글 목록 -->
 	<select id="commentList" parameterType="int" resultType="commentVO">
-	SELECT	*	FROM COMMENT
+	SELECT	*	FROM COMMENTS
 	WHERE	question_num			= #{question_num}
 	</select>
 	
 	<!-- 답글 등록 -->
 	<insert id="commentInsert" parameterType="commentVO">
-	INSERT	INTO	comment
+	INSERT	INTO	comments
 			(question_num,	comment_content,	comment_title)
 	VALUES	(#{question_num},	#{comment_content},	#{comment_title})
 	</insert>
 	
 	<!-- 답글 수정 -->
 	<update id="commentUpdate" parameterType="commentVO">
-	UPDATE	COMMENT
+	UPDATE	COMMENTS
 	SET		comment_content		= #{comment_content} , comment_title = #{comment_title}
 	WHERE	comment_num			= #{comment_num}
 	</update>
@@ -33,7 +33,7 @@
 	<!-- 답글 삭제 -->
 	<delete id="commentDelete" parameterType="int">
 	DELETE	
-	FROM	COMMENT		
+	FROM	COMMENTS	
 	WHERE	comment_num			= #{comment_num}
 	</delete>
 

@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class customersVO {
 	
-	private	int member_code;			// 코드
+	private	int member_code;			// 코드	
 	private	String member_id ;			// 회원아이디
 	private String member_pw;			// 회원비번
 	private String member_name;			// 이름

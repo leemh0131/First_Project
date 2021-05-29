@@ -26,7 +26,7 @@
 <br><br><br><br><br><br><br><br><br><br><br>
 <div class="container">
 
-     <h1 style="font-family: sans-serif; font-weight: bold; font-size: 35px">1:1문의관리</h1>
+     <h1 style="font-family: sans-serif; font-weight: bold; font-size: 35px">1:1문의관리</h1>     	
         <hr><br>  
         <!-- 문의내용 -->      
         <table class="table table-striped">			
@@ -99,8 +99,8 @@ function fnModuleInfo(str){
 function del(comment_num) {
 	var chk = confirm("정말 답변삭제하시겠습니까?");
 	if (chk) {
-		location.href='commentDelete?comment_num='+comment_num;
-	}
+		location.href='commentDelete?comment_num='+comment_num;		
+	}	
 }
 
 
