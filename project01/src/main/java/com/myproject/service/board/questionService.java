@@ -22,7 +22,7 @@ public interface questionService {
 		// 회원 리스트
 		public List<questionVO> questionList(String tbl) throws Exception;
 		
-		// 공지사항 상세보기
+		// 문의보기
 		public questionVO questionView(int question_num) throws Exception;	
 		
 }

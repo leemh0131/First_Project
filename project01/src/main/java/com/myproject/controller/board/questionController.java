@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.myproject.domain.board.commentVO;
 import com.myproject.domain.board.questionVO;
+import com.myproject.domain.board.reviewVO;
 import com.myproject.service.board.commentService;
 import com.myproject.service.board.questionService;
 
@@ -60,5 +62,29 @@ public class questionController {
 		
 	}	
 	
+	// 답변작성 GET
+	@RequestMapping(value = "/commentInsert", method = RequestMethod.GET) 
+	public void getcommentInsert(@RequestParam("question_num")int question_num, Model model) throws Exception {		
+		logger.info("questionController commentInsert() GET" + question_num);
+		model.addAttribute("question_num", question_num);
+	}	
+	
+	// 답변작성 POST	
+	@RequestMapping(value = "/commentInsert", method = RequestMethod.POST)
+	public String commentInsert(commentVO vo, questionVO Qvo) throws Exception {
+		logger.info("reviewController commentInsert() => " + vo);
+		commentService.commentInsert(vo);				
+		return "redirect:/question/questionView?question_num=" + Qvo.getQuestion_num();
+	}
+	
+	
+	// 답변삭제	
+	@RequestMapping(value = "/commentDelete", method = RequestMethod.GET)
+	public String commentDelete(questionVO Qvo, @RequestParam("comment_num")int comment_num) throws Exception {
+		logger.info("reviewController commentDelete() => " + vo);
+		commentService.commentDelete(comment_num);
+		return "redirect:/question/questionView?question_num=" + Qvo.getQuestion_num();
+	}
+
 
 }

@@ -30,4 +30,7 @@ public interface productDAO {
 	//상품좋아요
 	public void productLike(int product_code) throws Exception;
 	
+	//상품좋아요 카운트
+	public int productLikeCount(int product_code) throws Exception;
+	
 }

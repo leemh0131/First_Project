@@ -16,7 +16,7 @@ public interface reviewService {
 	public void reviewdelete(int review_num) throws Exception;
 	
 	//리뷰갯수
-	public reviewVO reviewCnt(int product_code) throws Exception;
+	public int reviewCnt(int product_code) throws Exception;
 	
 	//전체리뷰
 	public List<reviewVO> reviewAll(String tbl) throws Exception;

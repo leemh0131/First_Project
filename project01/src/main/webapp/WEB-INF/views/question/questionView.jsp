@@ -27,11 +27,12 @@
 <div class="container">
 
      <h1 style="font-family: sans-serif; font-weight: bold; font-size: 35px">1:1문의관리</h1>
-        <hr><br>        
+        <hr><br>  
+        <!-- 문의내용 -->      
         <table class="table table-striped">			
             <tr>
                 <th style="font-size: 16px;" scope="row">Member_ID</th>
-                <td style="font-size: 15px;" >${questionView.member_id}</td>                          
+                <td style="font-size: 15px;">${questionView.member_id}</td>                          
             	<th style="font-size: 16px;" scope="row">Writer</th>
                 <td style="font-size: 15px;">${questionView.member_name}</td>                
 				<th style="font-size: 16px;" scope="row">Title</th>
@@ -43,10 +44,69 @@
         <div class="container">
        		<h3>${questionView.question_content}</h3>            
         </div>
-
-        <br><br><br><br><br><br>
+        
+         <!--관리자일시 답변작성 버튼을 보여준다.-->
+        <div style="float: right;" class="col-md-2">
+			<a onclick="fnModuleInfo(${questionView.question_num})"><button class="btn btn-dark" type="button">답변작성			
+			</button></a>
+		</div> 
+		
+        <br><br><br><hr>
+        
+        <!-- 답변이있으면 보여준다. -->
+        <table class="table table-striped">			
+            <tr>                                        
+            	<th style="font-size: 16px;" scope="row">Writer</th>
+                <td style="font-size: 15px;">관리자</td>                
+				<th style="font-size: 16px;" scope="row">Title</th>
+                <td style="font-size: 15px;">${questionView.comment_title}</td>                
+                <th style="font-size: 16px;" scope="row">Date</th>
+                <td style="font-size: 15px;" ><fmt:formatDate value="${questionView.comment_date}" type="both"/></td>                
+            </tr>            
+        </table>
+        <div class="container">
+       		<h3>${questionView.comment_content}</h3>            
+        </div>
+        
+         <!--관리자일시 답변삭제 버튼을 보여준다.-->
+        <div style="float: right;" class="col-md-2">
+			<a onclick="fnModuleInfo(${questionView.question_num})">
+			<button onclick="del(${questionView.comment_num})" type="button" id="btnDelete" class="btn btn-dark">
+			답변삭제
+			</button>
+			</a>
+		</div>
+        
+              
+        
+        <!-- Moa Modal-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    		<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content"></div>
+		  	</div>
+		</div>
 
 </div>
+
+<script type="text/javascript">
+//모달사용
+function fnModuleInfo(str){
+   $('#myModal .modal-content').load("commentInsert?question_num="+str);
+   $('#myModal').modal();
+}
+
+//삭제
+function del(comment_num) {
+	var chk = confirm("정말 답변삭제하시겠습니까?");
+	if (chk) {
+		location.href='commentDelete?comment_num='+comment_num;
+	}
+}
+
+
+</script>
+
+
 </body>
 <br><br><br><br><br><br><br><br>
 <br><br><br><br>

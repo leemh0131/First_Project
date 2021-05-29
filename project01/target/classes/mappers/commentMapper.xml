@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.myproject.mappers.CommentMapper">
+<mapper namespace="com.myproject.mappers.commentMapper">
 
 	<!-- 답글의 개수를 구한다. -->
 	<select id="commentCount" resultType="int">

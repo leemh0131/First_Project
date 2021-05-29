@@ -30,5 +30,8 @@ public interface productService {
 	//상품좋아요
 	public void productLike(int product_code) throws Exception;
 	
+	//상품좋아요
+	public int productLikeCount(int product_code) throws Exception;
+	
 	
 }

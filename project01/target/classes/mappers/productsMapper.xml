@@ -31,7 +31,7 @@
 		select	product_code, product_type, img_view, product_name, 
 				product_price, product_read, product_count, product_like 
 				from products
-				where product_type = #{product_type}					
+				where product_type = #{product_type}
 	</select>
 	
 	<!-- 베스트리스트보기 -->
@@ -41,7 +41,7 @@
 				from products ORDER BY product_like desc limit 10
 	</select>	
 	
-	<!-- 상품 상세보기 -->
+	<!-- 상품 상세보기 --> 
     <select id="productView" resultType="productVO">
             select * from products where product_code = #{product_code}
     </select>
@@ -55,6 +55,10 @@
     <update id="productLike">
 		update products set product_like = product_like + 1 where product_code = #{product_code}
 	</update>
+	
+	<select id="productLikeCount" resultType="int">
+		select product_like from products where product_code = #{product_code} 
+	</select>
 	
 	
 	

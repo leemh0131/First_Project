@@ -189,9 +189,8 @@
 						</div>
 					</div>						
 							
-					<!-- 관리자 로그인 시 -->
-								
-					<!-- 수정/삭제하기
+					<!-- 관리자 로그인 시 -->								
+					<!-- 수정/삭제하기 -->
 					<div class="col-md-6">
 						<div class="btn1">
 						<a href="/products/updateProduct?product_code=${productView.product_code}"><button type="button" id="update" class="btn1 btn-outline-dark btn-lg">
@@ -199,8 +198,7 @@
 						</button>
 						</a>
 						</div>
-					</div>
-					-->
+					</div>					
 				
 				</div>
 			</div>
@@ -249,94 +247,97 @@
 	</div><br><br><hr style="border-color: #A5A5A5;">
 	
 	
-	
-		<!-- 리뷰가없을시 
-		<div class="row">
-			<div class="col-md-12">
-				<h2 style="text-align: center; height: 500px; padding-top: 200px; color: #979491;">
-				등록된 구매평이 없습니다.
-				</h2>
-			</div>
-		</div>	-->
-		
-	
-		
-		<!-- 리뷰 -->
-		<c:forEach items="${reviewAll}" var="reviewVO">	
-		<div class="row" style="margin: 100px, 100px, 100px, 100px;">
-			
-			<input type="hidden" value="${reviewVO.review_num}" />
-		
-			<!-- 이름 -->
-			<div class="col-md-2">				
-				<h6 style="font-weight:bold;">${reviewVO.member_name}&nbsp;님</h6>
-			</div>
-			
-			<!-- 별점 -->
-			<div class="col-md-10">
-			<c:choose>
-				<c:when test="${reviewVO.review_star == 1}">
-	        		<p style="font-size:20px; color: #FF0000;">★</p>
-	   			</c:when>
-	   			<c:when test="${reviewVO.review_star == 2}">
-	        		<p style="font-size:20px; color: #FF0000;">★★</p>
-	   			</c:when>
-	   			<c:when test="${reviewVO.review_star == 3}">
-	        		<p style="font-size:20px; color: #FF0000;">★★★</p>
-	   			</c:when>
-	   			<c:when test="${reviewVO.review_star == 4}">
-	        		<p style="font-size:20px; color: #FF0000;">★★★★</p>
-	   			</c:when>
-	   			<c:when test="${reviewVO.review_star == 5}">
-	        		<p style="font-size:20px; color: #FF0000;">★★★★★</p>
-	   			</c:when>				
-			</c:choose>
-			</div>
-			
-			<!-- 사진 -->
-			<div class="col-md-2" style="width:150px; height: 190px; background-color: gray;">
-				<h5>${reviewVO.review_img}</h5>
-			</div>
-			
-			<%-- 사진 없을 때 .... 오류
-			<c:set var="a" value="사진없음"/> 
-			<c:choose>
-				<c:when test='${reviewVO.review_img == a}'>
-					<div class="col-md-2" style="width:150px; height: 190px; background-color: blue;">
-						<h5>${reviewVO.review_img}</h5>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="col-md-2" style="width:150px; height: 190px; background-color: red;">		
-						<h5>${reviewVO.review_img}</h5>
-					</div>
-				</c:otherwise>.
-			</c:choose> --%> 
-			
-			
-			<div class="col-md-10">
-			
-				<!-- 제목	 -->
-				<h6 style="font-weight:bolder;" >${reviewVO.review_title}				
-					<!-- 날짜 -->
-					<label style="float: right;"><c:set var="date" value="${reviewVO.review_date}"/><fmt:formatDate value="${date}"/></label>
-				</h6>
+		<c:choose>
+			<c:when test = "${!empty reviewAll}">	
+				<!-- 리뷰 -->
+				<c:forEach items="${reviewAll}" var="reviewVO">	
+				<div class="row" style="margin: 100px, 100px, 100px, 100px;">
+					
+					<input type="hidden" value="${reviewVO.review_num}" />
 				
-				<!-- 내용 -->
-				<div class="col-md-10">		
-					<h6>${reviewVO.review_content}</h6>
+					<!-- 이름 -->
+					<div class="col-md-2">				
+						<h6 style="font-weight:bold;">${reviewVO.member_name}&nbsp;님</h6>
+					</div>
+					
+					<!-- 별점 -->
+					<div class="col-md-10">
+					<c:choose>
+						<c:when test="${reviewVO.review_star == 1}">
+			        		<p style="font-size:20px; color: #FF0000;">★</p>
+			   			</c:when>
+			   			<c:when test="${reviewVO.review_star == 2}">
+			        		<p style="font-size:20px; color: #FF0000;">★★</p>
+			   			</c:when>
+			   			<c:when test="${reviewVO.review_star == 3}">
+			        		<p style="font-size:20px; color: #FF0000;">★★★</p>
+			   			</c:when>
+			   			<c:when test="${reviewVO.review_star == 4}">
+			        		<p style="font-size:20px; color: #FF0000;">★★★★</p>
+			   			</c:when>
+		   			<c:when test="${reviewVO.review_star == 5}">
+		        		<p style="font-size:20px; color: #FF0000;">★★★★★</p>
+		   			</c:when>				
+				</c:choose>
 				</div>
 				
-				<!-- 헤더에서 회원코드를 가져온 후 일치하면 보여주는 삭제 버튼(본인로그인 삭제) -->
-				<!-- 컨트롤러에서 equestParam으로 review_num가 안불러와짐 ㅠㅠ 뭔가 잘못됐는데 뭔지 모르겠음 리스트형태라 그런가.. -->
-				<div style="float: right;" class="col-md-2">		
-					<button name="review_num" onclick="del(${reviewVO.review_num})" style="width: 70px;" type="button" class="btn1 btn-outline-dark btn-sm">삭제</button>
-				</div>			
+				<!-- 사진 -->
+				<div class="col-md-2" style="width:150px; height: 190px; background-color: gray;">
+					<h5>${reviewVO.review_img}</h5>
+				</div>
 				
-			</div>
+				<%-- 사진 없을 때 .... 오류
+				<c:set var="a" value="사진없음"/> 
+				<c:choose>
+					<c:when test='${reviewVO.review_img == a}'>
+						<div class="col-md-2" style="width:150px; height: 190px; background-color: blue;">
+							<h5>${reviewVO.review_img}</h5>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-md-2" style="width:150px; height: 190px; background-color: red;">		
+							<h5>${reviewVO.review_img}</h5>
+						</div>
+					</c:otherwise>.
+				</c:choose> --%> 
+				
+				
+				<div class="col-md-10">
+				
+					<!-- 제목	 -->
+					<h6 style="font-weight:bolder;" >${reviewVO.review_title}				
+						<!-- 날짜 -->
+						<label style="float: right;"><c:set var="date" value="${reviewVO.review_date}"/><fmt:formatDate value="${date}"/></label>
+					</h6>
+					
+					<!-- 내용 -->
+					<div class="col-md-10">		
+						<h6>${reviewVO.review_content}</h6>
+					</div>
+					
+					<!-- 헤더에서 회원코드를 가져온 후 일치하면 보여주는 삭제 버튼(본인로그인 삭제) -->
+					<!-- 컨트롤러에서 equestParam으로 review_num가 안불러와짐 뭔가 잘못됐는데 뭔지 모르겠음 리스트형태라 그런 -->
+					<div style="float: right;" class="col-md-2">		
+						<button name="review_num" onclick="del(${reviewVO.review_num})" style="width: 70px;" type="button" class="btn1 btn-outline-dark btn-sm">삭제</button>
+					</div>
+					
+				</div>
+				
+			</div> <hr>
+			</c:forEach>		
+		</c:when>
+		<c:otherwise>
+			<!-- 리뷰가없을시  -->
+			<div class="row">
+				<div class="col-md-12">
+					<h2 style="text-align: center; height: 500px; padding-top: 200px; color: #979491;">
+					등록된 구매평이 없습니다.
+					</h2>
+				</div>
+			</div>	
+		</c:otherwise>	
+		</c:choose>
 			
-		</div> <hr>
-		</c:forEach>		
 	
 </div>
 
@@ -354,7 +355,7 @@ function fnModuleInfo(str){
 function del(review_num) {
 	var chk = confirm("정말 삭제하시겠습니까?");
 	if (chk) {
-		location.href='reviewdelete?review_num?review_num=' + review_num;
+		location.href='../review/reviewdelete?review_num=' + review_num;
 	}
 }
 
@@ -366,15 +367,25 @@ function productContentBuy()  {
   
 //좋아요요 ajax사용으로 수정필요.. 중복, 새로고침
 var click = true;
-function like(product_code)  {	
-	if(click) {
-		location.href='productLike?product_code='+product_code;
+function like(product_code) {
+	/* if(click) {
+		location.href='productLike?product_code='+;
 		click = false;
 	} else {
 		alert("좋아요는 한번만 가능합니다.");
 	}
-    document.getElementById("likeResult").innerText = " " + ${productView.product_like};
+    document.getElementById("likeResult").innerText = " " + ${productView.product_like}; */
+	 $.ajax({
+	        url : 'productLike',
+	        type : 'post',
+	        data : {'product_code': product_code},
+	        success : function(data){
+	        	document.getElementById("likeResult").innerText = " " + data;
+	        }
+	    });
   }
+
+
   
 
 

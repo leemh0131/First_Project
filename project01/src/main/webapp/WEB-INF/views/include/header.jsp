@@ -7,8 +7,8 @@ body {
 	background-color: #F9F9F9 !important;
 	}
 	
-.navbar-default {
-  
+.nav-item:hover {	 
+	box-shadow: 1px 1px 20px #ddd;
 }
 
 /* 어드민아이콘링크비활성화 */
@@ -46,19 +46,19 @@ font-size: 17px;
 	          <a href="../products/productListBest" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Best10</span></a>
 	        </li>
 	        <li class="nav-item">
-	          <a href="../products/productList?product_type=1" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Outer </span></a>
+	          <a href="../products/productList?product_type=1" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Outer</span></a>
 	        </li>
 	        <li class="nav-item">
-	          <a href="../products/productList?product_type=2" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Top </span></a>
+	          <a href="../products/productList?product_type=2" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Top</span></a>
 	        </li>
 	        <li class="nav-item">
-	          <a href="../products/productList?product_type=3" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Pants </span></a>
+	          <a href="../products/productList?product_type=3" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Pants</span></a>
 	        </li>
 	        <li class="nav-item">
-	          <a href="../products/productList?product_type=4" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Accessory </span></a>
+	          <a href="../products/productList?product_type=4" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Accessory</span></a>
 	        </li>
 	        <li class="nav-item text-dark mr-2">
-	          <a href="../products/productList?product_type=5" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Shoes </span></a>
+	          <a href="../products/productList?product_type=5" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Shoes</span></a>
 	        </li>
 	    </ul>
     </div>
@@ -73,7 +73,7 @@ font-size: 17px;
     <!-- 검색창 -->
     <div class="col-md-2">
         <form class="form-inline my-lg-1 py-2">
-        	<input class="form-control mr-sm form-control-sm w-50" type="text" placeholder="Search" id="Search">
+        	<input class="form-control mr-sm form-control-sm w-50" type="text" name="searchName" placeholder="Search" id="Search">
         	<button id="search" type="submit" class="btn text-dark btn-lg" contenteditable="true"><i class="fa fa-search"></i></button>
         </form>
     </div>
@@ -97,8 +97,7 @@ font-size: 17px;
 	            </a>
 	            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
 		            <a class="dropdown-item" href="/board/boardList">공지사항</a>
-		            <a class="dropdown-item" onclick="not_loginQnA()" href="#">문의하기</a>
-		            <a class="dropdown-item" href="#">리뷰보기</a>
+		            <a class="dropdown-item" onclick="not_loginQnA()" href="#">문의하기</a>		            
 		            <a class="dropdown-item" href="#">비회원조회</a>
 	            </div>
 	        </li>
@@ -121,8 +120,7 @@ font-size: 17px;
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
 	            <a class="dropdown-item" href="mypage/mypage">마이페이지</a>
 	            <a class="dropdown-item" href="/board/boardList">공지사항</a>
-	            <a class="dropdown-item" href="#">문의하기</a>
-	            <a class="dropdown-item" href="#">리뷰작성</a>
+	            <a class="dropdown-item" href="#">문의하기</a>	           
 	            <a class="dropdown-item" href="#">주문조회</a>
 	            <a class="dropdown-item" href="#">로그아웃</a>
             </div>

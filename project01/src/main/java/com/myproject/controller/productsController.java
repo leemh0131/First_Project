@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myproject.domain.productVO;
 import com.myproject.domain.board.reviewVO;
@@ -58,9 +58,7 @@ public class productsController {
 	// 상품등록 get
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.GET)
 	public void insertProductGET(productVO vo, Model model) throws Exception {
-
 		logger.info("insertProductGET");
-
 	}
 
 	// 상품등록 post
@@ -68,10 +66,7 @@ public class productsController {
 	public String insertProductPost(productVO vo) throws Exception {
 
 		logger.info("insertProductPOST" + vo);
-
-		productService.insertProduct(vo);
-		
-
+		productService.insertProduct(vo);		
 		return "redirect:/products/productList?product_type=" + vo.getProduct_type();
 	}
 
@@ -96,7 +91,7 @@ public class productsController {
 		model.addAttribute("reviewAll", list);
 		
 		//리뷰갯수
-		reviewVO  cnt = null;
+		int cnt = 0;
 		cnt = reviewService.reviewCnt(product_code);
 		model.addAttribute("reviewCnt", cnt);		
 		
@@ -129,10 +124,11 @@ public class productsController {
 	}
 	
 	// 좋아요	ajax사용으로 수정필요..
-	@RequestMapping(value = "productLike", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "productLike", method = RequestMethod.POST)
 	public String productLike(@RequestParam("product_code")int product_code) throws Exception {
 		productService.productLike(product_code);
-		return "redirect:/products/productView?product_code=" + product_code;
+		return Integer.toString(productService.productLikeCount(product_code));
 	}
 
 }

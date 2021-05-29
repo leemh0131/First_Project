@@ -75,7 +75,12 @@ public class productServiceImp implements productService {
 		dao.productLike(product_code);
 	}
 
-	
+	//좋아요
+	@Override
+	public int productLikeCount(int product_code) throws Exception {
+		logger.info("productServiceImp productLike () => " + product_code);
+		return dao.productLikeCount(product_code);
+	}
 
 	
 

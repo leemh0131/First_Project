@@ -61,22 +61,31 @@
 <div class="container">
 
 <div class="row">
-<c:forEach items="${productList}" var="productVO">	
-	<div id="product" class="col-sm-3">		
-		<a href="/products/productView?product_code=${productVO.product_code}">			
-			<div class="product_img">		
-				<img src="${productVO.img_view}" alt="image"/>
-				<h4 class="product_name">${productVO.product_name}</h4>
-				<c:if test="${productVO.product_count <= 0}">
-				<h4 style="font-weight: bolder; color: red;" class="product_price">SOLD OUT</h4>
-				</c:if>
-				<c:if test="${productVO.product_count > 0}">			
-				<h4 class="product_price">${productVO.product_price} KRW</h4>
-				</c:if>
+<c:choose>
+	<c:when test = "${!empty productList}">
+		<c:forEach items="${productList}" var="productVO">	
+			<div id="product" class="col-sm-3">		
+				<a href="/products/productView?product_code=${productVO.product_code}">			
+					<div class="product_img">		
+						<img src="${productVO.img_view}" alt="image"/>
+						<h4 class="product_name">${productVO.product_name}</h4>
+						<c:if test="${productVO.product_count <= 0}">
+						<h4 style="font-weight: bolder; color: red;" class="product_price">SOLD OUT</h4>
+						</c:if>
+						<c:if test="${productVO.product_count > 0}">			
+						<h4 class="product_price">${productVO.product_price} KRW</h4>
+						</c:if>
+					</div>
+				</a>
 			</div>
-		</a>
-	</div>
-</c:forEach>
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+		<div style="text-align: center; width: 100%; height: 700px; margin: auto;" >			
+			<br><br><br><br><br><h1 style="height: 700px; color: #979491;">상품준비중입니다.</h1>
+		</div>
+	</c:otherwise>	
+</c:choose>
 </div>
 
 </div>

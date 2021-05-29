@@ -77,6 +77,13 @@ public class productDAOImp implements productDAO{
 		logger.info("productDAOImp productLike() => " + product_code);
 		sqlSession.update(namespace + ".productLike", product_code);
 	}
+	
+	//좋아요
+	@Override
+	public int productLikeCount(int product_code) throws Exception {
+		logger.info("productDAOImp productLike() => " + product_code);
+		return sqlSession.selectOne(namespace + ".productLikeCount", product_code);
+	}
 
 
 	

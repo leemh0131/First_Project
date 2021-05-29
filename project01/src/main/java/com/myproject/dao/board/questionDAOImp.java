@@ -53,7 +53,7 @@ public class questionDAOImp implements questionDAO {
 	@Override
 	public questionVO questionView(int question_num) throws Exception {
 		logger.info("questionDAOImp questionView() => " + question_num);
-		return sqlSession.selectOne(namespace + ".questionAllList", question_num);
+		return sqlSession.selectOne(namespace + ".questionView", question_num);
 	}
 
 	//회원리스트

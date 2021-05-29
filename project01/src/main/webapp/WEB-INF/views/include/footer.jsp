@@ -21,7 +21,8 @@
 	    font-size: 45px;
 		font-weight: bolder;
 		font-family: 'Tangerine', cursive;
-    }
+    }    
+ 
     
 </style>
 
@@ -38,18 +39,17 @@
         	
         	<!-- 메인메뉴 -->
             <div class="col-lg-4 col-6 p-3">
-          		<h2 class="text-info"><b>Main</b></h2>
+          		<h3 class="text-info"><b>Main</b></h3>
           		<ul class="list-unstyled">
             		<li class="Main"> <a href="/" class="text-info">Home</a></li>
             		<li class="Main"> <a href="/board/boardList" class="text-info">FAQ</a></li>
-		            <li class="Main"> <a href="#" class="text-info">Best</a></li>
-		            <li class="Main"> <a href="#" class="text-info">Review</a></li>
+		            <li class="Main"> <a href="/products/productListBest" class="text-info">Best</a></li>		            
           		</ul>
         	</div>
         	
         	<!-- 아이콘 -->
         	<div class="col-lg-3 col-md-4 p-3">
-            	<h2 class="text-info"> <b>Follow us</b> </h2>
+            	<h3 class="text-info"> <b>Follow us</b> </h3>
             	<div class="row">
             		<div class="d-flex align-items-center justify-content-between my-2 col-md-12">
 	            		<a href="#" class="">

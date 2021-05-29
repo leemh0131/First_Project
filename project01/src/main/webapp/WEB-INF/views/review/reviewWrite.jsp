@@ -12,24 +12,24 @@
 
 
 <!-- Modal -->
-<form onsubmit="return check()" name="f" method="post">
+<form onsubmit="return check()" name="f" method="post" action="/review/reviewWrite">
 		
-		    <div class="modal-header">
-		    
+		    <div class="modal-header">		    
 			    <h6 class="modal-title" id="exampleModalCenterTitle">리뷰작성</h6>			    
 			    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			        <span aria-hidden="true">&times;</span>
-			    </button>
-			    
+			    </button>			    
 		    </div>
 		    
 		    <!-- 인붓 -->
 		    <div class="modal-body">
 		   
 		    	<!-- 숨겨서 상품코드, 멤버코드 보낸다 -->
-		    	<input type="hidden" name="product_code" value="${reviewWrite.product_code}"/>
+		    	<input type="hidden" name="product_code" value="${product_code}"/>
+		    	
 		    	<!-- 나중에 헤드에서 멤버코드 값 가져오기 -->
-		    	<input type="hidden" name="member_code" value="1"/>		 
+		    	<input type="hidden" name="member_code" value="1"/>
+		    	 
 		    	<div class="row">
 		    		<div class="col-md-3">	    	
 			    		<p>이민호 님</p>
@@ -57,7 +57,7 @@
       				</div>
 
       				<div class="col-md-12">
-      					<input type="file" name="files" multiple="multiple" value="사진없음"/>
+      					<input name="review_img" multiple="multiple" />
       				</div>
 
 				</div>	
@@ -73,6 +73,30 @@
 
 <script type="text/javascript">
 
+//공백체크
+function check() {	
+
+	if(f.review_title.value == "" || f.review_title.value == null) {
+		   alert("제목을 입력해 주세요.");
+		   f.review_title.focus();
+		   return false;
+		}
+		
+		else if(f.review_content.value == "" || f.review_content.value == null) {
+		   alert("내용를 선택해주세요.");
+		   f.review_content.focus();
+		   return false;
+		}
+	
+		else if(f.review_star.value == "" || f.review_star.value == null) {
+		   alert("별점을 매겨주세요.");
+		   f.review_star.focus();
+		   return false;
+		}	
+
+	  else return true;
+
+}
 
 //별
 $('#star a').click(function(){ 
@@ -81,15 +105,14 @@ $('#star a').click(function(){
 	
 	var star = ($(this).attr("value"));
 	
-	document.getElementById("review_star").value = star;	
-	
+	document.getElementById("review_star").value = star;		
 	
 });
 
 //키보드사용
 $(function() {
 	$("#myModal").modal({
-		keyboard:	true
+		keyboard:true
 	});
 });
 

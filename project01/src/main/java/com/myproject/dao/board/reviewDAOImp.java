@@ -53,7 +53,7 @@ public class reviewDAOImp implements reviewDAO {
 
 	//리뷰갯수
 	@Override
-	public reviewVO reviewCnt(int product_code) throws Exception {
+	public int reviewCnt(int product_code) throws Exception {
 		logger.info("reviewDAOImp reviewCnt() => " + product_code);
 		return sqlSession.selectOne(namespace + ".reviewCnt", product_code);
 	}
