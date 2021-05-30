@@ -41,6 +41,20 @@ public class questionController {
 		model.addAttribute("questionAllList", list);
 	}
 	
+	/*
+	 * // 회원문의리스트화면 세션 예시
+	 * 
+	 * @RequestMapping(value = "/questionList", method = RequestMethod.GET) public
+	 * void questionList(Model model, HttpServletRequest request) throws Exception {
+	 * logger.info("questionList GET.."); HttpSession session =
+	 * request.getSession();
+	 * 
+	 * String member_code = (String) session.getAttribute("member_code");
+	 * List<questionVO> list = null; list =
+	 * questionService.questionList(member_code); model.addAttribute("questionList",
+	 * list); model.addAttribute("member_code", member_code); }
+	 */
+	
 	// 회원문의리스트화면
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
 	public void questionList(Model model, @RequestParam("member_code")String member_code) throws Exception {
@@ -54,7 +68,7 @@ public class questionController {
 
 	// 문의보기
 	@RequestMapping(value = "/questionView", method = RequestMethod.GET)
-	public void questionView(@RequestParam("question_num") int question_num, Model model) throws Exception {
+	public void questionView(@RequestParam("question_num") int question_num, Model model) throws Exception {		
 		
 		questionVO view = null;
 		view =  questionService.questionView(question_num);		
@@ -72,10 +86,9 @@ public class questionController {
 	// 문의작성 POST	
 	@RequestMapping(value = "/questionInsert", method = RequestMethod.POST)
 	public String questionInsert(questionVO Qvo) throws Exception {
-		logger.info("questionController questionInsert() => " + Qvo);	
-		// System.out.println(Qvo.getMember_code()+"aaaaaa");
+		logger.info("questionController questionInsert() => " + Qvo);		
 		questionService.questionInsert(Qvo);		
-		return "redirect:/question/questionView?question_num=" + Qvo.getQuestion_num();
+		return "redirect:/";
 	}	
 
 	// 답변작성 GET

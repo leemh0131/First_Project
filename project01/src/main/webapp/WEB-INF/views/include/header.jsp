@@ -87,7 +87,7 @@ font-size: 17px;
 	        <li class="nav-item text-dark"><a onclick="not_loginCart()" class="nav-link" href="#"><i class="fa fa-shopping-cart fa-lg text-dark pt-1"></i><br></a></li>
 	        
 	        <!-- 로그인 -->
-	        <li class="nav-item"><a class="nav-link text-dark" href="/memberMain2">Login</a></li>
+	        <li class="nav-item"><a class="nav-link text-dark" href="/Login">Login</a></li>
 	        <!-- 회원가입 -->	        
 	        <li class="nav-item"><a class="nav-link text-dark" href="#">Join</a></li>
 	       	<!-- 비회원메뉴 -->        

@@ -74,7 +74,7 @@
             
             <!-- 문의하기 -->
             <div style="float: right;" class="col-md-2">
-				<a onclick='fnModuleInfo("${member_code}")'><button class="btn btn-dark" type="button">문의하기			
+				<a onclick='fnModuleInfo(${member_code})'><button class="btn btn-dark" type="button">문의하기			
 				</button></a>				
 			</div>			
 			
