@@ -5,8 +5,8 @@
 <mapper namespace="com.myproject.mappers.questionMapper">
 	<!-- 등록 -->
     <insert  id="questionInsert">
-        INSERT INTO question (question_title, question_content) 
-        VALUES (#{question_title}, #{question_content})
+        INSERT INTO question (member_code, question_title, question_content) 
+        VALUES (#{member_code}, #{question_title}, #{question_content})
     </insert >
     
     <!-- 수정 -->
@@ -34,9 +34,13 @@
 	
 	<!-- 리스트 -->
 	<select id="questionList" resultType="questionVO" parameterType="String">
-		 select q.question_num, c.member_code, c.member_name, q.question_title, q.question_content, q.question_date 
-		 from question as q, customers as c 
-		 where c.member_code = #{member_code} and q.member_code = c.member_code order by q.question_date desc				
+		 select * 
+		from 
+			(select q.question_num, q.member_code, q.question_title, q.question_content, q.question_date, c.member_name, c.member_id 
+		    from question as q, customers as c 
+		    where q.member_code = c.member_code) as qc 
+		left join comments as c 
+		on c.question_num = qc.question_num where qc.member_code = #{member_code} order by qc.question_date desc;				
 	</select>
 	
 	<!-- 상세보기 -->

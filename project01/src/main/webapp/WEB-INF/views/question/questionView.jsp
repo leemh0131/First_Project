@@ -45,7 +45,7 @@
        		<h3>${questionView.question_content}</h3>            
         </div>
         
-         <!--관리자일시 답변작성 버튼을 보여준다.-->
+        <!--관리자일시 답변작성 버튼을 보여준다.-->
         <div style="float: right;" class="col-md-2">
 			<a onclick="fnModuleInfo(${questionView.question_num})"><button class="btn btn-dark" type="button">답변작성			
 			</button></a>
@@ -69,12 +69,10 @@
         </div>
         
          <!--관리자일시 답변삭제 버튼을 보여준다.-->
-        <div style="float: right;" class="col-md-2">
-			<a onclick="fnModuleInfo(${questionView.question_num})">
+        <div style="float: right;" class="col-md-2">			
 			<button onclick="del(${questionView.comment_num})" type="button" id="btnDelete" class="btn btn-dark">
 			답변삭제
-			</button>
-			</a>
+			</button>			
 		</div>
         
               

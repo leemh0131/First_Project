@@ -14,7 +14,7 @@ import lombok.ToString;
 public class questionVO {
 		
 	private int 			question_num; //문의번호
-	private int 			member_code; //회원코드
+	private String 			member_code; //회원코드
 	private String 			member_name; //회원이름
 	private	String 			member_id ;		//회원아디
 	private String			question_title; //제목
