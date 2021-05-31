@@ -78,7 +78,12 @@ public class questionController {
 
 	// 문의보기
 	@RequestMapping(value = "/questionView", method = RequestMethod.GET)
-	public void questionView(@RequestParam("question_num") int question_num, Model model) throws Exception {		
+	public void questionView(@RequestParam("question_num") int question_num, HttpServletRequest req, Model model) throws Exception {
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
 		
 		questionVO view = null;
 		view =  questionService.questionView(question_num);		
@@ -125,9 +130,17 @@ public class questionController {
 	// 답변삭제	
 	@RequestMapping(value = "/commentDelete", method = RequestMethod.GET)
 	public String commentDelete(@RequestParam("comment_num")int comment_num) throws Exception {
-		logger.info("questionController commentDelete() =>" + comment_num);		
-		commentService.commentDelete(comment_num);
-		return "redirect:/question/questionAllList";		
+		logger.info("questionController commentDelete() =>" + comment_num);			
+		commentService.commentDelete(comment_num);		
+		return "redirect:/question/questionList";	
+	}
+	
+	// 문의삭제	
+	@RequestMapping(value = "/questionDelete", method = RequestMethod.GET)
+	public String questionDelete(@RequestParam("question_num")int question_num) throws Exception {
+		logger.info("questionController questionDelete() =>" + question_num);			
+		questionService.questionDelete(question_num);		
+		return "redirect:/question/questionList";
 	}
 
 

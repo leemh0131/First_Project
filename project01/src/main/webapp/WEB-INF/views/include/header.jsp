@@ -145,7 +145,8 @@ font-size: 17px;
 	             	<span class="text-dark">관리자모드</span> 
 	            </a>
 	            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">	            
-		            <a class="dropdown-item" href="/board/boardList">게시판관리</a>
+		            <a class="dropdown-item" href="/board/boardList">공지사항관리</a>
+		            <a class="dropdown-item" href="/question/questionList">문의관리</a>
 		            <a class="dropdown-item" href="#">주문관리</a>
 		            <a class="dropdown-item" href="/products/insertProduct">상품등록</a>	            
 		            <a class="dropdown-item" onclick="log_out()" href="/logout">로그아웃</a>

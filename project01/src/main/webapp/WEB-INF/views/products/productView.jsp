@@ -277,32 +277,16 @@
 			   			<c:when test="${reviewVO.review_star == 4}">
 			        		<p style="font-size:20px; color: #FF0000;">★★★★</p>
 			   			</c:when>
-		   			<c:when test="${reviewVO.review_star == 5}">
-		        		<p style="font-size:20px; color: #FF0000;">★★★★★</p>
-		   			</c:when>				
-				</c:choose>
-				</div>
+			   			<c:when test="${reviewVO.review_star == 5}">
+			        		<p style="font-size:20px; color: #FF0000;">★★★★★</p>
+			   			</c:when>				
+					</c:choose>
+					</div>
 				
 				<!-- 사진 -->
 				<div class="col-md-2" style="width:150px; height: 190px; background-color: gray;">
 					<h5>${reviewVO.review_img}</h5>
-				</div>
-				
-				<%-- 사진 없을 때 .... 오류
-				<c:set var="a" value="사진없음"/> 
-				<c:choose>
-					<c:when test='${reviewVO.review_img == a}'>
-						<div class="col-md-2" style="width:150px; height: 190px; background-color: blue;">
-							<h5>${reviewVO.review_img}</h5>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="col-md-2" style="width:150px; height: 190px; background-color: red;">		
-							<h5>${reviewVO.review_img}</h5>
-						</div>
-					</c:otherwise>.
-				</c:choose> --%> 
-				
+				</div>				
 				
 				<div class="col-md-10">
 				
@@ -319,6 +303,13 @@
 					
 					<!-- 본인삭제버튼 -->
 					<c:if test="${reviewVO.member_code == member.member_code}">
+					<div style="float: right;" class="col-md-2">		
+						<button name="review_num" onclick="del(${reviewVO.review_num})" style="width: 70px;" type="button" class="btn1 btn-outline-dark btn-sm">삭제</button>
+					</div>
+					</c:if>
+					
+					<!-- 관리자삭제버튼 -->
+					<c:if test="${member.mlevel == 0}">
 					<div style="float: right;" class="col-md-2">		
 						<button name="review_num" onclick="del(${reviewVO.review_num})" style="width: 70px;" type="button" class="btn1 btn-outline-dark btn-sm">삭제</button>
 					</div>

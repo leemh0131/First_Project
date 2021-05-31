@@ -18,36 +18,30 @@
     
     <!-- 삭제 -->
     <delete id="questionDelete">
-    	delete from board where board_num = #{board_num}
-    </delete>
-
-	<!-- 관리자 리스트 -->
-	<select id="questionAllList" resultType="questionVO" parameterType="String">
+    	delete from question where question_num = #{question_num}
+    </delete>	
+	
+	<!-- 리스트 -->
+	<select id="questionList" resultType="questionVO" parameterType="String">
 		select * 
 		from 
 			(select q.question_num, q.member_code, q.question_title, q.question_content, q.question_date, c.member_name, c.member_id 
 		    from question as q, member as c 
 		    where q.member_code = c.member_code) as qc 
-		left join member as c 
-		on c.question_num = qc.question_num order by qc.question_date desc		
-	</select>
-	
-	<!-- 리스트 -->
-	<select id="questionList" resultType="questionVO" parameterType="String">
-		select * from question, member
-		where member.member_code = question.member_code and member.member_code = #{member_code} order by question.question_date desc;				
+		left join comments as c 
+		on c.question_num = qc.question_num order by qc.question_date desc			
 	</select>
 	
 	<!-- 상세보기 -->
     <select id="questionView" resultType="questionVO">
-        select * 
+         select * 
 		from 
 			(select q.question_num, q.member_code, q.question_title, q.question_content, q.question_date, c.member_name, c.member_id 
 		    from question as q, member as c 
 		    where q.member_code = c.member_code) as qc 
-				left join member as c 
+				left join comments as c 
 				on c.question_num = qc.question_num
-				where qc.question_num = #{question_num}
+				where qc.question_num =#{question_num};
     </select>
     
     

@@ -32,7 +32,12 @@ public class MainController {
 	
 	//메인페이지
 	@RequestMapping("/")
-	public String memberMain() {
+	public String memberMain(Model model, HttpServletRequest req) {
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
+		
 		return "memberMain";
 	}
 	

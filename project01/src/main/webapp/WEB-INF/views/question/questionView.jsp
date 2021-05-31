@@ -27,7 +27,8 @@
 <div class="container">
 
      <h1 style="font-family: sans-serif; font-weight: bold; font-size: 35px">1:1문의관리</h1>     	
-        <hr><br>  
+        <hr><br>
+        
         <!-- 문의내용 -->      
         <table class="table table-striped">			
             <tr>
@@ -45,11 +46,15 @@
        		<h3>${questionView.question_content}</h3>            
         </div>
         
-        <!--관리자일시 답변작성 버튼을 보여준다.-->
-        <div style="float: right;" class="col-md-2">
-			<a onclick="fnModuleInfo(${questionView.question_num})"><button class="btn btn-dark" type="button">답변작성			
-			</button></a>
-		</div> 
+        <c:if test="${empty questionView.comment_content}">
+        <!--답변이 없을 시 문의삭제-->
+        <div style="float: right;" class="col-md-2">			
+			<button onclick="Q_del(${questionView.question_num})" type="button" id="btnDelete" class="btn btn-dark">
+			문의삭제
+			</button>			
+		</div>
+        </c:if>        
+        
 		
         <br><br><br><hr>
         
@@ -68,13 +73,22 @@
        		<h3>${questionView.comment_content}</h3>            
         </div>
         
-         <!--관리자일시 답변삭제 버튼을 보여준다.-->
+        <c:if test="${member.mlevel == 0 && empty questionView.comment_content}">
+        <!--관리자일시 답변작성 버튼을 보여준다.-->
+        <div style="float: right;" class="col-md-2">
+			<a onclick="fnModuleInfo(${questionView.question_num})"><button class="btn btn-dark" type="button">답변작성			
+			</button></a>
+		</div> 
+		</c:if>
+        
+        <c:if test="${member.mlevel == 0 && !empty questionView.comment_content}">
+        <!--관리자이고 답변이 있으면 답변삭제 버튼을 보여준다.-->
         <div style="float: right;" class="col-md-2">			
 			<button onclick="del(${questionView.comment_num})" type="button" id="btnDelete" class="btn btn-dark">
 			답변삭제
 			</button>			
 		</div>
-        
+        </c:if>
               
         
         <!-- Moa Modal-->
@@ -93,11 +107,19 @@ function fnModuleInfo(str){
    $('#myModal').modal();
 }
 
-//삭제
+//답변삭제
 function del(comment_num) {
-	var chk = confirm("정말 답변삭제하시겠습니까?");
+	var chk = confirm("정말 답변을 삭제하시겠습니까?");
 	if (chk) {
 		location.href='commentDelete?comment_num='+comment_num;		
+	}	
+}
+
+//문의삭제
+function Q_del(question_num) {
+	var chk = confirm("정말 문의을 삭제하시겠습니까?");
+	if (chk) {
+		location.href='questionDelete?question_num='+question_num;		
 	}	
 }
 
