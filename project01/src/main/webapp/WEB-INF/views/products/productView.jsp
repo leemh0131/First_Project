@@ -118,7 +118,7 @@
 <br>
 
 	<div class="container">
-	<form method="post" onsubmit="return false;">
+	<form id="pos" method="post" onsubmit="return false;" action="/order">
 	
 		<div class="row">
 		<!-- 사진 -->
@@ -153,7 +153,7 @@
 				<div id="product_content_div">				
 					<label style="font-size: 16px; font-family: sans-serif;">수량</label><br><hr>
 					<div>
-						<input id="product_content_input" onkeyup="productContentBuy()" onclick="productContentBuy()" type="number" step="1" min="1" max="" name="product_content_buy" value='1' size="10"/>
+						<input id="product_content_input" onkeyup="productContentBuy()" onclick="productContentBuy()" type="number" step="1" min="1" max="" name="order_count" value='1' size="10"/>
 						<span id="priceResult" style="font-size: 18px; font-family: sans-serif; float: right;">${productView.product_price}&nbsp;KRW</span>					
 					</div>					
 				</div><br><br>
@@ -163,7 +163,7 @@
 					<!-- 구매하기 -->
 					<div class="col-md-4">
 						<div class="btn1">
-						<a href="#"><button type="submit" id="Buy" class="btn1 btn-outline-dark btn-lg">
+						<a href="/order"><button type="submit" id="Buy" class="btn1 btn-outline-dark btn-lg">
 							<i class="fa fa-krw" aria-hidden="true"></i>&nbsp;Buy
 						</button>
 						</a>
@@ -173,7 +173,7 @@
 					<!-- 장바구니담기 -->	
 					<div class="col-md-4">
 						<div class="btn1">
-						<a href="#"><button type="submit" id="Cart" class="btn1 btn-outline-dark btn-lg">
+						<a href="#"><button type="button" id="Cart" class="btn1 btn-outline-dark btn-lg">
 							<i class="fa fa-shopping-cart fa-lg pt-1"></i>&nbsp;Cart
 						</button>
 						</a>
@@ -358,7 +358,7 @@ function productContentBuy()  {
     document.getElementById("priceResult").innerText = buy * ${productView.product_price} + " KRW";
 }
   
-//좋아요요 ajax사용으로 수정필요.. 중복, 새로고침
+//좋아요 ajax사용 중복수정
 var click = true;
 function like(product_code) {
 	/* if(click) {
@@ -377,11 +377,6 @@ function like(product_code) {
 	        }
 	    });
   }
-
-
-  
-
-
 
 </script>
 
