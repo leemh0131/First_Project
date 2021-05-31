@@ -50,12 +50,11 @@ public class MainController {
 	
 	//로그인
 	@RequestMapping(value="/include/header", method=RequestMethod.POST) 
-	public void headerlogin(Model model, HttpServletRequest req, RedirectAttributes rttr) throws Exception {		  
+	public void headerlogin(Model model, HttpServletRequest req) throws Exception {		  
 		//로그인세션가져오기		  
 		HttpSession session = req.getSession();
-		String login = (String) session.getAttribute("member");		
-		logger.info("mainController 헤더에서 사용 " + login);
-		model.addAttribute("member", login);
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
 		 
 	}
 	

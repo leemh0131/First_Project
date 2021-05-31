@@ -1,6 +1,8 @@
 package com.myproject.controller.board;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.myproject.domain.MemberVO;
 import com.myproject.domain.board.reviewVO;
 import com.myproject.service.board.reviewService;
 
@@ -25,9 +28,14 @@ public class reviewController {
 	
 	// 리뷰작성 get
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.GET) 
-	public void getreviewWrite(@RequestParam("product_code")int product_code, Model model) throws Exception {		
+	public void getreviewWrite(@RequestParam("product_code")int product_code, Model model, HttpServletRequest req) throws Exception {		
 		logger.info("reviewController reviewWrite() GET" + product_code);
 		model.addAttribute("product_code", product_code);
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
 	}	
 	
 	// 리뷰작성 POST	RequestMethod.POST
@@ -37,7 +45,7 @@ public class reviewController {
 		reviewService.reviewWrite(vo);
 		
 				
-		return "redirect:/";
+		return "redirect:/products/productListBest";
 	}
 	
 	// 리뷰삭제	

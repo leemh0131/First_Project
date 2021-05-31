@@ -123,7 +123,7 @@ font-size: 17px;
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
 	            <a class="dropdown-item" href="mypage/mypage">마이페이지</a>
 	            <a class="dropdown-item" href="/board/boardList">공지사항</a>
-	            <a class="dropdown-item" href="#">문의하기</a>	           
+	            <a class="dropdown-item" href="/question/questionList">문의하기</a>	           
 	            <a class="dropdown-item" href="#">주문조회</a>
 	            <a class="dropdown-item" onclick="log_out()" href="/logout">로그아웃</a>
             </div>
@@ -147,7 +147,7 @@ font-size: 17px;
 	            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">	            
 		            <a class="dropdown-item" href="/board/boardList">게시판관리</a>
 		            <a class="dropdown-item" href="#">주문관리</a>
-		            <a class="dropdown-item" href="../products/insertProduct">상품등록</a>	            
+		            <a class="dropdown-item" href="/products/insertProduct">상품등록</a>	            
 		            <a class="dropdown-item" onclick="log_out()" href="/logout">로그아웃</a>
 	            </div>
          	</li>
@@ -168,9 +168,9 @@ function not_loginQnA() {
 }
 
 //로그아웃
- function log_out(){	
+function log_out(){	
 	alert("로그아웃했습니다.");  
- }
+}
 
 
 </script>

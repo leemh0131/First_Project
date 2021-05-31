@@ -37,6 +37,6 @@ public class reviewVO {
 	
 	//조인
 	private productVO productvo;
-	private MemberVO customersVO;
+	private MemberVO membervo;
 	
 }

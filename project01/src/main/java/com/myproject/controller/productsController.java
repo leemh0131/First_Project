@@ -3,6 +3,8 @@ package com.myproject.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myproject.domain.MemberVO;
 import com.myproject.domain.productVO;
 import com.myproject.domain.board.reviewVO;
 import com.myproject.service.productService;
@@ -72,8 +75,13 @@ public class productsController {
 
 	// 상품상세보기
 	@RequestMapping(value = "/productView", method = RequestMethod.GET)
-	public void productView(@RequestParam("product_code") int product_code, Model model) throws Exception {
+	public void productView(@RequestParam("product_code") int product_code, HttpServletRequest req, Model model) throws Exception {
 		logger.info("getView() GET");
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
 		
 		//보기
 		productVO View = null;

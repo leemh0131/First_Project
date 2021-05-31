@@ -2,8 +2,9 @@ package com.myproject.controller.board;
 
 import java.util.List;
 
-
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.myproject.domain.MemberVO;
 import com.myproject.domain.board.commentVO;
 import com.myproject.domain.board.questionVO;
 import com.myproject.service.board.commentService;
@@ -29,7 +31,7 @@ public class questionController {
 	@Inject
 	private questionService questionService;
 	@Inject
-	private commentService commentService;
+	private commentService commentService;	
 
 	// 관리자문의리스트화면
 	@RequestMapping(value = "/questionAllList", method = RequestMethod.GET)
@@ -59,13 +61,19 @@ public class questionController {
 	
 	// 회원문의리스트화면
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
-	public void questionList(Model model, @RequestParam("member_code")String member_code) throws Exception {
-		logger.info("questionList GET..");	
+	public void questionList(Model model, HttpServletRequest req) throws Exception {
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();			
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
+		
 		
 		List<questionVO> list = null;
-		list = questionService.questionList(member_code);
+		list = questionService.questionList(Integer.toString(memberVO.getMember_code()));
 		model.addAttribute("questionList", list);
-		model.addAttribute("member_code", member_code);
+		logger.info("questionList GET..list =>" + list);
+		
 	}
 
 	// 문의보기
@@ -80,17 +88,22 @@ public class questionController {
 	
 	// 문의작성 GET
 	@RequestMapping(value = "/questionInsert", method = RequestMethod.GET) 
-	public void getquestionInsert(@RequestParam("member_code")String member_code, Model model) throws Exception {		
-		logger.info("questionController questionInsert() GET" + member_code);		
-		model.addAttribute("member_code", member_code);
+	public void getquestionInsert(Model model, HttpServletRequest req) throws Exception {		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();			
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);	
+			
 	}	
 	
 	// 문의작성 POST	
 	@RequestMapping(value = "/questionInsert", method = RequestMethod.POST)
-	public String questionInsert(questionVO Qvo) throws Exception {
-		logger.info("questionController questionInsert() => " + Qvo);		
+	public String questionInsert(Model model, HttpServletRequest req, questionVO Qvo) throws Exception {
+		
 		questionService.questionInsert(Qvo);		
-		return "redirect:/";
+		logger.info("questionController questionInsert() => " + Qvo);		 
+		
+		return "redirect:/question/questionList";
 	}	
 
 	// 답변작성 GET

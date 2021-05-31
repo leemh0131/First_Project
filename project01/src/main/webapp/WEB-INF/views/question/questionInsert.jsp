@@ -26,7 +26,7 @@
 		    <!-- 인붓 -->
 		    <div class="modal-body">		   
 		    	<!-- 숨겨서 멤버코드 -->
-		    	<input type="hidden" name="member_code" value="${member_code}"/>		    		 
+		    	<input type="hidden" name="member_code" value="${member.member_code}"/>		    		 
 		    	<div class="row">
 		    		<div class="col-sm-12">
 		    			<label>제목</label><input style="width: 100%" name="question_title" placeholder="제목입력"/>

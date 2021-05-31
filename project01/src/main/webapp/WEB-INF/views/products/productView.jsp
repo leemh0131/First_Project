@@ -188,8 +188,9 @@
 						<span style="font-size: 17px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
 						</div>
 					</div>						
-							
-					<!-- 관리자 로그인 시 -->								
+					
+					<c:if test="${member.mlevel == 0 }">
+					<!-- 관리자 로그인 시 -->							
 					<!-- 수정/삭제하기 -->
 					<div class="col-md-6">
 						<div class="btn1">
@@ -198,7 +199,8 @@
 						</button>
 						</a>
 						</div>
-					</div>					
+					</div>
+					</c:if>					
 				
 				</div>
 			</div>
@@ -315,12 +317,12 @@
 						<h6>${reviewVO.review_content}</h6>
 					</div>
 					
-					<!-- 헤더에서 회원코드를 가져온 후 일치하면 보여주는 삭제 버튼(본인로그인 삭제) -->
-					<!-- 컨트롤러에서 equestParam으로 review_num가 안불러와짐 뭔가 잘못됐는데 뭔지 모르겠음 리스트형태라 그런 -->
+					<!-- 본인삭제버튼 -->
+					<c:if test="${reviewVO.member_code == member.member_code}">
 					<div style="float: right;" class="col-md-2">		
 						<button name="review_num" onclick="del(${reviewVO.review_num})" style="width: 70px;" type="button" class="btn1 btn-outline-dark btn-sm">삭제</button>
 					</div>
-					
+					</c:if>
 				</div>
 				
 			</div> <hr>

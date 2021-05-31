@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.myproject.domain.MemberVO;
 import com.myproject.domain.board.boardVO;
 import com.myproject.service.board.boardService;
 
@@ -29,8 +32,13 @@ public class boardController {
 
 	// 리스트화면
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
-	public void list(Model model) throws Exception {
+	public void list(Model model,  HttpServletRequest req) throws Exception {
 		logger.info("BoardController list called.....");
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
 		
 		List<boardVO> list = null;
 		list = boardService.boardList("boardList");
@@ -39,7 +47,12 @@ public class boardController {
 
 	// 공지상세
 	@RequestMapping(value = "/boardView", method = RequestMethod.GET)
-	public void boardView(@RequestParam("board_num") int board_num, Model model) throws Exception {
+	public void boardView(@RequestParam("board_num") int board_num, HttpServletRequest req, Model model) throws Exception {
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
 	 
 		boardVO view = null;
 		view =  boardService.boardView(board_num);		

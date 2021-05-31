@@ -7,7 +7,7 @@
 	<!-- 관리자 관리용 리뷰보기 -->
     <select id="reviewView" resultType="reviewVO">
     	select r.review_num, r.product_code, p.product_name, c.member_code, c.member_name, r.review_star, r.review_title, r.review_content, r.review_date 
-    	from review as r, products as p, customers as c
+    	from review as r, products as p, member as c
     	where r.product_code = p.product_code  
     </select>   
     
@@ -21,8 +21,8 @@
     <!-- 리뷰전체 -->
 	<select id="reviewAll" resultType="reviewVO">
     	select r.review_num, r.product_code, p.product_name, c.member_code, c.member_name, r.review_star, r.review_title, r.review_content, r.review_date, r.review_img 
-    	from review as r, products as p, customers as c
-    	where r.product_code = #{product_code} and r.product_code = p.product_code       
+    	from review as r, products as p, member as c
+    	where  r.product_code=#{product_code} and r.product_code = p.product_code and c.member_code = r.member_code order by r.review_date desc;      
     </select>
     
     <!-- 리뷰쓰기 -->    

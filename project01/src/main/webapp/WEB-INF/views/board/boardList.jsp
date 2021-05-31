@@ -51,6 +51,7 @@
             </tbody>
         </table>
         
+        <c:if test="${member.mlevel == 0}">
         <!-- 관리자 버튼 작성 -->
 		<div style="float: right;">
 	        <a href="/board/boardInsert"><button type="button" class="btn btn-outline-dark btn-lg">
@@ -58,7 +59,7 @@
 			</button>
 			</a>
 		</div>
-
+		</c:if>
         <br><br><br><br><br><br>
 
 </div>

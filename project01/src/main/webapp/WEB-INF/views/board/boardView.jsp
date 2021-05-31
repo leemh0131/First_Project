@@ -52,7 +52,8 @@
 		
 	<br><br><br><br><br><br>
 	
-	<!-- 관리자 버튼 수정/삭제 -->
+		<!-- 관리자 버튼 수정/삭제 -->
+		<c:if test="${member.mlevel == 0}">
 		<div style="float: right;">
 	        <a href="/board/boardUpdate?board_num=${boardView.board_num}"><button type="button" class="btn btn-outline-dark btn-lg">
 			<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;수정
@@ -61,10 +62,9 @@
 			
 			<button onclick="del(${boardView.board_num})" type="button" class="btn btn-outline-dark btn-lg">
 			<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;삭제
-			</button>	
-			
-			
+			</button>			
 		</div>
+		</c:if>
 
 </div>
 

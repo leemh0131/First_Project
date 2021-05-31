@@ -27,12 +27,12 @@
 		    	<!-- 숨겨서 상품코드, 멤버코드 보낸다 -->
 		    	<input type="hidden" name="product_code" value="${product_code}"/>
 		    	
-		    	<!-- 나중에 헤드에서 멤버코드 값 가져오기 -->
-		    	<input type="hidden" name="member_code" value="1"/>
+		    	<!-- 멤버코드 값 가져오기 -->
+		    	<input type="hidden" name="member_code" value="${member.member_code}"/>
 		    	 
 		    	<div class="row">
 		    		<div class="col-md-3">	    	
-			    		<p>이민호 님</p>
+			    		<p>${member.member_name} 님</p>
 			    	</div>			    	
 			    	<!-- 리뷰 별 -->
 			    	<div class="col-md-6">

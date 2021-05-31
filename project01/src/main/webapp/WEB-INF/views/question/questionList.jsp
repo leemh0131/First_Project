@@ -28,10 +28,9 @@
 
      <h1 style="font-family: sans-serif; font-weight: bold; font-size: 35px">1:1문의</h1>
    		
-        <hr><br>                    
-        	
-            <c:choose>
-            	<c:when test="${!empty questionList}">				
+        <hr><br>        	
+            <c:choose>            	
+            	<c:when test="${!empty questionList}">		            		
 				<table class="table table-hover">
 		            <thead>
 		                <tr style="font-family: sans-serif; font-weight: bold; font-size: 17px">
@@ -45,7 +44,8 @@
 		            </thead>
 		            
            			<tbody>	
-           			<c:forEach items="${questionList}" var="vo" varStatus="status">			
+           			<c:forEach items="${questionList}" var="vo" varStatus="status">	
+           			<c:if test="${vo.member_code == member.member_code}">			
 						<tr onclick="location.href='/question/questionView?question_num=${vo.question_num}'" style="font-family: sans-serif; font-size: 16px">                	           	
 							<td>${fn:length(questionList)-status.index}</td>
 							<td>${vo.question_title}</td>
@@ -60,11 +60,12 @@
 								<td style="color: red;">답변대기</td>
 								</c:otherwise>	
 							</c:choose>                                                                         
-						</tr>					
-					</c:forEach> 
-					</tbody>
-        		</table> 				
-				</c:when> 
+						</tr>	
+					</c:if>					
+					</c:forEach> 					
+					</tbody>					
+        		</table>        			
+				</c:when>				 
 				<c:otherwise>
 					<div style="text-align: center; width: 100%; height: 300px; margin: auto;" >			
 						<br><br><br><br><br><h1 style="height: 300px; color: #979491;">1:1문의가 없습니다.</h1>
@@ -74,7 +75,7 @@
             
             <!-- 문의하기 -->
             <div style="float: right;" class="col-md-2">
-				<a onclick='fnModuleInfo(${member_code})'><button class="btn btn-dark" type="button">문의하기			
+				<a onclick='fnModuleInfo()'><button class="btn btn-dark" type="button">문의하기			
 				</button></a>				
 			</div>			
 			
@@ -98,8 +99,8 @@
 <script type="text/javascript">
 var ttt = true;
 //모달사용
-function fnModuleInfo(ee){   
-   $('#myModal .modal-content').load("questionInsert?member_code=" + ee);
+function fnModuleInfo(){
+   $('#myModal .modal-content').load("questionInsert");
    $('#myModal').modal();
 }
 </script>
