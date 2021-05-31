@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/resources/css/bootstrap.jsp" %>
 <style>
 
@@ -62,7 +63,7 @@ font-size: 17px;
 	        </li>
 	    </ul>
     </div>
-    <!--카테고리종료-->
+    <!--카테고리종료-->   	
     
     <!-- 로고 -->    
     <div class="col-md-2 text-dark">
@@ -79,6 +80,8 @@ font-size: 17px;
     </div>
     <!-- 검색창 종료-->
     
+    <c:choose>
+    <c:when test="${empty member}">
     <!-- 비 로그인 -->
     <div class="col-md-3 my-0 text-dark">
         <ul class="nav">
@@ -87,9 +90,9 @@ font-size: 17px;
 	        <li class="nav-item text-dark"><a onclick="not_loginCart()" class="nav-link" href="#"><i class="fa fa-shopping-cart fa-lg text-dark pt-1"></i><br></a></li>
 	        
 	        <!-- 로그인 -->
-	        <li class="nav-item"><a class="nav-link text-dark" href="/Login">Login</a></li>
+	        <li class="nav-item"><a class="nav-link text-dark" href="/member/login">Login</a></li>
 	        <!-- 회원가입 -->	        
-	        <li class="nav-item"><a class="nav-link text-dark" href="#">Join</a></li>
+	        <li class="nav-item"><a class="nav-link text-dark" href="/member/join">Join</a></li>
 	       	<!-- 비회원메뉴 -->        
 	        <li class="nav-item dropdown text-dark mr-auto">
 	            <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -104,40 +107,38 @@ font-size: 17px;
         </ul>
     </div>
     <!-- 비 로그인 -->
-<!--     
-    ---------------------------로그인 후 바뀌는 부분-----------------------------------------
-    로그인 후 메뉴
+    </c:when>
+    <c:when test="${member.mlevel == 1}">
+    <!-- 로그인 후 메뉴 -->
      <div class="col-md-3 my-0 text-dark">
         <ul class="nav">
-         장바구니
+         <!-- 장바구니 -->
 	        <li class="nav-item text-dark"><a class="nav-link" href="/mypage/likey"><i class="fa fa-shopping-cart fa-lg text-dark pt-1"></i><br></a></li>
-	         로그인 메뉴
+	         <!-- 로그인 메뉴 -->
 	        <li class="nav-item dropdown text-dark mr-auto">
             <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
             href="#" role="button" aria-haspopup="true" aria-expanded="false">
-             	<span class="text-dark">이민호&nbsp;님</span> 
+             	<span class="text-dark">${member.member_name}&nbsp;님</span> 
             </a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
 	            <a class="dropdown-item" href="mypage/mypage">마이페이지</a>
 	            <a class="dropdown-item" href="/board/boardList">공지사항</a>
 	            <a class="dropdown-item" href="#">문의하기</a>	           
 	            <a class="dropdown-item" href="#">주문조회</a>
-	            <a class="dropdown-item" href="#">로그아웃</a>
+	            <a class="dropdown-item" onclick="log_out()" href="/logout">로그아웃</a>
             </div>
          </li>
         </ul>
      </div>
-     로그인 후 메뉴 종료 
-    -----------------------------------------------------------------------------------
-    
-    
-    ---------------------------어드민 로그인 후 바뀌는 부분-----------------------------------------    
-    어드민로그인 후 메뉴
+    <!--  로그인 후 메뉴 종료 --> 
+    </c:when>
+  	<c:when test="${member.mlevel == 0}">    
+    <!-- 어드민로그인 후 메뉴 -->
     <div class="col-md-3 my-0 text-dark">
         <ul class="nav">
-         어드민
+         <!-- 어드민 -->
 	        <li class="nav-item text-dark"><a class="admin nav-link" href="#"><i class="fa fa-address-card fa-lg text-dark pt-1"></i><br></a></li>
-	         어드민 메뉴
+	         <!-- 어드민 메뉴 -->
 	        <li class="nav-item dropdown text-dark mr-auto">
 	            <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown"
 	            href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -147,15 +148,14 @@ font-size: 17px;
 		            <a class="dropdown-item" href="/board/boardList">게시판관리</a>
 		            <a class="dropdown-item" href="#">주문관리</a>
 		            <a class="dropdown-item" href="../products/insertProduct">상품등록</a>	            
-		            <a class="dropdown-item" href="#">로그아웃</a>
+		            <a class="dropdown-item" onclick="log_out()" href="/logout">로그아웃</a>
 	            </div>
          	</li>
         </ul>
     </div>
-     어드민로그인 후 메뉴 종료     
-    ------------------------------------------------------------------------------------------  
-    
--->    
+    <!-- 어드민로그인 후 메뉴 종료 -->    
+    </c:when>    
+	</c:choose>
 </div>
 
 <script>
@@ -166,4 +166,11 @@ function not_loginCart() {
 function not_loginQnA() {
 	alert("로그인 후 1:1문의 가능합니다.");
 }
+
+//로그아웃
+ function log_out(){	
+	alert("로그아웃했습니다.");  
+ }
+
+
 </script>

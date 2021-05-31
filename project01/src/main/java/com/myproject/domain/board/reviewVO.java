@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.myproject.domain.customersVO;
+import com.myproject.domain.MemberVO;
 import com.myproject.domain.productVO;
 
 import lombok.Getter;
@@ -37,6 +37,6 @@ public class reviewVO {
 	
 	//조인
 	private productVO productvo;
-	private customersVO customersVO;
+	private MemberVO customersVO;
 	
 }

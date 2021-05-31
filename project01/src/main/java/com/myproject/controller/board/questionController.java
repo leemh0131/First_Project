@@ -46,13 +46,15 @@ public class questionController {
 	 * 
 	 * @RequestMapping(value = "/questionList", method = RequestMethod.GET) public
 	 * void questionList(Model model, HttpServletRequest request) throws Exception {
-	 * logger.info("questionList GET.."); HttpSession session =
-	 * request.getSession();
+	 * logger.info("questionList GET..");
+	 * HttpSession session = request.getSession();	  
 	 * 
 	 * String member_code = (String) session.getAttribute("member_code");
-	 * List<questionVO> list = null; list =
-	 * questionService.questionList(member_code); model.addAttribute("questionList",
-	 * list); model.addAttribute("member_code", member_code); }
+	 * 
+	 * List<questionVO> list = null;
+	 * list =  questionService.questionList(member_code);
+	 * model.addAttribute("questionList", list);
+	 * model.addAttribute("member_code", member_code); }
 	 */
 	
 	// 회원문의리스트화면
