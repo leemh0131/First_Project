@@ -47,7 +47,7 @@ input:focus {outline:none;}
 
 	<h3 style="margin-bottom: 30px;">결제하기</h3>
 
-<form action="/order/buy" name="form" id="form" method="post">
+<form action="/order/buy" onsubmit="return check()" name="form" id="form" method="post">
 <input type="hidden" id="product_code" name="product_code" value=""/>
 
 <div class="row">
@@ -78,18 +78,18 @@ input:focus {outline:none;}
 	<!-- 주문자정보 -->
 	<div style="background-color: white;"  class="col-sm-7 p-3 m-1">			
 			<h6>주문자 정보</h6>
-			<input type="hidden" value="${member.member_code}"/>
+			<input type="hidden" name="member_code" value="${member.member_code}"/>
 			<div class="row">
 				<div class="col-sm-6">
-					<input type="text" style="width: 100%; margin-bottom: 30px;" placeholder="이름" value="${member.member_name}"/>
+					<input type="text" id="member_name" style="width: 100%; margin-bottom: 30px;" placeholder="이름" value="${member.member_name}"/>
 				</div>
 				<div class="col-sm-6">
-					<input type="text" style="width: 100%; margin-bottom: 30px;" placeholder="연락처" value="${member.member_tel}"/>
+					<input type="text" id="member_tel" style="width: 100%; margin-bottom: 30px;" placeholder="연락처" value="${member.member_tel}"/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12">
-					<input type="text" style="width: 100%; margin-bottom: 30px;" placeholder="이메일" value="${member.member_email}"/>
+					<input type="text" id="member_email" style="width: 100%; margin-bottom: 30px;" placeholder="이메일" value="${member.member_email}"/>
 				</div>				
 			</div>			
 	</div>	
@@ -105,10 +105,10 @@ input:focus {outline:none;}
 		<h6>배송 정보</h6>
 		<div class="row">
 			<div class="col-sm-6">
-				<input type="text" name="delivery_name" style="width: 100%; margin-bottom: 30px;" placeholder="수령인" value="${member.member_name}"/>
+				<input type="text" id="delivery_name" name="delivery_name" style="width: 100%; margin-bottom: 30px;" placeholder="수령인" value="${member.member_name}"/>
 			</div>
 			<div class="col-sm-6">
-				<input type="text" name="delivery_tel" style="width: 100%; margin-bottom: 30px;" placeholder="연락처" value="${member.member_tel}"/>
+				<input type="text" id="delivery_tel" name="delivery_tel" style="width: 100%; margin-bottom: 30px;" placeholder="연락처" value="${member.member_tel}"/>
 			</div>
 		</div>
 		
@@ -137,7 +137,7 @@ input:focus {outline:none;}
 	</div>
 	
 	<div class="col-sm-11 p-3 m-1">
-		<button style="float: right;" class="btn-outline-dark m-1" type="button">결제하기</button>
+		<button style="float: right;" class="btn-outline-dark m-1" type="submit">결제하기</button>
 		<button style="float: right;" onclick="c()" class="btn-outline-dark m-1" type="button">구매취소</button>
 	</div>
 	
@@ -198,6 +198,49 @@ function c() {
 	location.href = document.referrer;
 	console.log("쿠키저장값ㅁㅁㅁㅁㅁㅁㅁㅁㅁ코드" + product_code);
 	console.log("쿠키저장값ㅁㅁㅁㅁㅁㅁㅁㅁㅁ갯수" + order_count);	
+
+}
+
+//공백체크
+function check() {	
+	
+	if(form.roadFullAddr.value == "" || form.roadFullAddr.value == null) {
+	   alert("배송주소을 입력해주세요.");
+	   form.roadFullAddr.focus();
+	   return false;
+	}
+	
+	else if(form.member_name.value == "" || form.member_name.value == null) {
+	   alert("주문자이름을 입력해주세요.");
+	   form.member_name.focus();
+	   return false;
+	}
+	 
+	else if(form.member_tel.value == "" || form.member_tel.value == null) {
+		   alert("주문자전화번호을 입력해주세요.");
+		   form.member_tel.focus();
+		   return false;
+	}
+	
+	else if(form.member_email.value == "" || form.member_email.value == null) {
+		   alert("주문자이메일을 입력해주세요.");
+		   form.member_email.focus();
+		   return false;
+	}
+	
+	else if(form.delivery_name.value == "" || form.delivery_name.value == null) {
+		   alert("배송받는 사람의 이름을 입력해주세요.");
+		   form.delivery_name.focus();
+		   return false;
+	}
+	
+	else if(form.delivery_tel.value == "" || form.delivery_tel.value == null) {
+		   alert("배송지 전화번호을 입력해주세요.");
+		   form.delivery_tel.focus();
+		   return false;
+	}	
+
+  else return true;
 
 }
 
