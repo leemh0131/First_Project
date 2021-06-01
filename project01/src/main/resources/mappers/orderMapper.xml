@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myproject.mappers.orderMapper">
+
+	<!-- 구매 -->
+    <insert  id="orderInsert">
+        INSERT INTO orders (member_code, product_code, order_count, total_price, delivery_name, delivery_addr) 
+        VALUES (#{member_code}, #{product_code}, #{order_count}, #{total_price}, #{delivery_name}, #{delivery_addr})
+    </insert >
+    
+    <!-- 취소 -->
+    <delete id="orderDelete">
+    	delete from orders where order_code = #{order_code}
+    </delete>
+
+	
+	
+	
+    
+</mapper>

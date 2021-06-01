@@ -81,7 +81,7 @@
 	padding-left: 60px;
 	}
 	
-	#product_content_input{
+	#product_cnt{
 	font-size: 17px;
 	font-family: sans-serif;
 	width: 100px;
@@ -111,14 +111,13 @@
 <!-- body -->
 <body>
 <br><br><br><br><br><br><br><br>
-
 <div class="container">	
 <!-- 메인메뉴 -->
 <nav id="menu" class="woocommerce-breadcrumb"><a href="/">Home</a> / <a href='/products/productList?product_type=${productView.product_type}'>${productView.product_type_name}</a> / ${productView.product_name}</nav>
 <br>
 
 	<div class="container">
-	<form id="pos" method="post" onsubmit="return false;" action="/order">
+	<form id="pos" name="f" method="post" onsubmit="return false;" action="/order">
 	
 		<div class="row">
 		<!-- 사진 -->
@@ -132,7 +131,7 @@
 				
 				<!-- 조회수 -->
 				<input type="hidden" value="${productView.product_read}"/>
-				<input type="hidden" value="${productView.product_code}"/>
+				<input id="product_code" type="hidden" value="${productView.product_code}"/>				
 				
 				<!-- 가격 -->
 				<div>
@@ -152,8 +151,8 @@
 				<!-- 수량선택 -->			
 				<div id="product_content_div">				
 					<label style="font-size: 16px; font-family: sans-serif;">수량</label><br><hr>
-					<div>
-						<input id="product_content_input" onkeyup="productContentBuy()" onclick="productContentBuy()" type="number" step="1" min="1" max="" name="order_count" value='1' size="10"/>
+					<div>						
+						<input name="order_count" id="order_count" onkeyup="product_cntResult()" onclick="product_cntResult()" type="number" step="1" min="1" max="" value='1' size="10"/>									
 						<span id="priceResult" style="font-size: 18px; font-family: sans-serif; float: right;">${productView.product_price}&nbsp;KRW</span>					
 					</div>					
 				</div><br><br>
@@ -162,8 +161,8 @@
 					
 					<!-- 구매하기 -->
 					<div class="col-md-4">
-						<div class="btn1">
-						<a href="/order"><button type="submit" id="Buy" class="btn1 btn-outline-dark btn-lg">
+						<div id="btn3" class="btn1">
+						<a href='/order/order?product_code=${productView.product_code}'><button type="button" id="Buy" onclick="ck()" class="btn1 btn-outline-dark btn-lg">
 							<i class="fa fa-krw" aria-hidden="true"></i>&nbsp;Buy
 						</button>
 						</a>
@@ -338,6 +337,38 @@
 <br><br><br>
 
 <script type="text/javascript">
+//쿠키사용
+var setCookie = function(name, value, exp) {
+var date = new Date();
+date.setTime(date.getTime() + exp*24*60*60*1000);
+document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+};
+
+var buy = 1;
+
+//실시간 가격
+function product_cntResult() {		
+	buy = document.getElementById('order_count').value;   
+	
+	//쿠키상품갯수
+	//setCookie('product_cnt', buy, 1);
+	
+ 	document.getElementById("priceResult").innerText = buy * ${productView.product_price} + " KRW"; 	
+ 	
+}
+
+function ck() {
+	//상풍코드 
+	var productCode = document.getElementById('product_code').value;
+	//쿠키상풍코드
+	setCookie('product_code', productCode, 1);
+	//쿠키상품갯수
+	setCookie('order_count', buy, 1);
+	
+}
+
+
+
 //모달사용
 function fnModuleInfo(str){
    $('#myModal .modal-content').load("../../review/reviewWrite?product_code="+str);
@@ -352,11 +383,7 @@ function del(review_num) {
 	}
 }
 
-//실시간 가격
-function productContentBuy()  {
-    var buy = document.getElementById('product_content_input').value;  
-    document.getElementById("priceResult").innerText = buy * ${productView.product_price} + " KRW";
-}
+
   
 //좋아요 ajax사용 중복수정
 var click = true;

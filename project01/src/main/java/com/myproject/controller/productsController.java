@@ -91,11 +91,9 @@ public class productsController {
 		//조회수
 		productService.updateViewCnt(product_code);
 		
-		//리뷰		 
-		int x = product_code;
-		String y = Integer.toString(x);
+		//리뷰		
 		List<reviewVO> list = null;
-		list = reviewService.reviewAll(y);
+		list = reviewService.reviewAll(Integer.toString(product_code));
 		model.addAttribute("reviewAll", list);
 		
 		//리뷰갯수
@@ -103,8 +101,7 @@ public class productsController {
 		cnt = reviewService.reviewCnt(product_code);
 		model.addAttribute("reviewCnt", cnt);		
 		
-	}	
-	
+	}		
 	
 	//상품 수정 get
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.GET)
@@ -113,8 +110,7 @@ public class productsController {
 		productVO View = null;
 		View = productService.productView(product_code);
 		model.addAttribute("productView", View);
-	}
-	
+	}	
 	
 	//상품 수정 post	
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.POST)

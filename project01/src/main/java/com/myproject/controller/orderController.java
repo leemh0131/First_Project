@@ -10,28 +10,51 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myproject.domain.MemberVO;
+import com.myproject.domain.productVO;
+import com.myproject.service.productService;
 
 @Controller
-@RequestMapping(value="/", produces="text/plain;charset=UTF-8")
+@RequestMapping(value="/order", produces="text/plain;charset=UTF-8")
 public class orderController {
 
 	// logger사용
 	private static final Logger logger = LoggerFactory.getLogger(orderController.class);
 	
+	@Inject
+	productService productService;
+	
 	// 주문
-	@RequestMapping(value = "order", method = RequestMethod.POST)
-	public void questionList(Model model, HttpServletRequest req) throws Exception {
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
+	public void order(Model model, HttpServletRequest req, @RequestParam("product_code") int product_code) throws Exception {	
 		
 		//로그인세션가져오기		  
 		HttpSession session = req.getSession();			
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
 		model.addAttribute("member", memberVO);
 		
+		//보기
+		productVO View = null;
+		View = productService.productView(product_code);
+		model.addAttribute("productView", View);		
 		
 	}
+	
+	//주소찾기
+	@RequestMapping(value = "/jusoPopup", method = {RequestMethod.GET, RequestMethod.POST})
+	public void jusoPopup() throws Exception {
+		
+	}
+	
+	// 약관동의
+	@RequestMapping(value = "/buyCheck", method = RequestMethod.GET)
+	public void buyCheck() throws Exception {
+			
+	}
+
+
 
 
 
