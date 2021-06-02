@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myproject.domain.MemberVO;
+import com.myproject.domain.orderVO;
 import com.myproject.domain.productVO;
+import com.myproject.service.orderService;
 import com.myproject.service.productService;
 
 @Controller
@@ -25,6 +27,9 @@ public class orderController {
 	
 	@Inject
 	productService productService;
+	
+	@Inject
+	orderService orderService;
 	
 	// 주문
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
@@ -38,9 +43,24 @@ public class orderController {
 		//보기
 		productVO View = null;
 		View = productService.productView(product_code);
-		model.addAttribute("productView", View);		
+		model.addAttribute("productView", View);
 		
 	}
+	
+	// 결제완료
+	@RequestMapping(value = "/orderComplete", method = {RequestMethod.GET, RequestMethod.POST})
+	public void orderComplete(Model model, HttpServletRequest req, orderVO vo) throws Exception {	
+		
+		logger.info("orderController orderComplete()일한다.");
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();			
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
+		model.addAttribute("member", memberVO);
+		
+		orderService.orderComplete(vo);			
+		}		
+	
 	
 	//주소찾기
 	@RequestMapping(value = "/jusoPopup", method = {RequestMethod.GET, RequestMethod.POST})

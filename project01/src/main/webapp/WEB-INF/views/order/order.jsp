@@ -47,7 +47,7 @@ input:focus {outline:none;}
 
 	<h3 style="margin-bottom: 30px;">결제하기</h3>
 
-<form action="/order/buy" onsubmit="return check()" name="form" id="form" method="post">
+<form action="/order/orderComplete" onsubmit="return check()" name="form" id="form" method="post">
 <input type="hidden" id="product_code" name="product_code" value=""/>
 
 <div class="row">

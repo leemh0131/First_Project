@@ -5,9 +5,9 @@
 <mapper namespace="com.myproject.mappers.orderMapper">
 
 	<!-- 구매 -->
-    <insert  id="orderInsert">
-        INSERT INTO orders (member_code, product_code, order_count, total_price, delivery_name, delivery_addr) 
-        VALUES (#{member_code}, #{product_code}, #{order_count}, #{total_price}, #{delivery_name}, #{delivery_addr})
+    <insert  id="orderComplete">
+        INSERT INTO orders (member_code, product_code, order_count, total_price, delivery_name, roadFullAddr, delivery_tel) 
+        VALUES (#{member_code}, #{product_code}, #{order_count}, #{total_price}, #{delivery_name}, #{roadFullAddr}, #{delivery_tel})
     </insert >
     
     <!-- 취소 -->
