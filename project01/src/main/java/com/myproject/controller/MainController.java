@@ -63,17 +63,7 @@ public class MainController {
 		 
 	}
 	
-	//로그아웃
-	@RequestMapping(value="/logout", method=RequestMethod.GET) 
-	public String headerlogout(HttpServletRequest req) throws Exception { 
-		
-		HttpSession session = req.getSession();
-		session.invalidate();
-		System.out.println("로그아웃");
-		
-		return "redirect:/";
-		 
-	}
+	
 	
 	
 }

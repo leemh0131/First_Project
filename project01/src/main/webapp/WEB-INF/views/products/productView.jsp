@@ -418,24 +418,37 @@ function logoutlike() {
 
   
 //좋아요 ajax사용 중복수정
-var click = true;
+/* var click = true;
 function like(product_code) {
-	/* if(click) {
-		location.href='productLike?product_code='+;
-		click = false;
+	if(click) {
+		 $.ajax({
+		        url : 'productLike',
+		        type : 'post',
+		        data : {'product_code': product_code},
+		        success : function(data){
+		        	document.getElementById("likeResult").innerText = " " + data;
+		        }
+		    });
 	} else {
 		alert("좋아요는 한번만 가능합니다.");
-	}
-    document.getElementById("likeResult").innerText = " " + ${productView.product_like}; */
-	 $.ajax({
-	        url : 'productLike',
-	        type : 'post',
-	        data : {'product_code': product_code},
-	        success : function(data){
-	        	document.getElementById("likeResult").innerText = " " + data;
-	        }
-	    });
-  }
+	}  	
+} */
+  
+  
+  
+  
+//좋아요 ajax사용 중복수정필요
+function like(product_code) {	
+$.ajax({
+       url : 'productLike',
+       type : 'post',
+       data : {'product_code': product_code},
+       success : function(data){
+       	document.getElementById("likeResult").innerText = " " + data;
+       }
+   });
+}
+
 
 </script>
 
