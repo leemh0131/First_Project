@@ -22,7 +22,8 @@ public class orderVO {
 	private String			order_status;	//배송현황
 	private Timestamp		order_date;		//날짜
 	private String 			delivery_name;	//이름
-	private String 			roadFullAddr;	//주소	
+	private String 			roadFullAddr;	//주소
+	private String 			delivery_tel;	//배송지번호
 	
 	private List<orderVO> 	list;	
 	

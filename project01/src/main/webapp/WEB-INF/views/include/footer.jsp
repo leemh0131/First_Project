@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
-
 <style>
     #footer{
     	background-color: #242D23;
@@ -21,8 +18,7 @@
 	    font-size: 45px;
 		font-weight: bolder;
 		font-family: 'Tangerine', cursive;
-    }    
- 
+    } 
     
 </style>
 

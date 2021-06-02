@@ -95,13 +95,7 @@
 	width: 100%;
 	
 	}	
-	
-	
-	
-	
-	
-	
-
+		
 	</style>	
 </head>
 <!-- 헤더 -->
@@ -148,7 +142,8 @@
 					<p class="product_content">${productView.product_content}</p>			
 				</div>
 				
-				<!-- 수량선택 -->			
+				<!-- 수량선택 -->
+				<input type="hidden" id="product_count" name="product_count" value="${productView.product_count}">	
 				<div id="product_content_div">				
 					<label style="font-size: 16px; font-family: sans-serif;">수량</label><br><hr>
 					<div>						
@@ -162,10 +157,19 @@
 					<!-- 구매하기 -->
 					<div class="col-md-4">
 						<div id="btn3" class="btn1">
+						<c:if test="${productView.product_count > 0}">
 						<a href='/order/order?product_code=${productView.product_code}'><button type="button" id="Buy" onclick="ck()" class="btn1 btn-outline-dark btn-lg">
 							<i class="fa fa-krw" aria-hidden="true"></i>&nbsp;Buy
 						</button>
 						</a>
+						</c:if>
+						<c:if test="${productView.product_count <= 0}">
+						<button style="color: red;" disabled="disabled" type="button" id="Buy" onclick="ck()" class="btn1 btn-outline-dark btn-lg">
+							SOLD OUT
+						</button>						
+						</c:if>
+						
+						
 						</div>
 					</div>				
 							
@@ -180,6 +184,7 @@
 					</div>							
 					
 					<!-- 좋아요 -->
+					<c:if test="${!empty member.mlevel}">
 					<div class="col-md-4">
 						<div  class="btn1">
 						<button onclick="like(${productView.product_code})" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
@@ -187,10 +192,22 @@
 						<span style="font-size: 17px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
 						</div>
 					</div>						
+					</c:if>
 					
-					<c:if test="${member.mlevel == 0 }">
+					<!-- 로그인 후 좋아요 가능 -->
+					<c:if test="${empty member.mlevel}">
+					<div class="col-md-4">
+						<div  class="btn1">
+						<button onclick="logoutlike()" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
+						<i class="fa fa-heart"></i>
+						<span style="font-size: 17px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
+						</div>
+					</div>						
+					</c:if>
+					
 					<!-- 관리자 로그인 시 -->							
 					<!-- 수정/삭제하기 -->
+					<c:if test="${member.mlevel == 0 }">					
 					<div class="col-md-6">
 						<div class="btn1">
 						<a href="/products/updateProduct?product_code=${productView.product_code}"><button type="button" id="update" class="btn1 btn-outline-dark btn-lg">
@@ -345,17 +362,29 @@ document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path
 };
 
 var buy = 1;
+var product_count = document.getElementById('product_count').value;
 
 //실시간 가격
-function product_cntResult() {		
-	buy = document.getElementById('order_count').value;   
+function product_cntResult() {
 	
-	//쿠키상품갯수
-	//setCookie('product_cnt', buy, 1);
-	
+	buy = document.getElementById('order_count').value;	
  	document.getElementById("priceResult").innerText = buy * ${productView.product_price} + " KRW"; 	
  	
+ 	if(product_count < buy){
+ 		alert("재고수량이 부족합니다.\n수량을 내려주세요!");
+ 		const target = document.getElementById('Buy');
+ 		target.disabled = true;
+ 		
+ 	} else {
+ 		
+ 		const target = document.getElementById('Buy');
+ 		target.disabled = false;
+ 		
+ 	}
+ 	
+ 	
 }
+
 
 function ck() {
 	//상풍코드 
@@ -383,6 +412,9 @@ function del(review_num) {
 	}
 }
 
+function logoutlike() {
+	alert("로그인 후 이용해주세요.")	
+}
 
   
 //좋아요 ajax사용 중복수정

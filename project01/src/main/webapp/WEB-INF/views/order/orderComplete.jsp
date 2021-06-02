@@ -13,6 +13,8 @@
 
 <body>
 <div class="container">
+<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
 <h3 style="margin-bottom: 30px;">주문완료</h3>
 
 

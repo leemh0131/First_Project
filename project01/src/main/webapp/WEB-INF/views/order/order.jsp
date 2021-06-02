@@ -72,13 +72,20 @@ input:focus {outline:none;}
 		<input style="border: none; width: 20px;" type="text" id="order_count" name="order_count" readonly="readonly" value="1"/>
 		<hr>
 		<span>총 결제금액</span>
-		<input style="border: none; width: 150px;" name="total_price" id="total_price" value=""/>
+		<input style="border: none; width: 60px;" name="total_price" id="total_price" value=""/><label> KRW</label>
 	</div>
 	
 	<!-- 주문자정보 -->
 	<div style="background-color: white;"  class="col-sm-7 p-3 m-1">			
 			<h6>주문자 정보</h6>
+			<!-- 회원 -->
+			<c:if test="${!empty member.member_code}">
 			<input type="hidden" name="member_code" value="${member.member_code}"/>
+			</c:if>
+			<!-- 비회원 -->
+			<c:if test="${empty member.member_code}">
+			<input type="hidden" name="member_code" value="0"/>
+			</c:if>
 			<div class="row">
 				<div class="col-sm-6">
 					<input type="text" id="member_name" style="width: 100%; margin-bottom: 30px;" placeholder="이름" value="${member.member_name}"/>
@@ -180,7 +187,7 @@ var order_count = getCookie('order_count');
 document.getElementById('product_code').value = product_code;
 document.getElementById('order_count').value = order_count;
 document.getElementById('Pproduct_cnt').innerHTML = order_count + " 개";
-document.getElementById('total_price').value = order_count * ${productView.product_price} + " KRW";
+document.getElementById('total_price').value = order_count * ${productView.product_price};
 
 console.log("쿠키저장값ㅁㅁㅁㅁㅁㅁㅁㅁㅁ코드" + product_code);
 console.log("쿠키저장값ㅁㅁㅁㅁㅁㅁㅁㅁㅁ갯수" + order_count);
@@ -201,9 +208,9 @@ function c() {
 
 }
 
-//공백체크
-function check() {	
-	
+//체크
+function check() {
+
 	if(form.roadFullAddr.value == "" || form.roadFullAddr.value == null) {
 	   alert("배송주소을 입력해주세요.");
 	   form.roadFullAddr.focus();
@@ -288,9 +295,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		document.form.emdNo.value = emdNo;
 		
 }	
-
-
-
 
 </script>
 </body>
