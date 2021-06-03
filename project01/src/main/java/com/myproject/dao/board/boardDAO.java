@@ -2,6 +2,7 @@ package com.myproject.dao.board;
 
 import java.util.List;
 
+import com.myproject.domain.board.PaginationVO;
 import com.myproject.domain.board.boardVO;
 
 public interface boardDAO {
@@ -10,7 +11,7 @@ public interface boardDAO {
 	public boardVO boardView(int board_num) throws Exception;
 	
 	// 공지 목록
-	public List<boardVO> boardList(String tbl) throws Exception;
+	public List<boardVO> boardList(PaginationVO paginationVO) throws Exception;
 	
 	// 공지 작성
 	public void boardInsert(boardVO vo) throws Exception;
@@ -23,4 +24,8 @@ public interface boardDAO {
 	
 	// 조회수
 	public void boardCnt(int board_num) throws Exception;
+	
+	//총 게시글 개수 확인(페이징)
+	public int getBoardListCnt() throws Exception;
+	
 }

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.myproject.domain.board.PaginationVO;
 import com.myproject.domain.board.boardVO;
 
 @Repository
@@ -30,9 +31,9 @@ public class boardDAOImp implements boardDAO {
 
 	//공지리스트
 	@Override
-	public List<boardVO> boardList(String tbl) throws Exception {
-		logger.info("boardDAOImp boardList() => " + tbl);
-		return sqlSession.selectList(namespace + ".boardList", tbl);
+	public List<boardVO> boardList(PaginationVO paginationVO) throws Exception {
+		logger.info("boardDAOImp boardList() => " + paginationVO);
+		return sqlSession.selectList(namespace + ".boardList", paginationVO);
 	}
 
 	//공지쓰기
@@ -61,6 +62,13 @@ public class boardDAOImp implements boardDAO {
 	public void boardCnt(int board_num) throws Exception {
 		logger.info("boardDAOImp boardCnt() => " + board_num);
 		sqlSession.update(namespace + ".boardCnt", board_num);		
+	}
+
+	//페이징
+	@Override
+	public int getBoardListCnt() throws Exception {		
+		logger.info("boardDAOImp 총 게시물 가져오기");
+		return sqlSession.selectOne(namespace + ".getBoardListCnt");
 	}
 
 }

@@ -2,7 +2,6 @@ package com.myproject.controller.board;
 
 import java.util.List;
 
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myproject.domain.MemberVO;
+import com.myproject.domain.board.PaginationVO;
 import com.myproject.domain.board.boardVO;
 import com.myproject.service.board.boardService;
 
@@ -32,17 +32,30 @@ public class boardController {
 
 	// 리스트화면
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
-	public void list(Model model,  HttpServletRequest req) throws Exception {
-		logger.info("BoardController list called.....");
+	public void list(Model model,  HttpServletRequest req,
+	@RequestParam(required = false, defaultValue = "1") int page, 
+	@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+		
+		logger.info("BoardController list called.....");	
 		
 		//로그인세션가져오기		  
 		HttpSession session = req.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
-		model.addAttribute("member", memberVO);
+		model.addAttribute("member", memberVO);		
 		
+		//전체 게시글 개수
+		int listCnt = boardService.getBoardListCnt();
+		
+		//PaginationVO 객체생성
+		PaginationVO pagination = new PaginationVO();
+		pagination.pageInfo(page, range, listCnt);		
+		model.addAttribute("pagination", pagination);	
+		
+		//리스트형식
 		List<boardVO> list = null;
-		list = boardService.boardList("boardList");
+		list = boardService.boardList(pagination);
 		model.addAttribute("boardList", list);
+		
 	}	
 
 	// 공지상세

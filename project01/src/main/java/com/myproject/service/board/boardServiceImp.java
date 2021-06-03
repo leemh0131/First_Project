@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myproject.dao.board.boardDAO;
+import com.myproject.domain.board.PaginationVO;
 import com.myproject.domain.board.boardVO;
 
 
@@ -31,11 +32,11 @@ public class boardServiceImp implements boardService {
 		return dao.boardView(board_num);
 	}
 
-	//공지리스트
+	//공지리스트	
 	@Override
-	public List<boardVO> boardList(String tbl) throws Exception {
-		logger.info("boardServiceImp boardList() => " + tbl);
-		return dao.boardList(tbl);
+	public List<boardVO> boardList(PaginationVO PaginationVO) throws Exception {
+		logger.info("boardServiceImp boardList() => " + PaginationVO);
+		return dao.boardList(PaginationVO);
 	}
 
 	//공지쓰기
@@ -59,10 +60,18 @@ public class boardServiceImp implements boardService {
 		dao.boardUpdate(vo);		
 	}
 
+	//조회수
 	@Override
 	public void boardCnt(int board_num) throws Exception {
 		logger.info("boardServiceImp product_code() => " + board_num);
 		dao.boardCnt(board_num);
+	}
+
+	//페이징총게시물
+	@Override
+	public int getBoardListCnt() throws Exception {	
+		logger.info("boardServiceImp 총 게시물 가져오기");
+		return dao.getBoardListCnt();
 	}
 	
 	
