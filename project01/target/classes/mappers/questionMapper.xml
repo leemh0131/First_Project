@@ -22,14 +22,22 @@
     </delete>	
 	
 	<!-- 리스트 -->
-	<select id="questionList" resultType="questionVO" parameterType="String">
+	<select id="questionList" resultType="questionVO" parameterType="int">
 		select * 
 		from 
 			(select q.question_num, q.member_code, q.question_title, q.question_content, q.question_date, c.member_name, c.member_id 
 		    from question as q, member as c 
 		    where q.member_code = c.member_code) as qc 
 		left join comments as c 
-		on c.question_num = qc.question_num order by qc.question_date desc			
+		on c.question_num = qc.question_num order by qc.question_date desc LIMIT #{startList}, #{listSize}	
+	</select>
+	
+	<!-- 페이징을 위한 글 갯수 -->
+	<select id="getBoardListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM
+			board
 	</select>
 	
 	<!-- 상세보기 -->

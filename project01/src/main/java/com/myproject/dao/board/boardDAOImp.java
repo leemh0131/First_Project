@@ -64,10 +64,10 @@ public class boardDAOImp implements boardDAO {
 		sqlSession.update(namespace + ".boardCnt", board_num);		
 	}
 
-	//페이징
+	//페이징 갯수
 	@Override
 	public int getBoardListCnt() throws Exception {		
-		logger.info("boardDAOImp 총 게시물 가져오기");
+		logger.info("boardDAOImp 공지갯수 가져오기");
 		return sqlSession.selectOne(namespace + ".getBoardListCnt");
 	}
 

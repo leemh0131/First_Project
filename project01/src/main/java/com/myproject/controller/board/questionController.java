@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myproject.domain.MemberVO;
+import com.myproject.domain.board.PaginationVO;
 import com.myproject.domain.board.commentVO;
 import com.myproject.domain.board.questionVO;
 import com.myproject.service.board.commentService;
@@ -32,46 +33,32 @@ public class questionController {
 	private questionService questionService;
 	@Inject
 	private commentService commentService;	
-
-	// 관리자문의리스트화면
-	@RequestMapping(value = "/questionAllList", method = RequestMethod.GET)
-	public void questionAllList(Model model) throws Exception {
-		logger.info("questionController questionAllList called.....");
-		
-		List<questionVO> list = null;
-		list = questionService.questionAllList("questionAllList");
-		model.addAttribute("questionAllList", list);
-	}
 	
-	/*
-	 * // 회원문의리스트화면 세션 예시
-	 * 
-	 * @RequestMapping(value = "/questionList", method = RequestMethod.GET) public
-	 * void questionList(Model model, HttpServletRequest request) throws Exception {
-	 * logger.info("questionList GET..");
-	 * HttpSession session = request.getSession();	  
-	 * 
-	 * String member_code = (String) session.getAttribute("member_code");
-	 * 
-	 * List<questionVO> list = null;
-	 * list =  questionService.questionList(member_code);
-	 * model.addAttribute("questionList", list);
-	 * model.addAttribute("member_code", member_code); }
-	 */
 	
 	// 회원문의리스트화면
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
-	public void questionList(Model model, HttpServletRequest req) throws Exception {
-		
+	public void questionList(Model model, HttpServletRequest req,
+		@RequestParam(required = false, defaultValue = "1") int page, 
+		@RequestParam(required = false, defaultValue = "1") int range)throws Exception {
+	
 		//로그인세션가져오기		  
 		HttpSession session = req.getSession();			
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");	
 		model.addAttribute("member", memberVO);
 		
+		//전체 게시글 개수
+		int listCnt = questionService.getBoardListCnt();
+		
+		//PaginationVO 객체생성
+		PaginationVO pagination = new PaginationVO();
+		pagination.pageInfo(page, range, listCnt);		
+		model.addAttribute("pagination", pagination);		
 		
 		List<questionVO> list = null;
-		list = questionService.questionList(Integer.toString(memberVO.getMember_code()));
+		//list = questionService.questionList(Integer.toString(memberVO.getMember_code()));
+		list = questionService.questionList(pagination);
 		model.addAttribute("questionList", list);
+		
 		logger.info("questionList GET..list =>" + list);
 		
 	}

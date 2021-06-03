@@ -125,7 +125,7 @@ font-size: 17px;
 	            <a class="dropdown-item" href="/board/boardList">공지사항</a>
 	            <a class="dropdown-item" href="/question/questionList">문의하기</a>	           
 	            <a class="dropdown-item" href="#">주문조회</a>
-	            <a class="dropdown-item" onclick="log_out()" href="member/logout">로그아웃</a>
+	            <a class="dropdown-item" onclick="log_out()" href="${path}/member/logout">로그아웃</a>
             </div>
          </li>
         </ul>
@@ -149,7 +149,7 @@ font-size: 17px;
 		            <a class="dropdown-item" href="/question/questionList">문의관리</a>
 		            <a class="dropdown-item" href="#">주문관리</a>
 		            <a class="dropdown-item" href="/products/insertProduct">상품등록</a>	            
-		            <a class="dropdown-item" onclick="log_out()" href="member/logout">로그아웃</a>
+		            <a class="dropdown-item" onclick="log_out()" href="${path}/member/logout">로그아웃</a>
 	            </div>
          	</li>
         </ul>

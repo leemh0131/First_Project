@@ -34,9 +34,7 @@ public class boardController {
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
 	public void list(Model model,  HttpServletRequest req,
 	@RequestParam(required = false, defaultValue = "1") int page, 
-	@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
-		
-		logger.info("BoardController list called.....");	
+	@RequestParam(required = false, defaultValue = "1") int range) throws Exception {		
 		
 		//로그인세션가져오기		  
 		HttpSession session = req.getSession();
@@ -55,6 +53,8 @@ public class boardController {
 		List<boardVO> list = null;
 		list = boardService.boardList(pagination);
 		model.addAttribute("boardList", list);
+		
+		logger.info("BoardController list called.....");
 		
 	}	
 

@@ -51,7 +51,7 @@
             </tbody>
         </table>
         
-		<!-- pagination-->		
+		<!-- 페이징 -->		
 		<ul class="pagination justify-content-center">
 			<c:if test="${pagination.prev}">
 				<li class="page-item"><a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Prev</a></li>
@@ -63,7 +63,7 @@
 				<li class="page-item"><a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')" >Next</a></li>
 			</c:if>
 		</ul>	
-		<!-- pagination-->
+		<!-- 페이징 -->
         
         
         <c:if test="${member.mlevel == 0}">

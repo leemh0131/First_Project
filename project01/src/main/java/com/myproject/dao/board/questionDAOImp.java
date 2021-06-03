@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.myproject.domain.board.PaginationVO;
 import com.myproject.domain.board.questionVO;
 
 @Repository
@@ -40,14 +41,7 @@ public class questionDAOImp implements questionDAO {
 	public void questionUpdate(questionVO vo) throws Exception {
 		logger.info("questionDAOImp questionUpdate() => " + vo);
 		sqlSession.update(namespace + ".questionUpdate", vo);		
-	}
-
-	//관리자리스트
-	@Override
-	public List<questionVO> questionAllList(String tbl) throws Exception {
-		logger.info("questionDAOImp questionAllList() => " + tbl);
-		return sqlSession.selectList(namespace + ".questionAllList", tbl);
-	}
+	}	
 
 	//상세보기	
 	@Override
@@ -56,11 +50,18 @@ public class questionDAOImp implements questionDAO {
 		return sqlSession.selectOne(namespace + ".questionView", question_num);
 	}
 
-	//회원리스트
+	//리스트
 	@Override
-	public List<questionVO> questionList(String tbl) throws Exception {
-		logger.info("questionDAOImp questionAllList() => " + tbl);
-		return sqlSession.selectList(namespace + ".questionList", tbl);
+	public List<questionVO> questionList(PaginationVO PaginationVO) throws Exception {
+		logger.info("questionDAOImp questionAllList() => " + PaginationVO);
+		return sqlSession.selectList(namespace + ".questionList", PaginationVO);
+	}
+
+	//문의갯수
+	@Override
+	public int getBoardListCnt() throws Exception {	
+		logger.info("questionDAOImp 문의 갯수 가져오기");
+		return sqlSession.selectOne(namespace + ".getBoardListCnt");
 	}
 
 }

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myproject.dao.board.questionDAO;
+import com.myproject.domain.board.PaginationVO;
 import com.myproject.domain.board.questionVO;
 
 @Service
@@ -40,18 +41,11 @@ public class questionServiceImp implements questionService {
 		dao.questionUpdate(vo);
 	}
 
-	//관리자리스트
-	@Override
-	public List<questionVO> questionAllList(String tbl) throws Exception {
-		logger.info("questionServiceImp questionAllList() => " + tbl);	
-		return dao.questionAllList(tbl);
-	}
-
 	//회원리스트
 	@Override
-	public List<questionVO> questionList(String tbl) throws Exception {
-		logger.info("questionServiceImp questionList() => " + tbl);	
-		return dao.questionList(tbl);
+	public List<questionVO> questionList(PaginationVO PaginationVO) throws Exception {
+		logger.info("questionServiceImp questionList() => " + PaginationVO);	
+		return dao.questionList(PaginationVO);
 	}
 
 	//뮨의보기
@@ -59,6 +53,13 @@ public class questionServiceImp implements questionService {
 	public questionVO questionView(int question_num) throws Exception {
 		logger.info("questionServiceImp questionView() => " + question_num);	
 		return dao.questionView(question_num);
+	}
+
+	//문의갯수
+	@Override
+	public int getBoardListCnt() throws Exception {		
+		logger.info("questionServiceImp 문의 갯수 가져오기");
+		return dao.getBoardListCnt();
 	}
 	
 
