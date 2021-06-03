@@ -362,28 +362,34 @@ document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path
 };
 
 var buy = 1;
-var product_count = document.getElementById('product_count').value;
+var productcount = document.getElementById('product_count').value;
 
 //실시간 가격
 function product_cntResult() {
 	
-	buy = document.getElementById('order_count').value;	
- 	document.getElementById("priceResult").innerText = buy * ${productView.product_price} + " KRW"; 	
+	buy = document.getElementById('order_count').value;		
+ 	document.getElementById("priceResult").innerText = buy * ${productView.product_price} + " KRW";  
  	
- 	if(product_count < buy){
+ 	//console.log("buy" + buy);
+	//console.log("productcount" + productcount);
+ 	
+ 	if(parseInt(productcount) < buy){ 	
+ 		
  		alert("재고수량이 부족합니다.\n수량을 내려주세요!");
  		const target = document.getElementById('Buy');
- 		target.disabled = true;
+ 		target.disabled = true; 		
  		
- 	} else {
+ 	} else {		
  		
  		const target = document.getElementById('Buy');
- 		target.disabled = false;
+ 		target.disabled = false; 		
  		
  	}
  	
  	
 }
+
+
 
 
 function ck() {
