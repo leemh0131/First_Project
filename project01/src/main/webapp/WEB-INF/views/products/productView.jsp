@@ -187,9 +187,9 @@
 					<c:if test="${!empty member.mlevel}">
 					<div class="col-md-4">
 						<div  class="btn1">
-						<button onclick="like(${productView.product_code})" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
+						<button style="height: 45px;" onclick="like(${productView.product_code})" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
 						<i class="fa fa-heart"></i>
-						<span style="font-size: 17px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
+						<span style="font-size: 16px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
 						</div>
 					</div>						
 					</c:if>
@@ -198,7 +198,7 @@
 					<c:if test="${empty member.mlevel}">
 					<div class="col-md-4">
 						<div  class="btn1">
-						<button onclick="logoutlike()" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
+						<button style="height: 45px;" onclick="logoutlike()" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
 						<i class="fa fa-heart"></i>
 						<span style="font-size: 17px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
 						</div>
@@ -424,7 +424,7 @@ function logoutlike() {
 
   
 //좋아요 ajax사용 중복수정
-/* var click = true;
+var click = true;
 function like(product_code) {
 	if(click) {
 		 $.ajax({
@@ -438,22 +438,11 @@ function like(product_code) {
 	} else {
 		alert("좋아요는 한번만 가능합니다.");
 	}  	
-} */
+} 
   
   
   
-  
-//좋아요 ajax사용 중복수정필요
-function like(product_code) {	
-$.ajax({
-       url : 'productLike',
-       type : 'post',
-       data : {'product_code': product_code},
-       success : function(data){
-       	document.getElementById("likeResult").innerText = " " + data;
-       }
-   });
-}
+
 
 
 </script>
