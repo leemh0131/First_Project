@@ -300,8 +300,8 @@
 					</div>
 				
 				<!-- 사진 -->
-				<div class="col-md-2" style="width:150px; height: 190px; background-color: gray;">
-					<img src="${pageContext.request.contextPath}${reviewVO.review_Timg}" class="review_Timg"/>
+				<div class="col-md-2" style="width:150px; height: 190px;">
+					<img src="${reviewVO.review_Timg}" style="width:150px; height: 190px;"/>
 				</div>
 				
 				<div class="col-md-10">

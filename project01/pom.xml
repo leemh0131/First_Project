@@ -124,7 +124,7 @@
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis</artifactId>
-		    <version>3.4.6</version>
+		    <version>3.5.2</version>
 		</dependency>
 		
 		<!-- Spring 과 MyBatis를 연결하는 라이브러리 -->

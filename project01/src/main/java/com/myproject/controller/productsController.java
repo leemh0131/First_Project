@@ -91,7 +91,7 @@ public class productsController {
 		//조회수
 		productService.updateViewCnt(product_code);
 		
-		//리뷰		
+		//리뷰보기	
 		List<reviewVO> list = null;
 		list = reviewService.reviewAll(Integer.toString(product_code));
 		model.addAttribute("reviewAll", list);

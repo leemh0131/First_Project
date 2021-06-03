@@ -61,9 +61,9 @@
       				</div>
 
       				<div class="col-md-12">
-      					<label for="review_img">이미지</label>
+      					<label for="review_img">이미지(선택사항)</label>
  						<input type="file" id="review_img" name="file" />
- 						<div class="select_img"><img src="" /></div>
+ 						<div class="select_img"><img src=""/></div>
  						<!-- 사진경로 -->
  						<%-- <%=request.getRealPath("/") %> --%> 						
       				</div>
@@ -83,6 +83,7 @@
 
 <script type="text/javascript">
 
+//이미지미리보기
 $("#review_img").change(function(){
 	   if(this.files && this.files[0]) {
 	    var reader = new FileReader;

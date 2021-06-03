@@ -50,7 +50,7 @@ public class reviewController {
 	
 	// 리뷰작성 POST	RequestMethod.POST
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.POST)
-	public String reviewWrite(reviewVO vo, MultipartFile file) throws Exception {
+	public String reviewWrite(reviewVO vo, MultipartFile file,@RequestParam("product_code")int product_code) throws Exception {
 		
 		
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
@@ -58,20 +58,27 @@ public class reviewController {
 		String fileName = null;
 
 		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-			fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			// 첨부파일이 있으면
+			fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			// img 파일저장
+			vo.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+			// Timg 파일저장
+			vo.setReview_Timg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);		
+			
 		} else {
-			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+			// 첨부파일이 없으면 놉 파일을 설정.			
+			fileName = File.separator + "images" + File.separator + "none.png";
+			vo.setReview_img(fileName);
+			vo.setReview_Timg(fileName);
+			System.out.println("fileName nnnnnooooooo = " + fileName);
 		}
 
-		vo.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		vo.setReview_Timg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);		
-		
 		
 		logger.info("reviewController reviewWrite() => " + vo);
 		reviewService.reviewWrite(vo);
 		
 				
-		return "redirect:/products/productListBest";
+		return "redirect:/products/productView?product_code=" + product_code;
 	}
 	
 	// 리뷰삭제	
