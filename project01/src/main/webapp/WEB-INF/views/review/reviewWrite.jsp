@@ -7,12 +7,16 @@
 #star a{ text-decoration: none; color: gray; }
 #star a.on{ color: red; }
 
+.select_img img {
+ height: 200px;
+}
+
 </style>
 
 
 
 <!-- Modal -->
-<form onsubmit="return check()" name="f" method="post" action="/review/reviewWrite">
+<form onsubmit="return check()" name="f" method="post" action="/review/reviewWrite" enctype="multipart/form-data">
 		
 		    <div class="modal-header">		    
 			    <h6 class="modal-title" id="exampleModalCenterTitle">리뷰작성</h6>			    
@@ -57,12 +61,18 @@
       				</div>
 
       				<div class="col-md-12">
-      					<input name="review_img" multiple="multiple" />
+      					<label for="review_img">이미지</label>
+ 						<input type="file" id="review_img" name="file" />
+ 						<div class="select_img"><img src="" /></div>
+ 						<!-- 사진경로 -->
+ 						<%-- <%=request.getRealPath("/") %> --%> 						
       				</div>
 
 				</div>	
 
 		    </div>
+		    
+		    
 		    <!-- 닫기 작성 버튼 -->
 		    <div class="modal-footer">
 		    	<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -72,6 +82,16 @@
 </form>
 
 <script type="text/javascript">
+
+$("#review_img").change(function(){
+	   if(this.files && this.files[0]) {
+	    var reader = new FileReader;
+	    reader.onload = function(data) {
+	     $(".select_img img").attr("src", data.target.result).width(200);        
+	    }
+	    reader.readAsDataURL(this.files[0]);
+	   }
+	  });
 
 //공백체크
 function check() {	

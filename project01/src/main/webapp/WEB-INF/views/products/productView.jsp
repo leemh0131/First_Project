@@ -301,8 +301,8 @@
 				
 				<!-- 사진 -->
 				<div class="col-md-2" style="width:150px; height: 190px; background-color: gray;">
-					<h5>${reviewVO.review_img}</h5>
-				</div>				
+					<img src="${pageContext.request.contextPath}${reviewVO.review_Timg}" class="review_Timg"/>
+				</div>
 				
 				<div class="col-md-10">
 				

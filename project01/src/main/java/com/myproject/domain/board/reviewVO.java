@@ -24,6 +24,7 @@ public class reviewVO {
 	private String product_name;	// 상품이름
 	private String member_name;		// 회원이름
 	private String review_img;		// 리뷰사진
+	private String review_Timg;		// 썸네일리뷰사진
 	private int review_star;		// 평별 별
 	private String review_title;	// 제목
 	private String review_content;	// 내용

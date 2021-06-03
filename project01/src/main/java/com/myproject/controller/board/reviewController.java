@@ -4,6 +4,10 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -11,10 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.myproject.domain.MemberVO;
 import com.myproject.domain.board.reviewVO;
 import com.myproject.service.board.reviewService;
+import com.myproject.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping(value="/review/", produces="text/plain;charset=UTF-8")
@@ -25,6 +31,10 @@ public class reviewController {
 	
 	@Inject
 	private reviewService reviewService;
+	
+	//이미지폴더가져오기
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	// 리뷰작성 get
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.GET) 
@@ -40,7 +50,23 @@ public class reviewController {
 	
 	// 리뷰작성 POST	RequestMethod.POST
 	@RequestMapping(value = "/reviewWrite", method = RequestMethod.POST)
-	public String reviewWrite(reviewVO vo) throws Exception {
+	public String reviewWrite(reviewVO vo, MultipartFile file) throws Exception {
+		
+		
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		vo.setReview_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		vo.setReview_Timg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);		
+		
+		
 		logger.info("reviewController reviewWrite() => " + vo);
 		reviewService.reviewWrite(vo);
 		
