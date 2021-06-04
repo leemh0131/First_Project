@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.myproject.dao.productDAO;
 import com.myproject.domain.MemberVO;
 import com.myproject.domain.productVO;
 import com.myproject.domain.board.reviewVO;
@@ -36,21 +35,9 @@ public class productsController {
 	
 	@Inject
 	private reviewService reviewService;
-	
-	
-	//베스트10화면	 
-	@RequestMapping(value="/productListBest",method=RequestMethod.GET)
-	public void	productListBest(Model model) throws Exception { 
-		logger.info("productListBest GET");
-		
-		List<productVO> ListBest = null;
-		ListBest = productService.productListBest("productListBest");
-		model.addAttribute("productListBest", ListBest);
-	 
-	}
 
 	// 리스트화면
-	@RequestMapping(value = "/productList", method = RequestMethod.GET)
+	@RequestMapping(value = "/productList", method = {RequestMethod.GET, RequestMethod.POST})
 	public void productList(Model model, @RequestParam(value = "product_type", defaultValue = "") String product_type,
 											@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
 		logger.info("productList GET");

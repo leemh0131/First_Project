@@ -11,9 +11,6 @@ public interface productDAO {
 	//관리자 상품 추가
 	public void insertProduct(productVO vo) throws Exception;	
 	
-	//상품베스트10보기
-	public List<productVO> productListBest(String tbl) throws Exception;
-	
 	//관리자 상품 수정
 	public void updateProduct(productVO vo)  throws Exception;
 	

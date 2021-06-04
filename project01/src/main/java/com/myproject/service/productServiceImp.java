@@ -40,13 +40,6 @@ public class productServiceImp implements productService {
 	public void deleteProduct(int product_code) throws Exception {
 		logger.info("productServiceImp deleteProduct() => " + product_code);
 		dao.deleteProduct(product_code);
-	}	
-	
-	//상품베스트리스트
-	@Override
-	public List<productVO> productListBest(String tbl) throws Exception {
-		logger.info("productServiceImp productListBest() => " + tbl);
-		return dao.productListBest(tbl);
 	}
 
 	//상품리스트

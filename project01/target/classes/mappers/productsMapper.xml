@@ -31,25 +31,19 @@
 		select	product_code, product_type, img_view, product_name, 
 				product_price, product_read, product_count, product_like 
 				from products
-				<!-- 검색추가 -->
-				<trim prefix="WHERE" prefixOverrides="AND|OR">
-					<if test='!product_type.equals("")'>
-						product_type = #{product_type}
+				<!-- 카테고리, 검색, 베스트10 -->
+				<trim>
+					<if test='!product_type.equals("")'> 
+						WHERE product_type = #{product_type}
 					</if>
 					<if test='!keyword.equals("")'>
-						product_name like CONCAT('%', #{keyword}, '%')
+						WHERE product_name like CONCAT('%', #{keyword}, '%')
 					</if>
-				</trim> 
-				
-				
+					<if test='product_type.equals("")'>
+						ORDER BY product_like desc limit 10 
+					</if>
+				</trim>				
 	</select>
-	
-	<!-- 베스트리스트보기 -->
-	<select id="productListBest" resultType="productVO" parameterType="String">
-		select	product_code, product_type, img_view, product_name, 
-				product_price, product_read, product_count, product_like 
-				from products ORDER BY product_like desc limit 10
-	</select>	
 	
 	<!-- 상품 상세보기 --> 
     <select id="productView" resultType="productVO">

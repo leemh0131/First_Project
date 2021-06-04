@@ -44,7 +44,7 @@ font-size: 17px;
     <div class="col-md-5 py-0 text-dark">
 	    <ul id="id_nav-item" class="nav text-dark">
 	        <li class="nav-item ml-auto">
-	          <a href="../products/productListBest" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Best10</span></a>
+	          <a href="../products/productList" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Best10</span></a>
 	        </li>
 	        <li class="nav-item">
 	          <a href="../products/productList?product_type=1" class="nav-link active"><span style="font-weight: normal;" class="text-dark">Outer</span></a>
@@ -73,7 +73,7 @@ font-size: 17px;
     
     <!-- 검색창 -->
     <div class="col-md-2">
-        <form class="form-inline my-lg-1 py-2" action="productList" method="post">
+        <form onsubmit="return check()" name="f" class="form-inline my-lg-1 py-2" action="productList" method="post">
         	<input class="form-control mr-sm form-control-sm w-50" type="text" value="${keyword}" name="keyword" placeholder="Search" id="keyword">
         	<button name="btnSearch" id="btnSearch" class="btn text-dark btn-lg" contenteditable="true"><i class="fa fa-search"></i></button>
         </form>
@@ -160,16 +160,7 @@ font-size: 17px;
 </div>
 
 <script>
-$(document).on('click', '#btnSearch', function(e){
 
-	e.preventDefault();
-
-	var url = "${pageContext.request.contextPath}/products/productList";	
-	url = url + "?keyword=" + $('#keyword').val();
-	location.href = url;
-	console.log(url);
-
-});	
 
 function not_loginCart() {
 	alert("로그인 후 장바구니를 이용해주세요.");
@@ -183,6 +174,38 @@ function not_loginQnA() {
 function log_out(){	
 	alert("로그아웃했습니다.");  
 }
+
+//공백체크
+function check() {	//폼은 얘를 부르니까 얘가 1순위
+	
+	if(f.keyword.value == "" || f.keyword.value == null) {
+	   alert("상품이름을 작성 후 검색해 주세요.");
+	   f.keyword.focus();
+	   return false;
+	}	
+
+  else return true;
+
+}
+
+//url
+$(document).on('click', '#btnSearch', function(e){
+	
+	if($('#keyword').val() == ""){
+		return;	
+	} else {
+		
+		e.preventDefault();
+		var url = "${pageContext.request.contextPath}/products/productList";	
+		url = url + "?keyword=" + $('#keyword').val();
+		location.href = url;
+		console.log(url);
+		
+	}
+	
+	
+
+});	
 
 
 </script>

@@ -51,13 +51,6 @@ public class productDAOImp implements productDAO{
 		logger.info("productDAOImp productList() => " + map);
 		return sqlSession.selectList(namespace + ".productList", map);		
 	}
-	
-	//베스트10리스트
-	@Override
-	public List<productVO> productListBest(String tbl) throws Exception {
-		logger.info("productDAOImp productList() => " + tbl);
-		return sqlSession.selectList(namespace + ".productListBest", tbl);
-	}	
 
 	//상품상세보기
 	@Override
