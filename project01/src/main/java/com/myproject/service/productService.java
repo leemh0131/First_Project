@@ -1,8 +1,10 @@
 package com.myproject.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.myproject.domain.productVO;
+import com.myproject.utils.search;
 
 public interface productService {
 	
@@ -16,7 +18,7 @@ public interface productService {
 	public void deleteProduct(int product_code) throws Exception;
 	
 	//상품리스트보기
-	public List<productVO> productList(String tbl) throws Exception;
+	public List<productVO> productList(HashMap<String, String> map) throws Exception;
 	
 	//상품베스트10보기
 	public List<productVO> productListBest(String tbl) throws Exception;

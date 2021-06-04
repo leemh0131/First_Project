@@ -1,5 +1,6 @@
 package com.myproject.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.myproject.dao.productDAO;
 import com.myproject.domain.productVO;
+import com.myproject.utils.search;
 
 @Service
 public class productServiceImp implements productService {
@@ -49,9 +51,9 @@ public class productServiceImp implements productService {
 
 	//상품리스트
 	@Override
-	public List<productVO> productList(String tbl) throws Exception {
-		logger.info("productServiceImp productList() => " + tbl);
-		return dao.productList(tbl);
+	public List<productVO> productList(HashMap<String, String> map) throws Exception {
+		logger.info("productServiceImp productList() => " + map);
+		return dao.productList(map);
 	}
 
 	//상품상세보기	

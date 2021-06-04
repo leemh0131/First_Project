@@ -27,11 +27,21 @@
     </delete>
 
 	<!-- 상품리스트보기 -->
-	<select id="productList" resultType="productVO" parameterType="String">
+	<select id="productList" resultType="productVO" parameterType="java.util.HashMap">
 		select	product_code, product_type, img_view, product_name, 
 				product_price, product_read, product_count, product_like 
 				from products
-				where product_type = #{product_type}
+				<!-- 검색추가 -->
+				<trim prefix="WHERE" prefixOverrides="AND|OR">
+					<if test='!product_type.equals("")'>
+						product_type = #{product_type}
+					</if>
+					<if test='!keyword.equals("")'>
+						product_name like CONCAT('%', #{keyword}, '%')
+					</if>
+				</trim> 
+				
+				
 	</select>
 	
 	<!-- 베스트리스트보기 -->

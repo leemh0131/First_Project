@@ -73,9 +73,9 @@ font-size: 17px;
     
     <!-- 검색창 -->
     <div class="col-md-2">
-        <form class="form-inline my-lg-1 py-2">
-        	<input class="form-control mr-sm form-control-sm w-50" type="text" name="searchName" placeholder="Search" id="Search">
-        	<button id="search" type="submit" class="btn text-dark btn-lg" contenteditable="true"><i class="fa fa-search"></i></button>
+        <form class="form-inline my-lg-1 py-2" action="productList" method="post">
+        	<input class="form-control mr-sm form-control-sm w-50" type="text" value="${keyword}" name="keyword" placeholder="Search" id="keyword">
+        	<button name="btnSearch" id="btnSearch" class="btn text-dark btn-lg" contenteditable="true"><i class="fa fa-search"></i></button>
         </form>
     </div>
     <!-- 검색창 종료-->
@@ -160,6 +160,17 @@ font-size: 17px;
 </div>
 
 <script>
+$(document).on('click', '#btnSearch', function(e){
+
+	e.preventDefault();
+
+	var url = "${pageContext.request.contextPath}/products/productList";	
+	url = url + "?keyword=" + $('#keyword').val();
+	location.href = url;
+	console.log(url);
+
+});	
+
 function not_loginCart() {
 	alert("로그인 후 장바구니를 이용해주세요.");
 }

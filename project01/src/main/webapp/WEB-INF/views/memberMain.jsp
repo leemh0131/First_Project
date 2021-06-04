@@ -10,7 +10,7 @@
 		width: 100%;
 		}
 		
-		h1{
+		.h_1{
 		text-align: center;
 		font-weight: 600 !important; 
 		font-style: italic;
@@ -101,7 +101,7 @@
 	
 	<div class="row">
 		<div class="col-md-12 mt-5 mb-3">
-			<h1>Welcome to the LogoTest world!<br>
+			<h1 class="h_1">Welcome to the LogoTest world!<br>
 			For your style add life and help clean the Eye.</h1>
 		</div>
 	</div>
@@ -141,7 +141,7 @@
 	
 	<div class="row">
 		<div class="col-md-12 mt-5 mb-3">
-			<h1>Enjoy shopping</h1>
+			<h1 class="h_1">Enjoy shopping</h1>
 		</div>
 	</div>
 

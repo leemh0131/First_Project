@@ -1,5 +1,6 @@
 package com.myproject.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.myproject.domain.productVO;
+import com.myproject.utils.search;
 
 @Repository
 public class productDAOImp implements productDAO{
@@ -45,9 +47,9 @@ public class productDAOImp implements productDAO{
 
 	//상품리스트
 	@Override
-	public List<productVO> productList(String tbl) throws Exception {
-		logger.info("productDAOImp productList() => " + tbl);
-		return sqlSession.selectList(namespace + ".productList", tbl);
+	public List<productVO> productList(HashMap<String, String> map) throws Exception {
+		logger.info("productDAOImp productList() => " + map);
+		return sqlSession.selectList(namespace + ".productList", map);		
 	}
 	
 	//베스트10리스트

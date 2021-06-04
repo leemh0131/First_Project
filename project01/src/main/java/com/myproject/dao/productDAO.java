@@ -1,8 +1,10 @@
 package com.myproject.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.myproject.domain.productVO;
+import com.myproject.utils.search;
 
 public interface productDAO {
 	
@@ -19,7 +21,7 @@ public interface productDAO {
 	public void deleteProduct(int product_code) throws Exception;
 	
 	//상품리스트보기
-	public List<productVO> productList(String tbl) throws Exception;
+	public List<productVO> productList(HashMap<String, String> map) throws Exception;
 	
 	//상품상세보기
 	public productVO productView(int product_code) throws Exception;

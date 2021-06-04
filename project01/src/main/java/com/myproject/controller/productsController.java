@@ -1,5 +1,7 @@
 package com.myproject.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myproject.dao.productDAO;
 import com.myproject.domain.MemberVO;
 import com.myproject.domain.productVO;
 import com.myproject.domain.board.reviewVO;
@@ -48,15 +51,22 @@ public class productsController {
 
 	// 리스트화면
 	@RequestMapping(value = "/productList", method = RequestMethod.GET)
-	public void productList(Model model, @RequestParam("product_type") String product_type) throws Exception {
+	public void productList(Model model, @RequestParam(value = "product_type", defaultValue = "") String product_type,
+											@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception {
 		logger.info("productList GET");
-
+		
 		List<productVO> list = null;
-		list = productService.productList(product_type);
+		//해시맵 선언
+		HashMap<String,String> map = new HashMap<>();
+		map.put("product_type", product_type);
+		map.put("keyword", keyword);
+		
+		//해시맵에 k v 넣기 
+		list = productService.productList(map); 
+		
 		model.addAttribute("productList", list);
 		//System.out.println("model => " + model);
 	}	
-
 
 	// 상품등록 get
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.GET)
