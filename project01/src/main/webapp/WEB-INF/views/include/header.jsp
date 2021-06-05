@@ -176,7 +176,7 @@ function log_out(){
 }
 
 //공백체크
-function check() {	//폼은 얘를 부르니까 얘가 1순위
+function check() {
 	
 	if(f.keyword.value == "" || f.keyword.value == null) {
 	   alert("상품이름을 작성 후 검색해 주세요.");
