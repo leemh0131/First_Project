@@ -124,7 +124,7 @@ public class productsController {
 		return "redirect:/products/productListBest";
 	}
 	
-	// 좋아요	ajax사용으로 수정필요..
+	// 좋아요	ajax사용 수정필요..
 	@ResponseBody
 	@RequestMapping(value = "productLike", method = RequestMethod.POST)
 	public String productLike(@RequestParam("product_code")int product_code) throws Exception {

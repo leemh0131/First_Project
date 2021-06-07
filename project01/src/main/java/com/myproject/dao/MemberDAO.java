@@ -8,7 +8,7 @@ public interface MemberDAO {
 	public MemberVO login(MemberVO memberVO) throws Exception;
 	
 	//회원가입
-	public void join(MemberVO memverVO) throws Exception;
+	public int join(MemberVO memverVO) throws Exception;
 	
 	//회원정보 업데이트
 	public int memberUpdate(MemberVO memberVO) throws Exception;
@@ -18,6 +18,9 @@ public interface MemberDAO {
 	
 	//아이디 중복 체크
 	public int idCheck(MemberVO memberVO) throws Exception;
+	
+	//이메일 중복 체크
+	public boolean emailCheck(String member_email) throws Exception;
 	
 
 }

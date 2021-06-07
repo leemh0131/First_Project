@@ -7,13 +7,49 @@
 	<!-- **** namespace의 내용이 DAOImpl의 내용과 같아야 한다. -->
 	<mapper namespace="com.myproject.mappers.memberMapper">
   
-  	<!-- 로그인 -->
+	<!-- 로그인 -->
   	<select id="login" resultType="MemberVO">
   		select *
   		from member
   		where member_id = #{member_id}
   		and member_pw = #{member_pw} 
   	</select>
-  	
+
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" parameterType="MemberVO" resultType="int">
+		select count(*) from member
+		where member_id = #{member_id}
+	</select>
+	
+	<!-- 이메일 중복 체크 -->
+	<!-- <select id="emailCheck" parameterType="MemberVO" resultType="int">
+		select count(*) from member
+		where member_email = #{member_email}
+	</select> -->
+	<select id="emailCheck"  resultType="String">
+		select member_email from member
+		where member_email = #{member_email}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="join">
+		insert into member (member_id, member_pw, member_name, post_no, member_addr1, member_addr2, member_tel, mgender, member_email, mbirth)
+		values(#{member_id}, #{member_pw}, #{member_name}, #{post_no}, #{member_addr1}, #{member_addr2}, #{member_tel}, #{mgender}, #{member_email}, #{mbirth})
+	</insert>
+	
+	<update id="memberUpdate">
+		update member
+		set member_pw = #{member_pw}
+			member_tel = #{member_tel}
+			mobile = #{mobile}
+			addr = #{addr}
+		where member_id = #{member_id}
+	</update>
+	
+	<delete id="memberDelete">
+		delete from member
+		where member_id = #{member_id}
+		and member_pw = #{member_pw}
+	</delete>
   	</mapper>
   

@@ -8,6 +8,12 @@ public interface MemberService {
 	public MemberVO login(MemberVO memberVO) throws Exception;	
 	
 	//회원가입
-	public MemberVO join(MemberVO memberVO) throws Exception;
+	public int join(MemberVO memberVO) throws Exception;
+	
+	//아이디 중복 검사
+	public int idCheck(MemberVO memberVO) throws Exception;
+	
+	//이메일 중복 검사
+	public boolean emailCheck(String member_email) throws Exception;
 
 }

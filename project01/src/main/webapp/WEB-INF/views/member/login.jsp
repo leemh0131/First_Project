@@ -17,13 +17,14 @@
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
 	<div id="container" align="center">
-		<form action="/member/login" method="post">
+		<form action="/member/login" method="post">		
 			<div class="mlogin">
 				<h2>회원 로그인</h2>
 				<label class="id"> 
 					<span>아이디</span> 
 					<input id="member_id" name="member_id" type="text">
 				</label> 
+				<br>
 				<label class="password"> 
 					<span>패스워드</span> 
 					<input id="member_pw" name="member_pw" type="password">
@@ -33,16 +34,17 @@
 					<label for="member_check_save_id">아이디 저장</label>
 				</p>
 				<button class="btn btn-primary" type="submit" id="submit">로그인</button>
-					<ul>
+				<button class="cancle btn btn-danger" type="button" >취소</button>
+				<ul>
 					<li class="join">"아직 회원이 아니십니까?" 
 						<a href="/member/join">회원가입하기</a>
 					</li>
-					<li>"아이디를 잊으셨나요?" 
+					<!-- <li>"아이디를 잊으셨나요?" 
 						<a href="#">아이디 찾기</a>
 					</li>
 					<li>"비밀번호를 잊으셨나요?" 
 						<a href="#">비밀번호 찾기 찾기</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</form>
@@ -63,17 +65,21 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	//취소
+	$(".cancle").on("click", function(){
+		location.href="/";
+	})
 	
 	//로그인 버튼을 눌렀을 때
 	$("#submit").on("click",function(){
-		if($("#userid").val()==""){
+		if($("#member_id").val()==""){
 			alert("아이디를 입력해주세요.");
-			$("#userid").focus();
+			$("#member_id").focus();
 			return false;
 		}
-		if($("#passwd").val()==""){
+		if($("#member_pw").val()==""){
 			alert("비밀번호를 입력해주세요.");
-			$("#passwd").focus();
+			$("#member_pw").focus();
 			return false;
 		}
 		
