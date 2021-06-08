@@ -9,7 +9,7 @@
 + 참여인원: Backend 4명
 + 사용기술
   + Spring, Apache Tomcat, Tiles, BootStrap, Mybatis
-  + Java, Ajax, Jquery
+  + Java, Ajax, Jquery, JS
   + MySQL DataBase
 + 담당 파트
   + 프로젝트 개발환경 구축
