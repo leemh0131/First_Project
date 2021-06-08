@@ -17,7 +17,7 @@
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
 	<div id="container" align="center">
-		<form action="/member/login" method="post">		
+		<form action="/member/login" method="post" onsubmit="return false;">		
 			<div class="mlogin">
 				<h2>회원 로그인</h2>
 				<label class="id"> 
@@ -33,8 +33,9 @@
 					<input id="member_check_save_id" name="member_check_save_id" type="checkbox"> 
 					<label for="member_check_save_id">아이디 저장</label>
 				</p>
-				<button class="btn btn-primary" type="submit" id="submit">로그인</button>
+				<button class="btn btn-primary" type="button" id="submit">로그인</button>
 				<button class="cancle btn btn-danger" type="button" >취소</button>
+				<br><br>		
 				<ul>
 					<li class="join">"아직 회원이 아니십니까?" 
 						<a href="/member/join">회원가입하기</a>
@@ -58,9 +59,6 @@
 	</div>
 	
 	
-	
-	
-	
 </div>
 
 <script type="text/javascript">
@@ -82,10 +80,72 @@ $(document).ready(function(){
 			$("#member_pw").focus();
 			return false;
 		}
-		
-		location.href="../";
+		$.ajax({
+			url : "/member/login",
+			type : "post",
+			dataType : "text",
+			////data : {"userid" : $("#userid").val()},
+			data : {"member_id" : $("#member_id").val(), "member_pw" : $("#member_pw").val()},
+			success : function(data){
+				//alert("Return Value : " + data);
+				if(data == "N") {
+					alert("로그인 정보를 확인해주세요.");
+				}
+				else if(data == "Y") {
+					
+					var set_id = $("#member_id").val();
+					
+					if($("#member_check_save_id").is(":checked")){
+						setPopCookie("auto_id", set_id , 365);
+					}else{
+						setPopCookie("auto_id", set_id , -1);
+					}
+					
+					location.href = "../";
+				}
+			}
+			, error : function(data){
+				console.log(data);	
+			}
+		})	
 	});	
+	
+	var cookies = getPopCookie("auto_id");
+	if (cookies != '' ){
+		$("#member_id").val(cookies);
+		$("#member_check_save_id").prop("checked", true);
+	}
+	
 });
+
+//쿠키 설정
+function setPopCookie( name, value, expiredays ) { 
+    var todayDate = new Date(); 
+    todayDate.setDate( todayDate.getDate() + expiredays ); 
+    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString();
+}
+
+function getPopCookie(name){
+    var nameOfCookie = name + "=";
+    var x = 0;
+
+    while ( x <= document.cookie.length )
+    {
+        var y = (x+nameOfCookie.length);
+        if ( document.cookie.substring( x, y ) == nameOfCookie ) 
+        {
+            if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+            {
+                endOfCookie = document.cookie.length;
+            }
+            return unescape( document.cookie.substring( y, endOfCookie ) );
+        }
+        x = document.cookie.indexOf( " ", x ) + 1;
+        if ( x == 0 ){break;}
+    }
+    return "";
+}
+
 
 </script>
 
