@@ -23,7 +23,7 @@ public class MemberVO {
 	private int mlevel; //유저레벨
 	private String mbirth; // 생일
 	private String mcreate; // 가입일
-	private String change_passwd_date; // 암호 변경일
+	private String change_passwd_date; // 암호 변경
 	
 	private String member_tel1; // 암호 변경일
 	private String member_tel2; // 암호 변경일
