@@ -1,5 +1,7 @@
 package com.myproject.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -74,6 +76,85 @@ public class orderController {
 			
 	}
 	
+	// 관리자 주문조회 (전체 주문)
+	@RequestMapping(value = "/orderList", method = RequestMethod.GET)
+	public String orderList(Model model) throws Exception {
+		logger.info("get orderList");
+		List<orderVO> orderList;
+		orderList = orderService.orderList();
+		model.addAttribute("orderList",orderList);
+		
+		return "/order/orderList";
+		
+	}
+	
+	// 회원 주문 조회 (특정 회원) 
+	@RequestMapping(value = "/MemberOrdList", method = RequestMethod.GET)
+	public String MemberOrdList(HttpServletRequest req, Model model) throws Exception {
+			logger.info("get MemberOrdList");
+			HttpSession session = req.getSession();
+	
+			MemberVO member = (MemberVO)session.getAttribute("member");
+			int member_code = member.getMember_code();
+			System.out.println(member_code);
+			
+			orderVO orderVO = new orderVO();
+			orderVO.setMember_code(member_code);
+			logger.info(orderVO.toString());
+			List<orderVO> MemberOrdList;
+			MemberOrdList = orderService.MemberOrdList(orderVO);
+			
+			//logger.info("aaaa = " + MemberOrdList.get(0).getDelivery_name());
+			model.addAttribute("MemberOrdList", MemberOrdList);		
+			
+			return "/order/MemberOrdList";
+	}
+	
+		
+	// 비회원 주문 조회
+	@RequestMapping(value = "/NonMemberOrdList", method = RequestMethod.GET)
+	public String NonOrderList(Model model) throws Exception {
+		logger.info("get NonOrderList");
+//			List<OrderVO> NonOrderList;
+//			NonOrderList = service.NonOrderList();
+//			model.addAttribute("NonOrderList",NonOrderList);
+		
+		return "/order/NonMemberOrdList";
+		
+	}
+	
+	// 주문 상세보기
+	@RequestMapping(value = "/orderView", method = RequestMethod.GET)
+	public String orderView(HttpServletRequest req, 
+							@RequestParam("order_code") int order_code,
+							Model model) throws Exception {
+		logger.info("get orderView");
+		
+		HttpSession session = req.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		model.addAttribute("member", member);
+		
+		System.out.println(member);	
+		
+		List<orderVO> orderView;
+		orderView = orderService.orderView(order_code);
+		model.addAttribute("orderView", orderView);
+		
+		return "/order/orderView";
+
+	}
+	
+	// 주문 상세 목록 - 배송 상태 변경
+	@RequestMapping(value = "/orderView", method = RequestMethod.POST)
+	public String delivery(orderVO vo) throws Exception {
+		logger.info("update status =>" + vo);
+		
+		orderService.delivery(vo);
+		
+		return "redirect:/order/orderView?order_code=" + vo.getOrder_code();
+			
+	}
+
 
 
 

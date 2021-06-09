@@ -14,6 +14,68 @@
     <delete id="orderDelete">
     	delete from orders where order_code = #{order_code}
     </delete>
+    
+    <!-- 관리자 주문 목록 -->
+	<select id="orderList" resultType="orderVO">
+		SELECT 
+			o.order_code, p.product_code, p.product_name, o.order_count, 
+			o.total_price, o.order_status, o.order_date, p.img_view
+		FROM 
+			orders o, products p
+		WHERE o.product_code = p.product_code 
+		ORDER BY order_date DESC
+	</select>
+	
+	
+	<!-- 회원 주문 조회-->
+	<select id="MemberOrdList" resultType="orderVO" parameterType="orderVO" >
+		SELECT  
+			o.order_code, o.member_code, o.product_code, 
+			o.order_count, o.total_price, o.order_status,	
+			o.order_date, p.product_name
+		FROM 
+			orders o, products p
+		WHERE 
+			o.product_code = p.product_code 
+		and	member_code = #{member_code}
+			
+	</select> 
+	
+	<!-- 비회원 주문 -->
+	<select id="NonOrderList" resultType="orderVO">
+		SELECT
+			o.order_code, p.product_code, p.product_name, o.order_count,
+			o.total_price, o.order_status, o.order_date, p.img_view
+		FROM
+			orders o, products p
+		WHERE
+			o.product_code = p.product_code
+	</select>
+	
+	<!-- 주문 상세보기 -->
+	<select id="orderView" resultType="orderVO">
+		SELECT
+			o.order_code, p.product_code, p.product_name, o.order_count,
+			o.total_price, o.order_status, o.order_date, p.img_view,
+			o.delivery_name, o.roadFullAddr, o.delivery_tel, 
+			p.product_price
+		FROM
+			   orders o, products p
+		WHERE
+			   o.product_code = p.product_code 
+		   AND order_code = #{order_code}
+	</select>
+	
+	<!-- 배송 상태 -->
+	<update id="delivery">
+		UPDATE
+			orders
+		SET	
+			order_status =  #{order_status}
+		WHERE
+			order_code	= #{order_code}
+	
+	</update>
 
 	
 	

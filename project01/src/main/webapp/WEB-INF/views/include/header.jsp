@@ -99,9 +99,9 @@ font-size: 17px;
 	            	<span class="text-dark">Menu</span>
 	            </a>
 	            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
-		            <a class="dropdown-item" href="/board/boardList">공지사항</a>
+		            <a class="dropdown-item" href="${path}/board/boardList">공지사항</a>
 		            <a class="dropdown-item" onclick="not_loginQnA()" href="#">문의하기</a>		            
-		            <a class="dropdown-item" href="#">비회원조회</a>
+		            <a class="dropdown-item" href="${path}/order/NonMemberOrdList">비회원조회</a>
 	            </div>
 	        </li>
         </ul>
@@ -122,9 +122,9 @@ font-size: 17px;
             </a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
 	            <a class="dropdown-item" href="${path}/mypage">마이페이지</a>
-	            <a class="dropdown-item" href="/board/boardList">공지사항</a>
-	            <a class="dropdown-item" href="/question/questionList">문의하기</a>	           
-	            <a class="dropdown-item" href="#">주문조회</a>
+	            <a class="dropdown-item" href="${path}/board/boardList">공지사항</a>
+	            <a class="dropdown-item" href="${path}/question/questionList">문의하기</a>	           
+	            <a class="dropdown-item" href="${path}/order/MemberOrdList">주문조회</a>
 	            <a class="dropdown-item" onclick="log_out()" href="${path}/member/logout">로그아웃</a>
             </div>
          </li>
@@ -145,10 +145,10 @@ font-size: 17px;
 	             	<span class="text-dark">관리자모드</span> 
 	            </a>
 	            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">	            
-		            <a class="dropdown-item" href="/board/boardList">공지사항관리</a>
-		            <a class="dropdown-item" href="/question/questionList">문의관리</a>
-		            <a class="dropdown-item" href="#">주문관리</a>
-		            <a class="dropdown-item" href="/products/insertProduct">상품등록</a>	            
+		            <a class="dropdown-item" href="${path}/board/boardList">공지사항관리</a>
+		            <a class="dropdown-item" href="${path}/question/questionList">문의관리</a>
+		            <a class="dropdown-item" href="${path}/order/orderList">주문관리</a>
+		            <a class="dropdown-item" href="${path}/products/insertProduct">상품등록</a>	            
 		            <a class="dropdown-item" onclick="log_out()" href="${path}/member/logout">로그아웃</a>
 	            </div>
          	</li>

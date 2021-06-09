@@ -45,7 +45,7 @@
 				<br><br>		
 				<ul>
 					<li class="join">"아직 회원이 아니십니까?" 
-						<a href="/member/join">회원가입하기</a>
+						<a href="${path}/member/join">회원가입하기</a>
 					</li>
 					<!-- <li>"아이디를 잊으셨나요?" 
 						<a href="#">아이디 찾기</a>

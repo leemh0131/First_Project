@@ -95,8 +95,6 @@
 </body>
 <%@ include file="../include/footer.jsp" %>
 
-<script src="../../../resources/js/jquery-3.6.0.min.js"></script>
-<script src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$("#select_all").click(function(){ 
