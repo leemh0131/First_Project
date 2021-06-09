@@ -121,7 +121,7 @@ font-size: 17px;
              	<span class="text-dark">${member.member_name}&nbsp;님</span> 
             </a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
-	            <a class="dropdown-item" href="mypage/mypage">마이페이지</a>
+	            <a class="dropdown-item" href="${path}/mypage">마이페이지</a>
 	            <a class="dropdown-item" href="/board/boardList">공지사항</a>
 	            <a class="dropdown-item" href="/question/questionList">문의하기</a>	           
 	            <a class="dropdown-item" href="#">주문조회</a>

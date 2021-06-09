@@ -47,6 +47,38 @@ public class MemberServiceimpl implements MemberService {
 		return result;
 	}
 	
+
+	//회원 비밀번호 변경
+	@Override
+	public int updatePwMember(MemberVO memberVO) throws Exception {
+		//결과를 저장할 변수 result
+		int result = 0;
+		
+		log.info("updatePwMemberService");
+		
+		//DAO가 1을 가져오지 못할경우 0값으로 result 처리
+		result = memberDAO.updatePwMember(memberVO) == 1 ? 1 : 0;
+		
+		// 0또는 1 반환
+		return result;
+	}
+	
+
+	//회원 정보 수정(비밀번호 외의 것)
+	@Override
+	public int updateMember(MemberVO memberVO) throws Exception {
+	//결과를 저장할 변수 result
+	int result = 0;
+	
+	log.info("updateMemberService");
+	
+	//DAO가 1을 가져오지 않을경우 0 값으로 result 처리
+	result = memberDAO.updateMember(memberVO) == 1 ? 1 : 0;
+	
+	//0또는 1 반환
+	return result;
+	}
+	
 	
 
 }

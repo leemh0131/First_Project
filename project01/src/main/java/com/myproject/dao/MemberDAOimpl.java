@@ -37,6 +37,45 @@ public class MemberDAOimpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	//회원 비밀번호 변경
+	@Override
+	public int updatePwMember(MemberVO memberVO) throws Exception {
+		//결과를 저장할 변수 result
+		int result = 0;
+		
+		log.info("updatePwMember DAO");
+		
+		//sql문의 결과값을 치환
+		int a = sqlSession.update(namespace + ".updatePwMember", memberVO);
+		//System.out.println("updatePwMember.sqlSession 값 : " + a);
+		
+		result = a ;
+		
+		//반환
+		return result;
+	}
+	
+	
+
+	//회원 정보 수정(비밀번호 외의 것)
+	public int updateMember(MemberVO memberVO) throws Exception {
+		//결과를 저장할 변수 result
+		int result = 0;
+		
+		log.info("updateMember DAO");
+		
+		//sql문의 결과값을 치환
+		int a = sqlSession.update(namespace + ".updateMember", memberVO);
+		//System.out.println("updateMember.sqlSession의 값 : " + a);
+		
+		result = a;
+		
+		//반환
+		return result;
+		
+		
+		}
 
 	@Override
 	public int memberDelete(MemberVO memberVO) throws Exception {

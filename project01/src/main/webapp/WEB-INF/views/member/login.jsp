@@ -6,6 +6,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>로그인</title>
+	<style type="text/css">
+	
+	#footer{
+	 margin-top : auto:
+	}
+	
+	</style>
 </head>
 <body>
 <div id="wrap">
@@ -19,15 +26,15 @@
 	<div id="container" align="center">
 		<form action="/member/login" method="post" onsubmit="return false;">		
 			<div class="mlogin">
-				<h2>회원 로그인</h2>
+				<h2>회원 로그인</h2><br>
 				<label class="id"> 
-					<span>아이디</span> 
-					<input id="member_id" name="member_id" type="text">
+					<span class="col-sm-4"> 아 이 디</span> 
+					<input class="col-sm-8" id="member_id" name="member_id" maxlength="16" type="text">
 				</label> 
 				<br>
 				<label class="password"> 
-					<span>패스워드</span> 
-					<input id="member_pw" name="member_pw" type="password">
+					<span class="col-sm-4">패스워드</span> 
+					<input class="col-sm-8" id="member_pw" name="member_pw" maxlength="16" type="password">
 				</label>
 				<p class="security">
 					<input id="member_check_save_id" name="member_check_save_id" type="checkbox"> 
@@ -49,6 +56,7 @@
 				</ul>
 			</div>
 		</form>
+		<br><br>
 	</div>
 
 	<div id="footer">
@@ -80,6 +88,7 @@ $(document).ready(function(){
 			$("#member_pw").focus();
 			return false;
 		}
+		// 로그인 아이디 저장버튼을 위해
 		$.ajax({
 			url : "/member/login",
 			type : "post",

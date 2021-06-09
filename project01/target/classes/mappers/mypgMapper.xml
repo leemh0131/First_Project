@@ -2,10 +2,180 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.myproject.mappers.productsMapper">
+<mapper namespace="com.myproject.mappers.mypgMapper">
 
+	<!-- <id property="" column=""></id> 
+ 		 <result property="" column=""></result> -->
+ 		 
+ 	<!-- <resultMap type="com.mypro.domain." id="">
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 		<id property="" column=""></id>
+ 	</resultMap>-->
+ 	
+ 	<resultMap type="com.myproject.domain.MemberVO" id="Member">
+ 		<id property="member_code" column="member_code"></id><!-- id 는 기본키일때 -->
+ 		<result property="member_id" column="member_id"></result> <!-- result는 기본키 그 외의 것 -->
+ 		<result property="member_pw" column="member_pw"></result><!-- column은 테이블에서의 컬럼명-->
+ 		<result property="member_name" column="member_name"></result><!--property는 모델클래스 에서의 컬럼명 -->
+ 		<result property="member_addr" column="member_addr"></result>
+ 		<result property="member_email" column="member_email"></result>
+ 		<result property="member_birth" column="member_birth"></result>
+ 		<result property="member_gender" column="member_gender"></result>
+ 		<result property="member_phone" column="member_phone"></result>
+ 		<result property="member_level" column="member_level"></result>
+ 		<result property="member_join" column="member_join"></result>
+ 	</resultMap>
+ 	
+ 	<resultMap type="com.myproject.domain.LikeyVO" id="Likey">
+ 		<id property="bno" column="bno"></id><!-- id 는 기본키일때 -->
+ 		<result property="member_code" column="member_code"></result> <!-- result는 기본키 그 외의 것 -->
+ 		<result property="product_code" column="product_code"></result><!-- column은 테이블에서의 컬럼명-->
+ 		<result property="register_date" column="register_date"></result><!--property는 모델클래스 에서의 컬럼명 -->
+ 	</resultMap>
+ 	
+ 	<resultMap type="com.myproject.domain.BasketVO" id="Basket">
+ 		<id property="bno" column="bno"></id>
+ 		<result property="member_code" column="member_code"></result>
+ 		<result property="product_code" column="product_code"></result>
+ 		<result property="basket_count" column="basket_count"></result>
+ 		<result property="basket_price" column="basket_price"></result>
+ 		<result property="register_date" column="register_date"></result>
+ 	</resultMap>
+ 
+	<resultMap type="com.myproject.domain.productVO" id="Products">
+		<id property="product_code" column="product_code"/>
+		<id property="img_view" column="img_view"/>
+		<id property="product_type" column="product_type"/>
+		<id property="product_type_name" column="product_type_name"/>
+		<id property="product_name" column="product_name"/>
+		<id property="product_price" column="product_price"/>
+		<id property="product_read" column="product_read"/>
+		<id property="product_content" column="product_content"/>
+		<id property="product_count" column="product_count"/>
+		<id property="product_date" column="product_date"/>
+		<id property="product_like" column="product_like"/>
+	</resultMap>
+	
+	<resultMap type="com.myproject.domain.orderVO" id="Orders">
+		<id property="order_code" column="order_code"/>
+		<id property="member_code" column="member_code"/>
+		<id property="product_code" column="product_code"/>
+		<id property="order_count" column="order_count"/>
+		<id property="total_price" column="total_price"/>
+		<id property="order_status" column="order_status"/>
+		<id property="order_date" column="order_date"/>
+		<id property="reciever" column="reciever"/>
+		<id property="roadFullAddr" column="roadFullAddr"/>
+		<id property="delivery_tel" column="delivery_tel"/>
+	</resultMap>
+	
+	<resultMap type="com.myproject.domain.TestBean" id="TestBeanMap">
+		<collection property="member" resultMap="Member"/>
+		<collection property="likey" resultMap="Likey"/>
+		<collection property="basket" resultMap="Basket"/>
+		<collection property="orders" resultMap="Orders"/>
+		<collection property="products" resultMap="Products"/>
+	</resultMap>
+	
+	<!-- #{프로퍼티} -> 타입에 맞춰서 값을 꺼낸다. -->
+	<!-- ${프로퍼티} -> 그냥 꺼낸다.-->
+	
 	<!-- 찜 목록 보기 --> 
-	<select id="list" parameterType="String" resultType="LikeyVO">
-		SELECT * FROM likey
+	<select id="likeyList" parameterType="LikeyVO" resultMap="TestBeanMap">
+		SELECT l.bno, p.img_view, p.product_name, p.product_price, l.register_date
+		FROM likey l
+		JOIN products p
+		ON p.product_code = l.product_code
+		WHERE l.member_code = #{member_code};
 	</select>
+	
+	<!-- 최근 한 달간 찜목록 보기 -->
+	<!-- <select id="likeyListMonth" parameterType="int" resultType="com.mypro.myapp.domain.LikeyMonthVO"> -->
+	<select id="likeyListMonth" parameterType="int" resultType="LikeyMonthVO">
+		SELECT l.bno, p.img_view, p.product_name, p.product_price, l.register_date
+		FROM likey l
+		JOIN products p
+		ON p.product_code = l.product_code
+		WHERE l.register_date BETWEEN date_add(SYSDATE(), interval -1 month) AND SYSDATE()
+		AND l.member_code = #{member_code}
+	</select>
+	
+	<!-- 찜목록 삭제 -->
+	<delete id="deleteLikey" parameterType="LikeyVO">
+		DELETE FROM likey
+		WHERE bno = #{bno}
+		AND member_code = #{member_code}
+	</delete>
+	
+	<!-- 장바구니 목록 보기 -->
+	<select id="basketList" parameterType="BasketVO" resultMap="TestBeanMap">
+		SELECT b.bno, p.img_view, p.product_name, p.product_price, b.basket_count, b.basket_price, b.register_date
+		FROM basket b
+		JOIN products p
+		ON b.product_code = p.product_code
+		WHERE b.member_code = #{member_code}
+	</select>
+	
+	<!-- 장바구니 목록 삭제 -->
+	<delete id="deleteBasket" parameterType="BasketVO">
+		DELETE FROM basket
+		WHERE bno = #{bno}
+		AND member_code = #{member_code}
+	</delete>
+	
+	<!-- 주문내역 보기 -->
+	<select id="orderList" parameterType="orderVO" resultMap="TestBeanMap">	    
+		SELECT p.img_view, p.product_name, o.order_code, o.order_count, o.total_price, o.order_status, o.order_date
+		FROM orders o
+		JOIN products p
+		ON o.product_code = p.product_code
+		WHERE o.member_code= #{member_code};
+	</select>
+	
+	<!--최근 한 달간 주문내역 보기 -->
+	<select id="orderListMonth" parameterType="orderVO" resultMap="TestBeanMap">
+		SELECT p.img_view, p.product_name, o.order_count, o.total_price, o.order_status, o.order_date
+		FROM orders o
+		JOIN products p
+		ON o.product_code = p.product_code
+		WHERE o.order_date BETWEEN date_add(SYSDATE(), interval -1 month) AND SYSDATE()
+		AND o.member_code= #{member_code};
+	</select>
+	
+	<!-- 날짜를 설정하여 주문 리스트를 보여준다. -->
+	<select id="getDateList" parameterType="MemberDateVO" resultMap="TestBeanMap">
+		
+		SELECT p.img_view, p.product_name, o.order_code, o.order_count, o.total_price, o.order_status, o.order_date
+		FROM orders o
+		JOIN products p
+		ON o.product_code = p.product_code
+		<![CDATA[
+		WHERE o.member_code= #{member_code}
+		AND o.order_date >= #{from_date} AND o.order_date < #{to_date}
+		]]>
+		ORDER BY o.order_date DESC
+	</select>
+	
+	<!-- 주문목록 상세 보기 -->
+	<select id="ordersDetailView" parameterType="orderVO" resultMap="TestBeanMap">		
+		SELECT p.img_view, o.member_name, p.product_name, o.order_code, o.product_code, o.order_count, o.total_price, o.order_status, o.order_date, o.reciever, o.roadFullAddr, o.delivery_tel
+		FROM (SELECT o.order_code, o.member_code, o.product_code, o.order_count, o.total_price, o.order_status, o.order_date, o.reciever, o.roadFullAddr, o.delivery_tel, c.member_name
+			  FROM customers c 
+			  JOIN orders o
+			  ON o.member_code = c.member_code
+			  WHERE c.member_code = #{member_code}) o
+		JOIN products p
+		ON o.product_code = p.product_code
+		WHERE o.member_code= 100001
+		AND o.order_code = #{order_code};
+	</select>
+	
+	
 </mapper>

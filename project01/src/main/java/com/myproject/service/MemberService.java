@@ -15,5 +15,11 @@ public interface MemberService {
 	
 	//이메일 중복 검사
 	public boolean emailCheck(String member_email) throws Exception;
+	
+	//회원 비밀번호 변경
+	public int updatePwMember(MemberVO memberVO) throws Exception;
+
+	//회원 정보 수정(비밀번호 외의 것)
+	public int updateMember(MemberVO memberVO) throws Exception;
 
 }

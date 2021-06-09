@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   		uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" 		uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="../../../resources/css/bootstrap.jsp" %>
 <%@ page session="true"%>
 
 <!DOCTYPE html>
@@ -27,7 +28,105 @@
 	position: relative;
 	display: block;
 	color: #1c1c1c;
+	font : 0.75em "Apple SD Gothic Neo", "돋움", Dotum, AppleGothic, sans-serif;	
 }
+
+#container:after {
+	content : "";
+	display : block;
+	clear : both;
+}
+
+.titleArea h3 {
+	padding : 0 0 0 10px;
+ 	font-size : 30px;
+ 	color : #272823;
+ 	display : block;
+ 	margin-block-start : 0.83em;
+ 	margin-block-end : 0.83em;
+ 	margin-inline-start : 0px;
+ 	margin0inline-end : 0px;
+ 	font-weight : bold;
+}
+
+#joinForm h3 {
+	padding : 50px 0 5px;
+	font-size : 15px;
+	color : #444;
+	display : block;
+	margin-block-start : 1em;
+ 	margin-block-end : 1em;
+ 	margin-inline-start : 0px;
+ 	margin0inline-end : 0px;
+ 	font : 1.2em "Apple SD Gothic Neo", "돋움", Dotum, AppleGothic, sans-serif;	
+ 	font-weight : bold;
+}
+
+.agreeBody{
+	background : #f7f7f7;
+	margin : 10px;	
+	padding : 10px;
+	display : block;
+	font : 0.8em "Apple SD Gothic Neo", "돋움", Dotum, AppleGothic, sans-serif;	
+	color :  #1c1c1c;	
+}
+
+.agreeBody:after{
+	content: "";
+	display: block;
+	clear : both;
+}
+
+.agreeBody .agree1, .agreeBody .agree2 {
+	width : 48%;	
+	padding : 0 1% 0 4%;
+	float : left;
+	display : block;
+	font : 0.75em "Apple SD Gothic Neo", "돋움", Dotum, AppleGothic, sans-serif;
+	text-align: left;
+	color :  #1c1c1c;	
+}
+
+.agreeBody .agree1 h3, .agreeBody .agree2 h3 {
+	padding : 0 0 5px;
+	font : 1.2em "Apple SD Gothic Neo", "돋움", Dotum, AppleGothic, sans-serif;
+	color :  #1c1c1c;
+}
+
+.agreeBody .agree1 .agreeArea, .agreeBody .agree2 .agreeArea {
+	padding : 10px 10px 10px;
+	border-top : 1px solid #c0c0c0;
+	border-bottom : 1px solid #c0c0c0;
+	color : #747474;
+	font-size : 11px;
+	line-height : 20px;
+	background : #fff;
+	display : block;
+	font : 0.75em "Apple SD Gothic Neo", "돋움", Dotum, AppleGothic, sans-serif;
+}
+
+.agreeBody .agree1 .agreeArea .agree, .agreeBody .agree2 .agreeArea .agree {
+	overflow : auto;
+	height: 110px;
+	padding : 20px;
+	border :  1px solid #e6e6e6;
+	background : #fff;
+	display : block;
+	font-size : 11px;
+	line-height : 20px;
+	font : 0.75em "Apple SD Gothic Neo", "돋움", Dotum, AppleGothic, sans-serif;
+}
+
+.fr-view{
+	word-wrap : break-word;
+}
+
+.all_agree {
+	text-align : left;	
+	padding-left : 50px;
+}
+
+
 </style>
 
 
@@ -45,51 +144,67 @@
 	<div id="container" align="center">
 		<div id="contents">
 			<div class="titleArea">
-				<h3>회원가입</h3>
+				<h3>회원가입</h3><hr>
 			</div>
 			<form class="form-horizontal" id="joinForm" name="joinForm" action="" method="post" onsubmit="return false;">
-				<input type="hidden" id="member_checked" name="member_checked" maxlength="16" value="1">
-				<h3>기본정보</h3>
+				<input type="hidden" id="member_checked" name="member_checked" maxlength="16" value="1">				
+				<h3 align="left">기본정보</h3>
 				<div class="joinWrite">
-					<table border="1">						
+					<table class="table">						
 						<tbody>
 							<tr>
 								<th scope="row">아이디</th>
 								<td>
 									<input type="text" id="member_id" name="member_id" maxlength="16" >
 									<button class="idCheck btn btn-primary btn-sm" type="button" id="idCheck"  onclick="fn_idCheck();" value="N">아이디 중복확인</button>
+									<br>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">비밀번호</th>
 								<td>
 									<input type="password" id="member_pw" name="member_pw" maxlength="16">
-									(영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)-비밀번호 설정시 특수문자 *은 제외하세요
+									<label class="pw_rule" style="font : 0.75em 'Apple SD Gothic Neo', '돋움', Dotum, AppleGothic, sans-serif;">
+										(영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)-비밀번호 설정시 특수문자 *은 제외하세요.&nbsp;&nbsp;
+									</label>									
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">비밀번호 확인</th>
 								<td>
-									<input type="password" id="member_pw_confirm" name="member_pw_confirm" autocomplete="off" maxlength="16">								
+									<input type="password" id="member_pw_confirm" name="member_pw_confirm" autocomplete="off" maxlength="16">
+									<br>								
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이름</th>
 								<td>
-									<input id="member_name" name="member_name" type="text" >
-								</td>
-							</tr>
+									<input id="member_name" name="member_name" type="text" >									
+								</td>								
+							</tr>							
 							<tr>
 								<th scope="row">주소</th>
 								<td>
 									<input type="text" id="post_no" name="post_no" readonly="readonly" maxlength="14">
 									-
 									<button class="btn btn-primary btn-sm" onclick="daumZipCode()">우편번호</button><br>
-									<input type="text" id="member_addr1" name="member_addr1" class="inputTypeText" readonly="readonly">기본주소
+									<input type="text" id="member_addr1" name="member_addr1" class="inputTypeText" readonly="readonly" >
+									<label style="font : 0.75em 'Apple SD Gothic Neo', '돋움', Dotum, AppleGothic, sans-serif;">기본 주소</label>
 									<br>
-									<input type="text" id="member_addr2" name="member_addr2" class="inputTypeText">나머지주소
+									<input type="text" id="member_addr2" name="member_addr2" class="inputTypeText">
+									<label style="font : 0.75em 'Apple SD Gothic Neo', '돋움', Dotum, AppleGothic, sans-serif;">나머지 주소</label>
 								</td>
-							</tr>							
+							</tr>		
+							<tr>
+								<th scope="row">전화번호</th>
+							 	<td>
+							 		<input class="col-sm-2" type="number" id="member_tel1" name="member_tel1"  maxlength="3" oninput="maxLengthCheck(this)">
+							 		-
+							 		<input class="col-sm-2" type="number" id="member_tel2" name="member_tel2" maxlength="4" oninput="maxLengthCheck(this)">
+							 		-
+							 		<input class="col-sm-2" type="number" id="member_tel3" name="member_tel3" maxlength="4" oninput="maxLengthCheck(this)">
+							 	</td>
+							</tr>					
 							<tr>
 								<th scope="row">휴대전화</th>
 							 	<td>
@@ -102,9 +217,9 @@
 							 			<option value="019">019</option>
 							 		</select>
 							 		-
-							 		<input type="number" id="mobile2" name="mobile2">
+							 		<input class="col-sm-2" type="number" id="mobile2" name="mobile2" maxlength="4" oninput="maxLengthCheck(this)">
 							 		-
-							 		<input type="number" id="mobile3" name="mobile3">
+							 		<input class="col-sm-2" type="number" id="mobile3" name="mobile3" maxlength="4" oninput="maxLengthCheck(this)">
 							 	</td>
 							</tr>
 							<tr>
@@ -124,17 +239,15 @@
 							<tr>
 								<th scope="row">생일</th>
 								<td>
-									<input type="text" id="datepicker" name="mbirth" placeholder="날짜를 선택하십시오."/>
-								</td>
-							</tr>
-							
-														
+									<input type="text" id="datepicker" name="mbirth" placeholder="날짜를 선택하십시오."/>									
+								</td>								
+							</tr>																				
 						</tbody>
 					</table>
+					<hr>
 				</div>
 				<!-- <h3 class="displaynone">추가정보</h3> -->
-				<div class="agreeBody">		
-					<input type="checkbox" id="checkbox1"> 전체 이용약관에 동의하십니까?			
+				<div class="agreeBody" align="center">							
 					<div class="agree1">
 						<h3>이용약관 동의</h3>
 						<div class="agreeArea">
@@ -146,8 +259,12 @@
 									있어 사이버 몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다. <br> 「PC통신,
 									무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다」 <br>
 									</div>
+									<br>
 							</div>
-							<input type="checkbox" id="checkbox2">	이용약관에 동의하십니까?			
+							<br>
+							이용약관에 동의하십니까?&nbsp;&nbsp;
+							<input type="checkbox" id="checkbox2"> &nbsp;동의			
+							<br>
 						</div>
 					</div>
 					<div class="agree2">
@@ -178,19 +295,32 @@
 										 <br>
 										 신규 서비스(제품) 개발 및 특화 , 이벤트 등 광고성 정보 전달
 									</p>
-									
+									<br>
 								</div>
 							</div>
-							<input type="checkbox" id="checkbox3">	이용약관에 동의하십니까?			
+							<br>
+							이용약관에 동의하십니까?&nbsp;&nbsp;
+							<input type="checkbox" id="checkbox3"> &nbsp;동의			
+							<br>
 						</div>
-					</div>
+						<br>
+					</div>	
+					
+					<div class="all_agree">						
+						<label id="all_agree_label">
+							전체 이용약관에 동의하십니까?&nbsp;&nbsp;
+						</label>
+						<input type="checkbox" id="checkbox1" > &nbsp;동의								
+					</div>	
+					<hr>				
 				</div>
+				
 				<!-- 회원가입 버튼 -->
 				<div class="btnArea center">
 					
 					<button class="btn btn-primary" type="button" id="join_btn">회원가입</button>
 					<button class="cancle btn btn-danger" type="button">취소</button>
-					
+					<br><br>
 				</div>			
 			</form>			
 		</div>
@@ -210,15 +340,18 @@
 
 	
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 우편번호 검색기능 -->
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
+	
 	// 취소
 	$(".cancle").on("click", function(){
-		location.href="/";
+		location.href="/"; //메인페이지로 돌아감
 	})
 	
+	// 아이디 재 입력시 아이디 체크 다시하도록
 	$("#member_id").on("keyup", function(){
 		$("#member_checked").val("1");
 	});
@@ -227,6 +360,8 @@ $(document).ready(function(){
 		$("#member_checked").val("1");
 	});
 	
+	
+	// 회원약관 동의 체크박스 컨트롤
 	$("#checkbox1").on("click", function(){
 		if($("#checkbox1").is(":checked")== true){
 			$("#checkbox2").prop("checked", true);
@@ -236,8 +371,40 @@ $(document).ready(function(){
 			$("#checkbox3").prop("checked", false);
 		}
 	});
+	
+	$("#checkbox2").on("click",function(){
+		if($("#checkbox2").is(":checked") == false){
+			$("#checkbox1").prop("checked", false)
+		}
+	});
+	
+	//회원가입 버튼 클릭시 체크하도록
+	$("#checkbox3").on("click",function(){
+		if($("#checkbox3").is(":checked") == false){
+			$("#checkbox1").prop("checked", false)
+		}
+	});
 
 	$("#join_btn").on("click", function(){
+		
+		$.ajax({
+			url : "/member/emailCheck",
+			type : "post",
+			dataType : "json",
+			////data : {"userid" : $("#userid").val()},
+			data : {"member_email" : $("#member_email").val()},
+			success : function(data){
+				//alert("Return Value : " + data);
+				if(data == false) {
+					alert("중복된 이메일입니다.");
+					$("#member_email").focus();
+					return false;
+				} 			
+			}
+			, error : function(data){
+				console.log(data);	
+			}
+		})
 		
 		if($("#checkbox2").is(":checked") == false){
 			alert("이용약관을 체크를 해주세요.");
@@ -264,6 +431,17 @@ $(document).ready(function(){
 			$("#member_pw").focus();
 			return false;
 		}
+		
+		//패스워드 암호 생성식
+		var reg = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&-]).{8,16}$/;		
+		var password = $("#member_pw").val();
+		if(!reg.test(password)){
+			alert("(영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)-비밀번호 설정시 특수문자 *은 제외하세요");
+			$("#member_pw").focus();
+			return false;
+		}
+		
+		
 		if($("#member_pw_confirm").val()!=$("#member_pw").val()){
 			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 			$("#member_pw_confirm").focus();
@@ -289,11 +467,31 @@ $(document).ready(function(){
 			$("#member_addr2").focus();
 			return false;
 		}
+		
+		if($("#mobile2").val()==""){
+			alert("핸드폰번호를 입력해주세요.");
+			$("#mobile2").focus();
+			return false;
+		}
+		if($("#mobile3").val()==""){
+			alert("핸드폰번호를 입력해주세요.");
+			$("#mobile2").focus();
+			return false;
+		}
+				
 		if($("#member_email").val()==""){
 			alert("이메일 주소를 입력해주세요.");
 			$("#member_email").focus();
 			return false;
 		}
+		
+		if($("#datepicker").val()==""){
+			alert("생일을 입력해주세요.");
+			$("#datepicker").focus();
+			return false;
+		}
+		
+		
 
 		var f = document.joinForm;
 		f.action = "/member/joinForm";
@@ -301,6 +499,7 @@ $(document).ready(function(){
 	});
 })
 
+//아이디 중복검사 함수
 function fn_idCheck() {
 	//alert("중복확인");
 	$.ajax({
@@ -326,6 +525,7 @@ function fn_idCheck() {
 	})
 }
 
+//달력관련
 $(function() {
     $("#datepicker").datepicker({
         //옵션들 생략//
@@ -356,6 +556,7 @@ $.datepicker.setDefaults({
 	// buttonText: "Select date"	// 조그만한 아이콘 툴팁
 });
 
+//우편번호 검색관련
 function daumZipCode() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -396,6 +597,14 @@ function daumZipCode() {
 			document.getElementById('member_addr2').focus();
 		}
 	}).open();
+}
+
+
+//maxLength 체크 함수
+function maxLengthCheck(object) {
+	if (object.value.length > object.maxLength) {
+	    object.value = object.value.slice(0, object.maxLength);
+	}    
 }
 </script>
 
