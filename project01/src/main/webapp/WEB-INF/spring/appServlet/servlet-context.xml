@@ -25,7 +25,7 @@
 	
 	<!-- 업로드 패스 설정 --> 
 	<beans:bean class="java.lang.String" id="uploadPath">		
-		<beans:constructor-arg value="D:\workspaceSpring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\project01\resources"/>											
+		<beans:constructor-arg value="D:\gitProject\First_Project\project01\src\main\webapp\resources"/>											
 	</beans:bean>	
 	
 	<!-- 일반 파일 업로드 경로 -->
