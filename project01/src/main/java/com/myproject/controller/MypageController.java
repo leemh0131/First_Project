@@ -22,6 +22,7 @@ import com.myproject.domain.MemberDateVO;
 import com.myproject.domain.MemberVO;
 import com.myproject.domain.TestBean;
 import com.myproject.domain.orderVO;
+import com.myproject.domain.productVO;
 import com.myproject.service.MemberService;
 import com.myproject.service.MypageService;
 import com.myproject.utils.ScriptUtils;
@@ -55,6 +56,7 @@ public class MypageController {
 		return "redirect:/mypage/main";
 	}
 	*/
+	
 	
 	//찜 목록 보기
 	@RequestMapping(value="/likey", method=RequestMethod.GET)

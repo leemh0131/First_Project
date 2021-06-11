@@ -1,6 +1,5 @@
 package com.myproject.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myproject.domain.LikeyVO;
 import com.myproject.domain.MemberVO;
 import com.myproject.domain.productVO;
 import com.myproject.domain.board.reviewVO;
+import com.myproject.service.MypageService;
 import com.myproject.service.productService;
 import com.myproject.service.board.reviewService;
 
@@ -35,6 +36,10 @@ public class productsController {
 	
 	@Inject
 	private reviewService reviewService;
+	
+	@Inject
+	private MypageService MypageService;	
+	
 
 	// 리스트화면
 	@RequestMapping(value = "/productList", method = {RequestMethod.GET, RequestMethod.POST})
@@ -53,8 +58,8 @@ public class productsController {
 		
 		model.addAttribute("productList", list);
 		//System.out.println("model => " + model);
-	}	
-
+	}
+	
 	// 상품등록 get
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.GET)
 	public void insertProductGET(productVO vo, Model model) throws Exception {
@@ -131,5 +136,21 @@ public class productsController {
 		productService.productLike(product_code);
 		return Integer.toString(productService.productLikeCount(product_code));
 	}
+	
+	// 찜 get
+	@RequestMapping(value = "/likeyInsert", method = RequestMethod.GET)
+	public void likeyInsertGET(@RequestParam("product_code") int product_code, Model model, LikeyVO vo) throws Exception {		
+		model.addAttribute("product_code", product_code);
+		logger.info("likeyInsert => " + product_code);		
+		MypageService.likeyInsert(vo);
+	}
+
+	// 찜 post
+	/*
+	 * @RequestMapping(value = "/likeyInsert", method = RequestMethod.POST) public
+	 * String likeyInsertPOST(LikeyVO vo, productVO voo) throws Exception {
+	 * logger.info("likeyInsert-->" + vo); MypageService.likeyInsert(vo); return
+	 * "redirect:/products/productView?Product_code=" + voo.getProduct_code(); }
+	 */
 
 }

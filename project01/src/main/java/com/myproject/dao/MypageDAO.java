@@ -8,8 +8,15 @@ import com.myproject.domain.LikeyVO;
 import com.myproject.domain.MemberDateVO;
 import com.myproject.domain.TestBean;
 import com.myproject.domain.orderVO;
+import com.myproject.domain.productVO;
 
 public interface MypageDAO {
+	
+	//찜목록 추가
+	public int likeyInsert(LikeyVO likeyVO) throws Exception;
+	
+	//장바구니 추가
+	//public void basketInsert(LikeyVO likeyVO) throws Exception;
 	
 	//찜목록 보기
 	public List<LikeyVO> likeyList(LikeyVO likeyVO) throws Exception;

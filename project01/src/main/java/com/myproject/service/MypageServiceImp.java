@@ -27,7 +27,6 @@ public class MypageServiceImp implements MypageService {
 	private MypageDAO mypageDAO;
 	
 	//찜 목록
-
 	@Override
 	public List<LikeyVO> likeyList(LikeyVO likeyVO) throws Exception {
 		logger.info("MypageService => likeyList 가 일한다.🔥🔥🔥");
@@ -86,6 +85,13 @@ public class MypageServiceImp implements MypageService {
 	public TestBean ordersDetailView(orderVO orderVO) throws Exception {
 		logger.info("mypageService => ordersDetailView");
 		return mypageDAO.ordersDetailView(orderVO);
+	}
+
+	//장바구니 추가
+	@Override
+	public int likeyInsert(LikeyVO likeyVO) throws Exception {
+		logger.info("mypageService => likeyInsert");
+		return mypageDAO.likeyInsert(likeyVO);
 	}
 	
 	

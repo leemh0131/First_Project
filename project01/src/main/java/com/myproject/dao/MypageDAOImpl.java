@@ -90,6 +90,13 @@ private static final Logger logger = LoggerFactory.getLogger(MypageController.cl
 		logger.info("mypageDAO => orderDetailView");
 		return sqlSession.selectOne(namespace + ".ordersDetailView", orderVO);
 	}
+
+	//장바구니추가
+	@Override
+	public int likeyInsert(LikeyVO likeyVO) throws Exception {
+		logger.info("mypageDAO => likeyInsert");
+		return sqlSession.insert(namespace + ".likeyInsert", likeyVO);
+	}
 	
 	/*
 	 * selectList : 쿼리 결과를 List<E>로 반환

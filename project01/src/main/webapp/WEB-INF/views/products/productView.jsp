@@ -106,6 +106,7 @@
 <body>
 <br><br><br><br><br><br><br><br>
 <div class="container">	
+<input type="hidden" id="member_code" value="${member.member_code}">
 <!-- 메인메뉴 -->
 <nav id="menu" class="woocommerce-breadcrumb"><a href="/">Home</a> / <a href='/products/productList?product_type=${productView.product_type}'>${productView.product_type_name}</a> / ${productView.product_name}</nav>
 <br>
@@ -155,7 +156,7 @@
 				<div class="row">
 					
 					<!-- 구매하기 -->
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div id="btn3" class="btn1">
 						<c:if test="${productView.product_count > 0}">
 						<a href='/order/order?product_code=${productView.product_code}'><button type="button" id="Buy" onclick="ck()" class="btn1 btn-outline-dark btn-lg">
@@ -174,18 +175,28 @@
 					</div>				
 							
 					<!-- 장바구니담기 -->	
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="btn1">
 						<a href="#"><button type="button" id="Cart" class="btn1 btn-outline-dark btn-lg">
 							<i class="fa fa-shopping-cart fa-lg pt-1"></i>&nbsp;Cart
 						</button>
 						</a>
 						</div>
-					</div>							
+					</div>
+					
+					<!-- 찜하기 -->	
+					<div class="col-md-3">
+						<div class="btn1">
+						<a href="#"><button type="button" onclick="Ins(${productView.product_code})" id="Like" class="btn1 btn-outline-dark btn-lg">
+							<i class="fa fa-shopping-cart fa-lg pt-1"></i>&nbsp;Like
+						</button>						
+						</a>
+						</div>
+					</div>								
 					
 					<!-- 좋아요 -->
 					<c:if test="${!empty member.mlevel}">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div  class="btn1">
 						<button style="height: 45px;" onclick="like(${productView.product_code})" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
 						<i class="fa fa-heart"></i>
@@ -196,7 +207,7 @@
 					
 					<!-- 로그인 후 좋아요 가능 -->
 					<c:if test="${empty member.mlevel}">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div  class="btn1">
 						<button style="height: 45px;" onclick="logoutlike()" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
 						<i class="fa fa-heart"></i>
@@ -354,6 +365,25 @@
 <br><br><br>
 
 <script type="text/javascript">
+
+//멤버코드
+var member = document.getElementById("member_code").value;
+//찜하기
+function Ins(product_code) {	
+	var chk = confirm("정말 찜하시겠습니까?");
+	if (member == null || member == "" || member == 0){
+		alert("로그인 후 가능합니다.")
+	} else {
+		if (chk) {
+			location.href='likeyInsert?product_code='+product_code;	
+			//location.href='productView?product_code='+product_code;
+		}
+	}
+	
+	
+	
+}
+
 //쿠키사용
 var setCookie = function(name, value, exp) {
 var date = new Date();
