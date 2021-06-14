@@ -237,6 +237,8 @@ public class MypageController {
 		//세션에서 받아온 member_code
 		int member_code = memberVO.getMember_code();
 		
+		System.out.println("zzzzzzzzzzzzz"+member_code);
+		
 		if(memberVO != null) { //세션이 붙어있는상태
 			orderVO.setMember_code(member_code);
 			orderVO.setOrder_code(order_code);
@@ -263,7 +265,7 @@ public class MypageController {
 	
 	//회원정보 수정을 위한 비밀번호post
 	@RequestMapping(value="/password", method=RequestMethod.POST)
-	public int postInputPassword(MemberVO paramMVO, Model model, HttpServletResponse rep, HttpServletRequest req) throws Exception {
+	public int postInputPassword(MemberVO MemberVO, Model model, HttpServletResponse rep, HttpServletRequest req) throws Exception {
 		
 		//로그인세션가져오기
 		HttpSession session = req.getSession();
@@ -276,11 +278,11 @@ public class MypageController {
 		
 		//테스트용
 		logger.info("member_id = " + member_id);
-		logger.info("member_pw = " + paramMVO.getMember_pw());
+		logger.info("member_pw = " + MemberVO.getMember_pw());
 		
 		if(memberVO != null) { //세션이 붙어있는상태
-			paramMVO.setMember_id(member_id);  				// 현재 세션에 있는 회원 id 설정하여 
-			MemberVO result = memberService.login(paramMVO);//서비스에 메소드에 매개변수로 전달.
+			MemberVO.setMember_id(member_id);  				// 현재 세션에 있는 회원 id 설정하여 
+			MemberVO result = memberService.login(MemberVO);//서비스에 메소드에 매개변수로 전달.
 			
 			if(result == null) { //해당되는 회원이 없을때
 				//logger.info("없음");

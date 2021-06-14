@@ -71,8 +71,7 @@
 		<id property="total_price" column="total_price"/>
 		<id property="order_status" column="order_status"/>
 		<id property="order_date" column="order_date"/>
-		<id property="reciever" column="reciever"/>
-		<id property="roadFullAddr" column="roadFullAddr"/>
+		<id property="delivery_name" column="delivery_name"/>
 		<id property="delivery_tel" column="delivery_tel"/>
 	</resultMap>
 	
@@ -177,15 +176,15 @@
 	
 	<!-- 주문목록 상세 보기 -->
 	<select id="ordersDetailView" parameterType="orderVO" resultMap="TestBeanMap">		
-		SELECT p.img_view, o.member_name, p.product_name, o.order_code, o.product_code, o.order_count, o.total_price, o.order_status, o.order_date, o.reciever, o.roadFullAddr, o.delivery_tel
-		FROM (SELECT o.order_code, o.member_code, o.product_code, o.order_count, o.total_price, o.order_status, o.order_date, o.reciever, o.roadFullAddr, o.delivery_tel, c.member_name
-			  FROM customers c 
+		SELECT p.img_view, o.member_name, p.product_name, o.order_code, o.product_code, o.order_count, o.total_price, o.order_status, o.order_date, o.roadFullAddr, o.delivery_tel, o.delivery_name
+		FROM (SELECT o.order_code, o.member_code, o.product_code, o.order_count, o.total_price, o.order_status, o.delivery_name, o.order_date, o.roadFullAddr, o.delivery_tel, c.member_name
+			  FROM member c 
 			  JOIN orders o
 			  ON o.member_code = c.member_code
 			  WHERE c.member_code = #{member_code}) o
 		JOIN products p
 		ON o.product_code = p.product_code
-		WHERE o.member_code= 100001
+		WHERE o.member_code= #{member_code}
 		AND o.order_code = #{order_code};
 	</select>
 	

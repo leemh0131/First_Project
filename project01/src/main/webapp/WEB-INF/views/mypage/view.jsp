@@ -86,7 +86,7 @@
                 <tbody>
                     <tr>
                         <th scope="row"><div class="">수취인</div></th>
-                        <td><div class="">${orderDetailview.orders.reciever}</div></td>
+                        <td><div class="">${orderDetailview.orders.delivery_name}</div></td>
                         <th scope="row"><div class="">연락처</div></th>
                         <td><!-- ${orderDetailview.orders.delivery_tel}-->010-0000-0000</td> <!-- 임시 -->
                     </tr>

@@ -33,12 +33,13 @@
 		
 				<label class="password">비밀번호를 다시 입력해주세요.</label>
 				
-				<div class="col-sm-2">
-					<input type="password" id="input_pw_txtbox" name="member_pw" placeholder="password"/>
-				</div>
-				
-				<div class="col-sm-2">
-					<button id="btn_ok" class="btn btn-dark btn-sm" type="submit">OK</button>
+				<div class="row">				
+					<div class="col-sm-2">
+						<input type="password" id="input_pw_txtbox" name="member_pw" placeholder="password"/>
+					</div>					
+					<div class="col-sm-1">
+						<button id="btn_ok" class="btn btn-dark btn-sm" type="submit">OK</button>
+					</div>
 				</div>
 				
 				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -64,8 +65,6 @@
 </body>
 <%@ include file="../include/footer.jsp" %>
 
-<script src="../../../resources/js/jquery-3.6.0.min.js"></script>
-<script src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
 	

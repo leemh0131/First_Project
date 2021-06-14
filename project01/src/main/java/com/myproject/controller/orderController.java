@@ -96,7 +96,7 @@ public class orderController {
 	
 			MemberVO member = (MemberVO)session.getAttribute("member");
 			int member_code = member.getMember_code();
-			System.out.println(member_code);
+			System.out.println("fffff =>" + member_code);
 			
 			orderVO orderVO = new orderVO();
 			orderVO.setMember_code(member_code);

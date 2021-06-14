@@ -55,14 +55,14 @@
 	
 	<!-- 회원 비밀번호 변경 -->
 	<update id="updatePwMember" parameterType="MemberVO">
-		UPDATE customers
+		UPDATE member
 		SET member_pw = #{member_pw}
 		WHERE member_code = #{member_code}	
 	</update>
 	
 	<!-- 회원 정보 수정(비밀번호 외의 것) -->
 	<update id="updateMember" parameterType="MemberVO">
-		UPDATE customers
+		UPDATE member
 		SET member_name = #{member_name},
 			member_addr = #{member_addr},
 			member_email= #{member_email},
