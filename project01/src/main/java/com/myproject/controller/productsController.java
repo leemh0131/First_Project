@@ -77,7 +77,8 @@ public class productsController {
 
 	// 상품상세보기
 	@RequestMapping(value = "/productView", method = RequestMethod.GET)
-	public void productView(@RequestParam("product_code") int product_code, HttpServletRequest req, Model model) throws Exception {
+	public void productView(@RequestParam("product_code") int product_code,
+	HttpServletRequest req, Model model, LikeyVO vo) throws Exception {
 		logger.info("getView() GET");
 		
 		//로그인세션가져오기		  
@@ -122,11 +123,33 @@ public class productsController {
 		return "redirect:/products/productList?product_type=" + vo.getProduct_type();
 	}
 	
-	// 게시글 삭제 GET	
+	// 삭제 GET	
 	@RequestMapping(value = "deleteProduct", method = RequestMethod.GET)
 	public String deleteProduct(@RequestParam("product_code")int product_code) throws Exception {
 		productService.deleteProduct(product_code);
-		return "redirect:/products/productListBest";
+		return "redirect:/";
+	}
+	
+	// 찜 GET	
+	@RequestMapping(value = "likeyInsert", method = RequestMethod.GET)
+	public String likeyInsert(Model model, HttpServletRequest req, LikeyVO likeyVO,
+			@RequestParam("product_code")int product_code) throws Exception {
+		
+		//로그인세션가져오기		  
+		HttpSession session = req.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member"); //memberVO는 세션
+		model.addAttribute("member", memberVO);
+		
+		int member_code = memberVO.getMember_code();
+		
+		if(memberVO != null) { //로그인일때
+			//likeyVO에 세션 member_code를 부여.
+			likeyVO.setMember_code(member_code);
+			likeyVO.setProduct_code(product_code);
+			MypageService.likeyInsert(likeyVO);	
+			
+		}
+		return "redirect:/products/productView?product_code="+product_code;
 	}
 	
 	// 좋아요	ajax사용 수정필요..
@@ -137,20 +160,6 @@ public class productsController {
 		return Integer.toString(productService.productLikeCount(product_code));
 	}
 	
-	// 찜 get
-	@RequestMapping(value = "/likeyInsert", method = RequestMethod.GET)
-	public void likeyInsertGET(@RequestParam("product_code") int product_code, Model model, LikeyVO vo) throws Exception {		
-		model.addAttribute("product_code", product_code);
-		logger.info("likeyInsert => " + product_code);		
-		MypageService.likeyInsert(vo);
-	}
 
-	// 찜 post
-	/*
-	 * @RequestMapping(value = "/likeyInsert", method = RequestMethod.POST) public
-	 * String likeyInsertPOST(LikeyVO vo, productVO voo) throws Exception {
-	 * logger.info("likeyInsert-->" + vo); MypageService.likeyInsert(vo); return
-	 * "redirect:/products/productView?Product_code=" + voo.getProduct_code(); }
-	 */
 
 }

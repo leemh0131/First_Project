@@ -13,7 +13,7 @@ import com.myproject.domain.productVO;
 public interface MypageDAO {
 	
 	//찜목록 추가
-	public int likeyInsert(LikeyVO likeyVO) throws Exception;
+	public void likeyInsert(LikeyVO likeyVO) throws Exception;
 	
 	//장바구니 추가
 	//public void basketInsert(LikeyVO likeyVO) throws Exception;

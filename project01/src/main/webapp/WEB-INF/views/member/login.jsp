@@ -76,18 +76,18 @@ $(document).ready(function(){
 		location.href="/";
 	})
 	
-	//로그인 버튼을 눌렀을 때
+	//로그인 버튼을 눌렀을 때 (임시)
 	$("#submit").on("click",function(){
 		if($("#member_id").val()==""){
 			alert("아이디를 입력해주세요.");
 			$("#member_id").focus();
 			return false;
-		}
-		if($("#member_pw").val()==""){
+		} else if($("#member_pw").val()==""){
 			alert("비밀번호를 입력해주세요.");
 			$("#member_pw").focus();
 			return false;
 		}
+		
 		// 로그인 아이디 저장버튼을 위해
 		$.ajax({
 			url : "/member/login",

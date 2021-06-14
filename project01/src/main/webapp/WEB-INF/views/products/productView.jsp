@@ -42,7 +42,7 @@
 	width: 100%;
 	}
 	
-	#Cart, #Buy, #like, #update{
+	#Cart, #Buy, #Like, #update, #productLike{
 	font-size: 17px;
 	font-family: sans-serif;
 	width: 100%;
@@ -106,7 +106,7 @@
 <body>
 <br><br><br><br><br><br><br><br>
 <div class="container">	
-<input type="hidden" id="member_code" value="${member.member_code}">
+<input type="hidden" name="member_code" id="member_code" value="${member.member_code}">
 <!-- 메인메뉴 -->
 <nav id="menu" class="woocommerce-breadcrumb"><a href="/">Home</a> / <a href='/products/productList?product_type=${productView.product_type}'>${productView.product_type_name}</a> / ${productView.product_name}</nav>
 <br>
@@ -188,7 +188,7 @@
 					<div class="col-md-3">
 						<div class="btn1">
 						<a href="#"><button type="button" onclick="Ins(${productView.product_code})" id="Like" class="btn1 btn-outline-dark btn-lg">
-							<i class="fa fa-shopping-cart fa-lg pt-1"></i>&nbsp;Like
+							<i class="fa fa-calendar-check-o"></i>&nbsp;Like
 						</button>						
 						</a>
 						</div>
@@ -198,9 +198,9 @@
 					<c:if test="${!empty member.mlevel}">
 					<div class="col-md-3">
 						<div  class="btn1">
-						<button style="height: 45px;" onclick="like(${productView.product_code})" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
+						<button onclick="like(${productView.product_code})" type="button" id="productLike" class="btn1 btn-outline-dark btn-lg">
 						<i class="fa fa-heart"></i>
-						<span style="font-size: 16px; font-family: sans-serif;" id="likeResult">&nbsp;${productView.product_like}</span></button>
+						<span id="likeResult">&nbsp;${productView.product_like}</span></button>
 						</div>
 					</div>						
 					</c:if>
@@ -368,15 +368,16 @@
 
 //멤버코드
 var member = document.getElementById("member_code").value;
+
 //찜하기
 function Ins(product_code) {	
 	var chk = confirm("정말 찜하시겠습니까?");
 	if (member == null || member == "" || member == 0){
-		alert("로그인 후 가능합니다.")
+		alert("로그인 후 가능합니다.");
 	} else {
 		if (chk) {
-			location.href='likeyInsert?product_code='+product_code;	
-			//location.href='productView?product_code='+product_code;
+			location.href='likeyInsert?product_code=' + product_code;	
+			alert("찜하기 완료 \n마이페이지에서 확인할 수 있습니다.");
 		}
 	}
 	
@@ -462,6 +463,7 @@ function like(product_code) {
 		        type : 'post',
 		        data : {'product_code': product_code},
 		        success : function(data){
+		        	
 		        	document.getElementById("likeResult").innerText = " " + data;
 		        }
 		    });

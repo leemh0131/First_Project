@@ -87,11 +87,11 @@ public class MypageServiceImp implements MypageService {
 		return mypageDAO.ordersDetailView(orderVO);
 	}
 
-	//장바구니 추가
+	//찜 추가
 	@Override
-	public int likeyInsert(LikeyVO likeyVO) throws Exception {
+	public void likeyInsert(LikeyVO likeyVO) throws Exception {
 		logger.info("mypageService => likeyInsert");
-		return mypageDAO.likeyInsert(likeyVO);
+		mypageDAO.likeyInsert(likeyVO);
 	}
 	
 	

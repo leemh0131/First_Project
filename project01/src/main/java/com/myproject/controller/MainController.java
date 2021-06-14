@@ -1,8 +1,5 @@
 package com.myproject.controller;
 
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,7 +41,7 @@ public class MainController {
 	}	
 			
 	
-	//로그인
+	//로그인세션
 	@RequestMapping(value="/include/header", method=RequestMethod.POST) 
 	public void headerlogin(Model model, HttpServletRequest req) throws Exception {		  
 		//로그인세션가져오기		  

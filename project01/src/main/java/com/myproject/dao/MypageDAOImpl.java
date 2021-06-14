@@ -91,11 +91,11 @@ private static final Logger logger = LoggerFactory.getLogger(MypageController.cl
 		return sqlSession.selectOne(namespace + ".ordersDetailView", orderVO);
 	}
 
-	//장바구니추가
+	//찜추가
 	@Override
-	public int likeyInsert(LikeyVO likeyVO) throws Exception {
-		logger.info("mypageDAO => likeyInsert");
-		return sqlSession.insert(namespace + ".likeyInsert", likeyVO);
+	public void likeyInsert(LikeyVO likeyVO) throws Exception {
+		logger.info("mypageDAO => likeyInsert");		
+		sqlSession.insert(namespace + ".likeyInsert", likeyVO);;
 	}
 	
 	/*

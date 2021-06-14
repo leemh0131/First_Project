@@ -14,11 +14,10 @@ import com.myproject.domain.orderVO;
 public interface MypageService {
 	
 	//찜목록 추가
-	public int likeyInsert(LikeyVO likeyVO) throws Exception;
+	public void likeyInsert(LikeyVO likeyVO) throws Exception;
 	
 	//장바구니 추가
-	//public void basketInsert(LikeyVO likeyVO) throws Exception;
-		
+	//public void basketInsert(LikeyVO likeyVO) throws Exception;		
 	
 	//찜 목록 보기
 	public List<LikeyVO> likeyList(LikeyVO likeyVO) throws Exception;
