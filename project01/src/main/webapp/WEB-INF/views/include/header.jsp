@@ -121,11 +121,14 @@ font-size: 17px;
              	<span class="text-dark">${member.member_name}&nbsp;님</span> 
             </a>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
-	            <a class="dropdown-item" href="${path}/mypage">마이페이지</a>
+	              <a class="dropdown-item" href="${path}/mypage">마이페이지</a>
+	            <a class="dropdown-item" href="${path}/member/memberUpdate">회원정보 수정</a>
+	            <%-- <a class="dropdown-item" href="${path}/member/pwChange">비밀번호 변경</a> --%>
+	            <a class="dropdown-item" onclick="layerPopup();" href="#none">비밀번호 변경</a>
 	            <a class="dropdown-item" href="${path}/board/boardList">공지사항</a>
 	            <a class="dropdown-item" href="${path}/question/questionList">문의하기</a>	           
 	            <a class="dropdown-item" href="${path}/order/MemberOrdList">주문조회</a>
-	            <a class="dropdown-item" onclick="log_out()" href="${path}/member/logout">로그아웃</a>
+	            <a class="dropdown-item" onclick="log_out()" href="javascript:void(0);">로그아웃</a>
             </div>
          </li>
         </ul>
@@ -173,6 +176,12 @@ function not_loginQnA() {
 //로그아웃
 function log_out(){	
 	alert("로그아웃했습니다.");  
+}
+
+//비번변경
+function layerPopup(){
+	var url = "/member/pwChange"
+	window.open(url, "비밀번호 변경", "top=50%, left=50%, width=800, height=350, scrollbars=yes, resizable=no");	
 }
 
 //공백체크

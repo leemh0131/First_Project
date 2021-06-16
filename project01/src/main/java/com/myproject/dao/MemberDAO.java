@@ -10,7 +10,7 @@ public interface MemberDAO {
 	//회원가입
 	public int join(MemberVO memverVO) throws Exception;
 	
-	//회원정보 업데이트
+	//회원정보 수정 (로그인 후 헤더메뉴에서 회원정보 수정메뉴)
 	public int memberUpdate(MemberVO memberVO) throws Exception;
 	
 	//회원정보 삭제
@@ -27,7 +27,15 @@ public interface MemberDAO {
 
 	//회원 정보 수정(비밀번호 외의 것)
 	public int updateMember(MemberVO memberVO) throws Exception;
-
+	
+	//패스워드 변경주기 체크
+	public int pwChangeCheck(String member_id) throws Exception;
+	
+	//비밀번호 변경
+	public int pwChange(MemberVO memberVO) throws Exception;
+	
+	//비밀번호 체크
+	public int pwCheck(MemberVO memberVO) throws Exception;
 	
 
 }

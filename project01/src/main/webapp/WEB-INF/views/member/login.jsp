@@ -28,13 +28,13 @@
 			<div class="mlogin">
 				<h2>회원 로그인</h2><br>
 				<label class="id"> 
-					<span class="col-sm-4"> 아 이 디</span> 
-					<input class="col-sm-8" id="member_id" name="member_id" maxlength="16" type="text">
+					<span class="col-sm-4" style="padding-left:21px !important">아 이 디</span> 
+					<input class="col-sm-8" id="member_id" name="member_id" maxlength="16" type="text" style="width:205px !important; max-width:250px !important">
 				</label> 
 				<br>
 				<label class="password"> 
 					<span class="col-sm-4">패스워드</span> 
-					<input class="col-sm-8" id="member_pw" name="member_pw" maxlength="16" type="password">
+					<input class="col-sm-8" id="member_pw" name="member_pw" maxlength="16" type="password" style="width:205px !important; max-width:250px !important">
 				</label>
 				<p class="security">
 					<input id="member_check_save_id" name="member_check_save_id" type="checkbox"> 
@@ -76,18 +76,20 @@ $(document).ready(function(){
 		location.href="/";
 	})
 	
-	//로그인 버튼을 눌렀을 때 (임시)
-	$("#submit").on("click",function(){
+	//로그인 버튼을 눌렀을 때
+	$("#submit").on("click",function(){	
+		
+		
 		if($("#member_id").val()==""){
 			alert("아이디를 입력해주세요.");
 			$("#member_id").focus();
 			return false;
-		} else if($("#member_pw").val()==""){
+		}
+		if($("#member_pw").val()==""){
 			alert("비밀번호를 입력해주세요.");
 			$("#member_pw").focus();
 			return false;
 		}
-		
 		// 로그인 아이디 저장버튼을 위해
 		$.ajax({
 			url : "/member/login",
@@ -100,7 +102,11 @@ $(document).ready(function(){
 				if(data == "N") {
 					alert("로그인 정보를 확인해주세요.");
 				}
-				else if(data == "Y") {
+				else if(data == "Y1" || data == "Y2") {	
+					
+					if(data == "Y2"){
+						alert("비밀번호 변경주기가 지났습니다. 비밀번호를 변경해주세요..");
+					}
 					
 					var set_id = $("#member_id").val();
 					
@@ -114,9 +120,13 @@ $(document).ready(function(){
 				}
 			}
 			, error : function(data){
+				alert("로그인 에러");
 				console.log(data);	
 			}
-		})	
+		})
+		
+		
+		
 	});	
 	
 	var cookies = getPopCookie("auto_id");

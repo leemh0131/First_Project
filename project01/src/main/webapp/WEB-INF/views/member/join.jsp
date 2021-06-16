@@ -208,7 +208,7 @@
 							<tr>
 								<th scope="row">휴대전화</th>
 							 	<td>
-							 		<select id="mobile1" name="mobile1">
+							 		<select class="col-sm-1" id="mobile1" name="mobile1">
 							 			<option value="010">010</option>
 							 			<option value="011">011</option>
 							 			<option value="016">016</option>
@@ -378,20 +378,20 @@ $(document).ready(function(){
 		}
 	});
 	
-	//회원가입 버튼 클릭시 체크하도록
+	
 	$("#checkbox3").on("click",function(){
 		if($("#checkbox3").is(":checked") == false){
 			$("#checkbox1").prop("checked", false)
 		}
 	});
-
-	$("#join_btn").on("click", function(){
+	
+	//회원가입 버튼 클릭시 체크하도록
+	$("#join_btn").on("click", function(){		
 		
 		$.ajax({
 			url : "/member/emailCheck",
 			type : "post",
-			dataType : "json",
-			////data : {"userid" : $("#userid").val()},
+			dataType : "json",			
 			data : {"member_email" : $("#member_email").val()},
 			success : function(data){
 				//alert("Return Value : " + data);
@@ -399,6 +399,100 @@ $(document).ready(function(){
 					alert("중복된 이메일입니다.");
 					$("#member_email").focus();
 					return false;
+				}else{
+
+					
+					if($("#checkbox2").is(":checked") == false){
+						alert("이용약관을 체크를 해주세요.");
+						return false;
+					}
+					
+					if($("#checkbox3").is(":checked") == false){
+						alert("개인정보 수집동의를 체크를 해주세요.");
+						return false;
+					}
+					
+					if($("#member_checked").val() != "0"){
+						alert("아이디 중복 체크를 해주세요.");
+						return false;
+					}
+					
+					if($("#member_id").val()==""){
+						alert("아이디를 입력해주세요.");
+						$("#member_id").focus();
+						return false;
+					}
+					if($("#member_pw").val()==""){
+						alert("비밀번호를 입력해주세요.");
+						$("#member_pw").focus();
+						return false;
+					}
+					
+					//패스워드 암호 생성식
+					var reg = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&-]).{8,16}$/;		
+					var password = $("#member_pw").val();
+					if(!reg.test(password)){
+						alert("(영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)-비밀번호 설정시 특수문자 *은 제외하세요");
+						$("#member_pw").focus();
+						return false;
+					}
+					
+					
+					if($("#member_pw_confirm").val()!=$("#member_pw").val()){
+						alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+						$("#member_pw_confirm").focus();
+						return false;
+					}
+					if($("#member_pw_confirm").val()==""){
+						alert("비밀번호 확인란을 입력해주세요.");
+						$("#member_pw_confirm").focus();
+						return false;
+					}
+					if($("#member_name").val()==""){
+						alert("성명을 입력해주세요.");
+						$("#member_name").focus();
+						return false;
+					}
+					if($("#post_no").val()==""){
+						alert("우편번호를 입력해주세요.");
+						$("#post_no").focus();
+						return false;
+					}
+					if($("#member_addr2").val()==""){
+						alert("나머지 주소를 입력해주세요.");
+						$("#member_addr2").focus();
+						return false;
+					}
+					
+					if($("#mobile2").val()==""){
+						alert("핸드폰번호를 입력해주세요.");
+						$("#mobile2").focus();
+						return false;
+					}
+					if($("#mobile3").val()==""){
+						alert("핸드폰번호를 입력해주세요.");
+						$("#mobile2").focus();
+						return false;
+					}
+							
+					if($("#member_email").val()==""){
+						alert("이메일 주소를 입력해주세요.");
+						$("#member_email").focus();
+						return false;
+					}
+					
+					if($("#datepicker").val()==""){
+						alert("생일을 입력해주세요.");
+						$("#datepicker").focus();
+						return false;
+					}
+					
+					
+
+					var f = document.joinForm;
+					f.action = "/member/joinForm";
+					f.submit();
+										
 				} 			
 			}
 			, error : function(data){
@@ -406,96 +500,7 @@ $(document).ready(function(){
 			}
 		})
 		
-		if($("#checkbox2").is(":checked") == false){
-			alert("이용약관을 체크를 해주세요.");
-			return false;
-		}
 		
-		if($("#checkbox3").is(":checked") == false){
-			alert("개인정보 수집동의를 체크를 해주세요.");
-			return false;
-		}
-		
-		if($("#member_checked").val() != "0"){
-			alert("아이디 중복 체크를 해주세요.");
-			return false;
-		}
-		
-		if($("#member_id").val()==""){
-			alert("아이디를 입력해주세요.");
-			$("#member_id").focus();
-			return false;
-		}
-		if($("#member_pw").val()==""){
-			alert("비밀번호를 입력해주세요.");
-			$("#member_pw").focus();
-			return false;
-		}
-		
-		//패스워드 암호 생성식
-		var reg = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&-]).{8,16}$/;		
-		var password = $("#member_pw").val();
-		if(!reg.test(password)){
-			alert("(영문 대소문자/숫자/특수문자 중 3가지 이상 조합, 8자~16자)-비밀번호 설정시 특수문자 *은 제외하세요");
-			$("#member_pw").focus();
-			return false;
-		}
-		
-		
-		if($("#member_pw_confirm").val()!=$("#member_pw").val()){
-			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-			$("#member_pw_confirm").focus();
-			return false;
-		}
-		if($("#member_pw_confirm").val()==""){
-			alert("비밀번호 확인란을 입력해주세요.");
-			$("#member_pw_confirm").focus();
-			return false;
-		}
-		if($("#member_name").val()==""){
-			alert("성명을 입력해주세요.");
-			$("#member_name").focus();
-			return false;
-		}
-		if($("#post_no").val()==""){
-			alert("우편번호를 입력해주세요.");
-			$("#post_no").focus();
-			return false;
-		}
-		if($("#member_addr2").val()==""){
-			alert("나머지 주소를 입력해주세요.");
-			$("#member_addr2").focus();
-			return false;
-		}
-		
-		if($("#mobile2").val()==""){
-			alert("핸드폰번호를 입력해주세요.");
-			$("#mobile2").focus();
-			return false;
-		}
-		if($("#mobile3").val()==""){
-			alert("핸드폰번호를 입력해주세요.");
-			$("#mobile2").focus();
-			return false;
-		}
-				
-		if($("#member_email").val()==""){
-			alert("이메일 주소를 입력해주세요.");
-			$("#member_email").focus();
-			return false;
-		}
-		
-		if($("#datepicker").val()==""){
-			alert("생일을 입력해주세요.");
-			$("#datepicker").focus();
-			return false;
-		}
-		
-		
-
-		var f = document.joinForm;
-		f.action = "/member/joinForm";
-		f.submit();
 	});
 })
 
@@ -596,7 +601,9 @@ function daumZipCode() {
 			//커서를 상세주소 입력필드로 이동시킨다.
 			document.getElementById('member_addr2').focus();
 		}
-	}).open();
+	}).open({
+		popupName : 'postPopup'		
+	});
 }
 
 

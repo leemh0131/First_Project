@@ -32,10 +32,12 @@ public class MemberDAOimpl implements MemberDAO {
 		return sqlSession.insert(namespace + ".join", memverVO);
 	}
 
+	//회원정보 수정 (로그인 후 헤더메뉴에서 회원정보 수정메뉴)
 	@Override
 	public int memberUpdate(MemberVO memberVO) throws Exception {
+		log.info("memberDAOimpl memberUpdate....");
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(namespace+".update", memberVO);
 	}
 	
 	//회원 비밀번호 변경
@@ -77,10 +79,11 @@ public class MemberDAOimpl implements MemberDAO {
 		
 		}
 
+	//회원 탈퇴
 	@Override
 	public int memberDelete(MemberVO memberVO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(namespace+".memberDelete", memberVO);
 	}
 
 	//중복체크
@@ -94,9 +97,34 @@ public class MemberDAOimpl implements MemberDAO {
 	@Override
 	public boolean emailCheck(String member_email) throws Exception {
 		log.info("MemberDAOimpl idCheck.....");
-		String memberEmail = sqlSession.selectOne("member.emailCheck", member_email);
+		String memberEmail = sqlSession.selectOne(namespace+".emailCheck", member_email);
 		
 		return (memberEmail==null)? true : false;
 	}
+
+	//패스워드 변경주기 체크
+	@Override
+	public int pwChangeCheck(String member_id) throws Exception {
+		log.info("MemberDAOimpl pwChangeCheck.....");
+		int Result = sqlSession.selectOne(namespace+".pwChangeCheck", member_id);		
+		return Result;
+	}
+
+	//비밀번호 변경
+	@Override
+	public int pwChange(MemberVO memberVO) throws Exception {
+		log.info("MemberDAOimpl pwChange.....");		
+		
+		return sqlSession.update(namespace+".pwChange", memberVO);
+	}
+
+	@Override
+	public int pwCheck(MemberVO memberVO) throws Exception {
+		// TODO Auto-generated method stub
+		int result = sqlSession.selectOne(namespace+".pwCheck", memberVO);	
+		return  result;
+	}
+	
+	
 
 }

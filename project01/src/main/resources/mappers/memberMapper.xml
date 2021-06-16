@@ -31,18 +31,64 @@
 		where member_email = #{member_email}
 	</select>
 	
+	<!-- 로그인 -->
+  	<select id="login" resultType="MemberVO">
+  		select *
+  		from member
+  		where member_id = #{member_id}
+  		and member_pw = #{member_pw} 
+  	</select>
+
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" parameterType="MemberVO" resultType="int">
+		select count(*) from member
+		where member_id = #{member_id}
+	</select>
+	
+	<!-- 이메일 중복 체크 -->
+	<!-- <select id="emailCheck" parameterType="MemberVO" resultType="int">
+		select count(*) from member
+		where member_email = #{member_email}
+	</select> -->
+	<select id="emailCheck"  resultType="String">
+		select member_email from member
+		where member_email = #{member_email}
+	</select>
+	
+	<!-- 패스워드 변경주기 관련 -->
+	<select id="pwChangeCheck"  resultType="int">
+		select TIMESTAMPDIFF(DAY, change_passwd_date, curdate())
+		from member
+		where member_id = #{member_id}
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id="join">
-		insert into member (member_id, member_pw, member_name, post_no, member_addr1, member_addr2, member_tel, mgender, member_email, mbirth)
-		values(#{member_id}, #{member_pw}, #{member_name}, #{post_no}, #{member_addr1}, #{member_addr2}, #{member_tel}, #{mgender}, #{member_email}, #{mbirth})
+		insert into member (member_id, member_pw, member_name, post_no, member_addr1, member_addr2, member_tel, mobile, mgender, member_email, mbirth)
+		values(#{member_id}, #{member_pw}, #{member_name}, #{post_no}, #{member_addr1}, #{member_addr2}, #{member_tel}, #{mobile}, #{mgender}, #{member_email}, #{mbirth})
 	</insert>
 	
-	<update id="memberUpdate">
+	<!-- 회원정보 수정 -->
+	<update id="update">
 		update member
-		set member_pw = #{member_pw}
-			member_tel = #{member_tel}
-			mobile = #{mobile}
-			addr = #{addr}
+		set member_name = #{member_name},
+			post_no = #{post_no},
+			member_addr1 = #{member_addr1},
+			member_addr2 = #{member_addr2},
+			member_tel = #{member_tel},
+			mobile = #{mobile},
+			mlevel = #{mlevel},
+			mgender = #{mgender},
+			member_email = #{member_email},
+			mbirth = #{mbirth}
+		where member_id = #{member_id}
+	</update>
+	
+	<!-- 패스워드 변경 -->
+	<update id="pwChange">
+		update member
+		set member_pw = #{new_member_pw},
+			change_passwd_date = now()
 		where member_id = #{member_id}
 	</update>
 	
@@ -55,14 +101,14 @@
 	
 	<!-- 회원 비밀번호 변경 -->
 	<update id="updatePwMember" parameterType="MemberVO">
-		UPDATE member
+		UPDATE customers
 		SET member_pw = #{member_pw}
 		WHERE member_code = #{member_code}	
 	</update>
 	
 	<!-- 회원 정보 수정(비밀번호 외의 것) -->
 	<update id="updateMember" parameterType="MemberVO">
-		UPDATE member
+		UPDATE customers
 		SET member_name = #{member_name},
 			member_addr = #{member_addr},
 			member_email= #{member_email},
@@ -70,9 +116,12 @@
 		WHERE member_code = #{member_code}
 	</update>
 	
-	
-	
-	
+	<!-- 패스워드 체크 -->
+	<select id="pwCheck" resultType="int">
+		select count(*) as cnt from member
+		where member_id = #{member_id}
+		and member_pw = #{member_pw}	
+	</select>
 	
  </mapper>
   
