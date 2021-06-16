@@ -23,10 +23,10 @@
 ![MainPage](https://user-images.githubusercontent.com/83706560/121125285-47fbcf80-c861-11eb-8791-d578a896990a.gif)
 
 
-### 상품리스트
+### 상품리스트/검색
 
 ![list](https://user-images.githubusercontent.com/83706560/121125401-78dc0480-c861-11eb-87c0-c3669588ef6f.png)
-
+![ezgif-3-5f983445a2e6](https://user-images.githubusercontent.com/83706560/122188231-b9bfc300-ceca-11eb-9adb-ba206561ea10.gif)
 
 ### 상품 등록/수정/삭제
 
