@@ -2,7 +2,7 @@
 팀 프로젝트 쇼핑몰입니다.
 
 # Description
-+ 개발 기간: 2021.05.24 ~ ing
++ 개발 기간: 2021.05.24 ~ 2021.06.24
 + 참여인원: Backend 4명
 + 사용기술
   + Spring, Apache Tomcat, Tiles, BootStrap, Mybatis
